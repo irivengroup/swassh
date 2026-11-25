@@ -1,0 +1,7 @@
+test_benchmark_creates_missing_output_parent (<run_path>.QualityCommandIOContracts.test_benchmark_creates_missing_output_parent) ... ok
+test_schedule_registers_from_private_cwd_using_checkout_sources (<run_path>.QualityCommandIOContracts.test_schedule_registers_from_private_cwd_using_checkout_sources) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.432s
+
+OK

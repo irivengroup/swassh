@@ -1,0 +1,25 @@
+{
+  "workflow_id": "98a2da5223f247d0851e802403a2af49",
+  "wheel_sha256": "ef86fb140f6c7c4b433d35078bd3e014845572f601af4f0d6a4408ba81973241",
+  "destination": "/var/lib/swassh-qualification-4055ca4583bb/restored",
+  "lock_identity": [
+    8,
+    48,
+    63061
+  ],
+  "refused_restore": {
+    "command": "swassh-restore-workflows",
+    "exit": 75,
+    "stderr": "volume verrouillé",
+    "destination_events": 0,
+    "destination_was_present": true
+  },
+  "refused_cleanup": {
+    "command": "swassh-clean-restore",
+    "exit": 75,
+    "stderr": "volume verrouillé",
+    "destination_events": 0,
+    "destination_was_present": false
+  },
+  "restored_sha256": "a468e202bc67da258dc5f1f2087f16bc29be87de921b40be7c9f135397aa2967"
+}

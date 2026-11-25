@@ -1,0 +1,22 @@
+{
+  "workflow_id": "944f3a1d546b44858d50a7e6456517a3",
+  "kit_sha256": "14f6f0c20f174b1495947b8d48d3aa1289747bcd740b7fd427fb3442ada08249",
+  "restored_pid": 2257,
+  "sqlite_integrity": "ok",
+  "restored_directory": "/var/lib/swassh-qualification-0b018e78902d/restored",
+  "logical_path": "/var/lib/swassh-qualification-0b018e78902d/workflows",
+  "original_database_inode": 72025,
+  "restored_database_inode": 73796,
+  "original_database_unchanged": true,
+  "first_report_sha256": "f9fff3a2a55bbe044fda88e6206d182569256f61ee3acd71b54f378f2392ab9d",
+  "first_resume_exit": 2,
+  "final_state": "succeeded",
+  "effects": [
+    "initial",
+    "mutation",
+    "verify",
+    "following"
+  ],
+  "previous_and_ambiguous_step_replays": 0,
+  "network": "private loopback; synthetic SSH process"
+}

@@ -1,0 +1,176 @@
+test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) ... 
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA', 'REVIEW_REF', 'REVIEW_SHA'], lengths={}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 0, 'REVIEW_SHA': 64, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 1, 'REVIEW_SHA': 64, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 39, 'REVIEW_SHA': 64, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 41, 'REVIEW_SHA': 64, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 0, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 1, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 63, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 65, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 0}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 1}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 64}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 63}) ... FAIL
+  test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 65}) ... FAIL
+test_raw_report_is_required_after_success_failure_or_cancellation_only (__main__.ReportedWorkflowRegression.test_raw_report_is_required_after_success_failure_or_cancellation_only) ... FAIL
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA', 'REVIEW_REF', 'REVIEW_SHA'], lengths={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 0, 'REVIEW_SHA': 64, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 1, 'REVIEW_SHA': 64, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 39, 'REVIEW_SHA': 64, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_REF'], lengths={'REVIEW_REF': 41, 'REVIEW_SHA': 64, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 0, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 1, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 63, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['REVIEW_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 65, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 0})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 1})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 64})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 63})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_missing_authority_names_every_repository_variable_without_values (__main__.ReportedWorkflowRegression.test_missing_authority_names_every_repository_variable_without_values) (invalid=['GATE_SHA'], lengths={'REVIEW_REF': 40, 'REVIEW_SHA': 64, 'GATE_SHA': 65})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 51, in test_missing_authority_names_every_repository_variable_without_values
+    self.assertEqual(public in result.stderr, key in invalid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False != True
+
+======================================================================
+FAIL: test_raw_report_is_required_after_success_failure_or_cancellation_only (__main__.ReportedWorkflowRegression.test_raw_report_is_required_after_success_failure_or_cancellation_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle138\regression_contract.py", line 58, in test_raw_report_is_required_after_success_failure_or_cancellation_only
+    self.assertIn('        id: sast_scan\n', scan)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '        id: sast_scan\n' not found in '        shell: bash\n        env:\n          SWASSH_SAST_REVIEW_SHA256: ${{ vars.SWASSH_SAST_REVIEW_SHA256 }}\n          SWASSH_SAST_GATE_SHA256: ${{ vars.SWASSH_SAST_GATE_SHA256 }}\n          PYTHONDONTWRITEBYTECODE: \'1\'\n        run: |\n          python -I -B -c \'import hashlib,os,runpy,sys;from pathlib import Path;p=Path(sys.argv[1]);expected=os.environ["SWASSH_SAST_GATE_SHA256"];actual=hashlib.sha256(p.read_bytes()).hexdigest();sys.exit("untrusted gate bytes") if actual!=expected else None;sys.argv=sys.argv[1:];runpy.run_path(str(p),run_name="__main__")\' scripts/sast_gate.py --root "$GITHUB_WORKSPACE" --scanner-python "$GITHUB_WORKSPACE/.qa-bandit/bin/python" --wheels "$RUNNER_TEMP/swassh-qa-wheels" --review "$RUNNER_TEMP/swassh-sast-review/review.json" --evidence "$RUNNER_TEMP/swassh-sast-review/evidence" --output "$RUNNER_TEMP/swassh-sast-output"'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.925s
+
+FAILED (failures=17)
