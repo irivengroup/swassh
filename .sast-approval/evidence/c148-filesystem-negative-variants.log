@@ -1,0 +1,144 @@
+test_creation_errors_are_not_retried_or_hidden (filesystem_negative_variants.DarwinCreationContractTests.test_creation_errors_are_not_retried_or_hidden) ... FAIL
+
+======================================================================
+FAIL: test_creation_errors_are_not_retried_or_hidden (filesystem_negative_variants.DarwinCreationContractTests.test_creation_errors_are_not_retried_or_hidden)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 80, in test_creation_errors_are_not_retried_or_hidden
+    operation.assert_called_once_with('entry', self.flags | os.O_EXCL, 0o600, dir_fd=41)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 997, in assert_called_once_with
+    raise AssertionError(msg)
+AssertionError: Expected 'mock' to be called once. Called 2 times.
+Calls: [call('entry', 1289, 384, dir_fd=41), call('entry', 9, 384, dir_fd=41)].
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+FAILED (failures=1)
+test_existing_open_errors_never_recreate_or_follow_an_entry (filesystem_negative_variants.DarwinCreationContractTests.test_existing_open_errors_never_recreate_or_follow_an_entry) ... 
+  test_existing_open_errors_never_recreate_or_follow_an_entry (filesystem_negative_variants.DarwinCreationContractTests.test_existing_open_errors_never_recreate_or_follow_an_entry) (error=FileNotFoundError(2, 'removed')) ... ERROR
+test_existing_open_errors_never_recreate_or_follow_an_entry (filesystem_negative_variants.DarwinCreationContractTests.test_existing_open_errors_never_recreate_or_follow_an_entry) ... ERROR
+
+======================================================================
+ERROR: test_existing_open_errors_never_recreate_or_follow_an_entry (filesystem_negative_variants.DarwinCreationContractTests.test_existing_open_errors_never_recreate_or_follow_an_entry) (error=FileNotFoundError(2, 'removed'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle148\check_filesystem_negative_variants.py", line 29, in recreate_removed_entry
+    return fs.os.open(name, flags | fs.os.O_EXCL, mode, dir_fd=self.fd)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1245, in _execute_mock_call
+    raise result
+FileExistsError: [Errno 17] exists
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle148\check_filesystem_negative_variants.py", line 32, in recreate_removed_entry
+    return fs.os.open(name, flags & ~fs.os.O_CREAT, mode, dir_fd=self.fd)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1245, in _execute_mock_call
+    raise result
+FileNotFoundError: [Errno 2] removed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 85, in test_existing_open_errors_never_recreate_or_follow_an_entry
+    self.directory.open('entry', self.flags)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\src\swassh\infrastructure\filesystem.py", line 231, in open
+    return self._create_or_open(name, flags, mode)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle148\check_filesystem_negative_variants.py", line 34, in recreate_removed_entry
+    return fs.os.open(name, flags | fs.os.O_EXCL, mode, dir_fd=self.fd)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1243, in _execute_mock_call
+    result = next(effect)
+StopIteration
+
+======================================================================
+ERROR: test_existing_open_errors_never_recreate_or_follow_an_entry (filesystem_negative_variants.DarwinCreationContractTests.test_existing_open_errors_never_recreate_or_follow_an_entry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 86, in test_existing_open_errors_never_recreate_or_follow_an_entry
+    self.assertIs(caught.exception, error)
+                  ^^^^^^^^^^^^^^^^
+AttributeError: '_AssertRaisesContext' object has no attribute 'exception'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (errors=2)
+test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_negative_variants.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) ... 
+  test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_negative_variants.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=False) ... ERROR
+  test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_negative_variants.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=True) ... ERROR
+
+======================================================================
+ERROR: test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_negative_variants.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 56, in test_concurrent_creator_and_existing_opener_avoid_observed_enoent
+    self.assertEqual(self.directory.open('budget.sqlite3', self.flags), 61)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\src\swassh\infrastructure\filesystem.py", line 231, in open
+    return self._create_or_open(name, flags, mode)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle148\check_filesystem_negative_variants.py", line 38, in omit_pinned_parent
+    return fs.os.open(name, flags | fs.os.O_EXCL, mode)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1247, in _execute_mock_call
+    result = effect(*args, **kwargs)
+TypeError: DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent.<locals>.operation() missing 1 required keyword-only argument: 'dir_fd'
+
+======================================================================
+ERROR: test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_negative_variants.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 56, in test_concurrent_creator_and_existing_opener_avoid_observed_enoent
+    self.assertEqual(self.directory.open('budget.sqlite3', self.flags), 61)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\src\swassh\infrastructure\filesystem.py", line 231, in open
+    return self._create_or_open(name, flags, mode)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle148\check_filesystem_negative_variants.py", line 38, in omit_pinned_parent
+    return fs.os.open(name, flags | fs.os.O_EXCL, mode)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1247, in _execute_mock_call
+    result = effect(*args, **kwargs)
+TypeError: DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent.<locals>.operation() missing 1 required keyword-only argument: 'dir_fd'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+FAILED (errors=2)

@@ -1,0 +1,282 @@
+{
+  "native_run": 45707435888,
+  "native_job": 139532886003,
+  "failures": 10,
+  "iterations": 20,
+  "all_directory_inodes_match": true,
+  "open_create_flags": [
+    781
+  ],
+  "events": [
+    {
+      "file": "sample-0/exceptions-0-0.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-9_12upix/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3083053,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3083053,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-1/exceptions-0-1.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-bdp4xco8/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3083405,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3083405,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-10/exceptions-0-0.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-kyteqdic/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3086420,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3086420,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-11/exceptions-0-1.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-olqc19b0/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3086921,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3086921,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-12/exceptions-0-0.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-1wsjsjmy/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3087505,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3087505,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-13/exceptions-0-1.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-5hmkdtq0/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3087835,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3087835,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-17/exceptions-0-1.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-61y_p9ek/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3089965,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3089965,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-18/exceptions-0-1.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-eyec63qe/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3090674,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3090674,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-19/exceptions-0-1.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-dyyv5o1b/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3090972,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3090972,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    },
+    {
+      "file": "sample-5/exceptions-0-1.jsonl",
+      "event": {
+        "module": "filesystem.py",
+        "function": "open",
+        "line": 229,
+        "type": "FileNotFoundError",
+        "errno": 2,
+        "message": "[Errno 2] No such file or directory: 'budget.sqlite3'",
+        "descriptor": 5,
+        "name": "budget.sqlite3",
+        "flags": 781,
+        "path": "/private/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/swassh-core-bench-0bjvpi2n/relay-budget/cc3a14d6f3973db22bc12170b817e8a7",
+        "descriptor_stat": {
+          "device": 16777231,
+          "inode": 3084701,
+          "mode": 16832,
+          "links": 3
+        },
+        "path_stat": {
+          "device": 16777231,
+          "inode": 3084701,
+          "mode": 16832,
+          "links": 3
+        }
+      }
+    }
+  ]
+}

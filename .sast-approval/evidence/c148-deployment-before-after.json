@@ -1,0 +1,24 @@
+{
+  "same_test_and_inputs": true,
+  "real_loopback_pip_venv_shell_and_profile": true,
+  "records": [
+    {
+      "revision": "before",
+      "source_sha256": "bb99e57bccdada5ac5f787009b7d4b3c16447bfba07a36225ef757ab4fe0d8a9",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0,
+      "successful": false
+    },
+    {
+      "revision": "after",
+      "source_sha256": "231c2c0cb34e886ac2890b5a2de1ac8120618f3220d178879863d8fc1791c3d4",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "successful": true
+    }
+  ]
+}

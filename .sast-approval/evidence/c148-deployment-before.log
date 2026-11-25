@@ -1,0 +1,17 @@
+test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts (test_ci_contracts.DeploymentAliasIntegrationTests.test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts) ... FAIL
+
+======================================================================
+FAIL: test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts (test_ci_contracts.DeploymentAliasIntegrationTests.test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/swassh-c148-alias-g0nejp7k/swassh-2.0.1/tests/test_ci_contracts.py", line 255, in test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts
+    result = operator['DeploymentProbe']().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/swassh-c148-alias-g0nejp7k/predecessor_validate_deployment.py", line 75, in run
+    raise AssertionError(shell)
+AssertionError: ['/tmp/swassh-deployment-alias-7tj42sfe/actual/app/bin/swassh', 'swassh 2.0.1']
+
+----------------------------------------------------------------------
+Ran 1 test in 5.257s
+
+FAILED (failures=1)

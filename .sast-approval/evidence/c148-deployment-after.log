@@ -1,0 +1,6 @@
+test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts (test_ci_contracts.DeploymentAliasIntegrationTests.test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.563s
+
+OK

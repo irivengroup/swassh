@@ -1,0 +1,12 @@
+test_all_supported_quality_matrix_cells_require_the_coverage_gate (test_ci_contracts.CoverageWorkflowContracts.test_all_supported_quality_matrix_cells_require_the_coverage_gate) ... ok
+test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts (test_ci_contracts.DeploymentAliasIntegrationTests.test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts) ... ok
+test_partition_retains_every_case_and_rejects_missing_or_duplicate_worker (test_ci_contracts.IsolatedUnitWorkerContracts.test_partition_retains_every_case_and_rejects_missing_or_duplicate_worker) ... ok
+test_worker_evidence_rejects_forged_counts_sources_skips_and_outcomes (test_ci_contracts.IsolatedUnitWorkerContracts.test_worker_evidence_rejects_forged_counts_sources_skips_and_outcomes) ... ok
+test_benchmark_creates_missing_output_parent (test_ci_contracts.QualityCommandIOContracts.test_benchmark_creates_missing_output_parent) ... ok
+test_schedule_registers_from_private_cwd_using_checkout_sources (test_ci_contracts.QualityCommandIOContracts.test_schedule_registers_from_private_cwd_using_checkout_sources) ... ok
+test_release_promotes_only_the_current_run_quality_artifact (test_ci_contracts.ReleaseArtifactWorkflowContracts.test_release_promotes_only_the_current_run_quality_artifact) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 6.401s
+
+OK

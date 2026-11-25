@@ -1,0 +1,1087 @@
+{
+  "diagnostic_only": true,
+  "publication_authorized": false,
+  "python": "3.12.10 (v3.12.10:0cc81280367, Apr  8 2025, 08:46:59) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "iterations": 50,
+  "tests_run": 50,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "source_unchanged": true,
+  "source_files": {
+    ".github/bandit-requirements.txt": "b00277e797c2149ec6ce69bfda42bb1413bb77424094c7128423343221d98460",
+    ".github/dependabot.yml": "5e54c7e473646e7b15345ac8dc7749922495be1cac57135cdf3cde5e4d20911f",
+    ".github/workflows/ci.yml": "560083e9a07f4d0496fc581a5f644167336adc20cf7045b611150d00e5973460",
+    ".github/workflows/portability.yml": "b459d940125414a05931bf592237e2450ca6537226dd34e2ec06895263a2b7e2",
+    ".github/workflows/release.yml": "a892457b78ec364a67c05a20122003b6bb47377f43a2bd5b1bba7cf8ad91f20a",
+    ".gitignore": "00b3cd92e4933e22cc5d3c343f9681718925b725d203b7722f6a7c2a06b4964a",
+    "LICENSE": "a22ba447db2bde05b8ffaa61fb68696efe412d5a0d64eb71f134f77261b233b9",
+    "README.md": "78b3663d0bfa6ed85ebed5d012898653860806490afca68afbc32eaf1fba585a",
+    "SECURITY.md": "f0e4af996f71965ba06f63b3a3ec8dbf6ac915557e443b0e25e0b2540f5c7076",
+    "VALIDATION.md": "bb1c6366fb98d7c781827a4a17ca3142c36cbb49ad8b0419e2d421b318a5ec0e",
+    "benchmarks/core.py": "b943afa0a4d55a5090f29251cbd3580bfe633b5d98fbd74b925f325536bd9010",
+    "build_support/swassh_build.py": "8be54749114ed49d822073b84bcce4de1e46e3efed72ec584ca2c82b5720787c",
+    "docs/index.md": "33bec4edbac5b72cc8efb5a4fbc27b3baa6b3b5c9651f7cd7e9644936d561d46",
+    "docs/wiki.d/history/IMPROVEMENTS.md": "4dcb95b19610445d2159a5da934714e3129048544bdaa8c6b52082833d315b43",
+    "docs/wiki.d/history/hardening/HARDENING-1.3.1.md": "c1c46fcbfa42fe353a788e5e2f3f2859d83ad837eef2dbb383c8fd0f1cd49682",
+    "docs/wiki.d/history/hardening/HARDENING-1.4.0.md": "e2a0c11018bb5a4c2916ccab60da6c57c8cb71e9075080d38916da0ea1d14b47",
+    "docs/wiki.d/history/hardening/HARDENING-1.5.1rc1.md": "18f503aef7e5fdbd8be3d5f451ec26f18edae775516d6d84521c8c1e5b13f981",
+    "docs/wiki.d/history/hardening/HARDENING-1.5.1rc2.md": "008f1e73002b1d325d521578629da519e7e66641c8201cf3228089d8de89d0c3",
+    "docs/wiki.d/history/hardening/HARDENING.md": "e8a551d94c11b08507e611b4c0536697b8b64ef93fe7be373e8c1dfd90f3d97e",
+    "docs/wiki.d/history/hardening/index.md": "f2a3d24ce54a6abc7b883ecc9ded49cfa2100db14fe1082d3c0c1a164d23fea6",
+    "docs/wiki.d/history/index.md": "2e046692fa4355962fb2efbf5ab04cfced3a5c53bfc2959f2bee50ee5ca37e99",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.5.0.md": "961e1dbc29294a286c8f874fa0f48a8ce38f62d266e1495cf3e331831f6cb7be",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.5.1.md": "c02b4a2bb179890aad35001473e0a01c789b11c6616c9fddf07064f02c6f6e58",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.5.1rc1.md": "00dd88524c9612b3ba55af216c0853db849b0a99ecb61280e13eb29d865f9553",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.5.1rc2.md": "b10176e8356f16c64ee677f3595504c4f9736f2192de187f75a43eb1a328a582",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.5.2.md": "be8edc0a08e498a1ecf4117d9b979fc27619f6f3c019c494b9ae4c0f6eef9631",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.5.3.md": "b40a5c6816f55cc8ea46ae4fe3304974f4fe58a97cc4c57b6dc25a5249187222",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.6.0.md": "b6c43ec4bae8b57196e32adb2e8b8d3426980b34a29189bf17921febcfba7527",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.7.0.md": "630b977fc1c573996813008ac85bf1612049d407d5853c50092568fb105afe45",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.8.0rc1.md": "f0e9342eadaac4ffc62b6e7ff00e8f61dcf2f5e5e8bde29f130c31a191b31faf",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.8.0rc2.md": "634ef943a291cafcaf3e7ce36a5c90eb387e3763ffe3ad5522e945ab7e829c83",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.8.0rc3.md": "49e4b77d4567b22d3dbeb170614d57015d794b437f38e97125ee5fafc6f25aec",
+    "docs/wiki.d/history/qualification/QUALIFICATION-1.8.0rc4.md": "722fea3f55798316945e2e5b94e8f43657e6ff040471f24a5cd35809c1aa86b4",
+    "docs/wiki.d/history/qualification/index.md": "edd404f8c005983ddd87feb53a40422cb65c2f71c3a124f89a64a62dded27705",
+    "docs/wiki.d/history/releases/RELEASE-1.4.1.md": "3e2abbe3580b2c46067a4d3407ce24bcffabb0652e905be82057379bcf1dda53",
+    "docs/wiki.d/history/releases/RELEASE-1.4.2.md": "5b3854318fcaf3b5ba1476f7aaa8ec2318051927e47b10c45e8de77763e16aa8",
+    "docs/wiki.d/history/releases/RELEASE-1.5.0.md": "582e284544f047a26ff1adfc0f8e577f2a2085bd75acb007d02951169a4d7bbf",
+    "docs/wiki.d/history/releases/RELEASE-1.5.1.md": "84c4a8414f01211524d98ec96414eb248fdd397e59494136ef44d1d4e3795e5e",
+    "docs/wiki.d/history/releases/RELEASE-1.5.2.md": "488502211000d0f09ca6e61170c319fce615ec0aa910cac5be88c79b1d95872a",
+    "docs/wiki.d/history/releases/RELEASE-1.5.3.md": "864e14de35c9863b23580c8bf0f793de26aac150e58877f8d1a3a545e3253fc3",
+    "docs/wiki.d/history/releases/RELEASE-1.6.0.md": "075e5ad1b2542f6ab7dccf9ca8efaaf1a479c4b8ac0025d084da63b844b42037",
+    "docs/wiki.d/history/releases/RELEASE-1.7.0.md": "ec8ce26d0367a96000282375bb4c569deb37b917f83e1aafbef19b39d127b9e6",
+    "docs/wiki.d/history/releases/index.md": "a187f93a3ae6485621159991df18ebdd4e78833b9972c0ef6e37b6121ada0d28",
+    "docs/wiki.d/operations/BANDWIDTH.md": "f343c6aa8e3e8a47aa654a7dc001c0fb15c07828797301a481812e3f9123569d",
+    "docs/wiki.d/operations/INSTALLATION.md": "13ec03d9e6e1a0f9c0ea07cb90c9eae083498a3cb7f9ed5b47f26337259dc150",
+    "docs/wiki.d/operations/OPERATIONS.md": "c4131646b24bb55c487510d22ddaea0295040c8fbc019f2f222cc409d6479556",
+    "docs/wiki.d/operations/PORTABILITY.md": "21b5b7480a4f3f34bcb75b27e62d8d022ef095e7b01c4d7cb7a6a34e3df24266",
+    "docs/wiki.d/operations/index.md": "8a1ae7343d865aa4fc67c01eab81d30b3d86a8b2c4d2fd9b2ec52d83e67f905a",
+    "docs/wiki.d/reference/ACCEPTANCE-SCALE.md": "fe591e6eb34fcebfae300be235379855cedf746a50c0c61608536e0cb4eb8ec2",
+    "docs/wiki.d/reference/ARCHITECTURE.md": "7293e201736ecff18641d42168a8fc0da88e25776a34a19c4b818fcd520d687f",
+    "docs/wiki.d/reference/COMPARISON.md": "dcef034579023dbef73c4b774eb9a28c598ea55df01856ed1fe335c59d2445c5",
+    "docs/wiki.d/reference/index.md": "d486c1fb0a77e95f06e76b9365443d3beaa56cc41e4775b19bd4bb4abbfb1110",
+    "docs/wiki.d/usage/CANARY.md": "b7b6d04f50d4cf55798351fcea7a6544589efceba5289ecf59a82226c59ad347",
+    "docs/wiki.d/usage/CHANNELS.md": "095f6b0b87e56ed1c8d87a9f6f606fafe67fc624605029623957610b43c983de",
+    "docs/wiki.d/usage/CONVERGENCE.md": "0cc160a18cef470158243b22ddd87a69bf0230ccecd928914ca696c6aaa2fcfd",
+    "docs/wiki.d/usage/NETWORK.md": "7a39cdf2d6af52b5d2a9a6ea76e16b10bd063f4d1ecadc5d18e48499a6faa059",
+    "docs/wiki.d/usage/PYTHON-SDK.md": "877a9dd354a40aa67cdc47ff13c1aa55726779949e96dbc8c2c48678062e5691",
+    "docs/wiki.d/usage/SCHEDULING.md": "b7065a8f203d00382372288bf5a07e4a6238a43b54ca955889b9bbaac4492cd5",
+    "docs/wiki.d/usage/TRANSFERS.md": "22960b4099703efa69579ad98803b5f920150a35468c23a950dd6572389b3fd6",
+    "docs/wiki.d/usage/WORKFLOWS.md": "9761dcacbd73bfe2ac74ce8717e736bcbd4c32e5251898a44db2b968495c8eda",
+    "docs/wiki.d/usage/index.md": "38baab556d2af20e03c8a43d15f29f1b8fc73b74db7c4a3637e58fcf647b43b7",
+    "examples/desired-state.json": "75930b0c4da2c2d24e391d7418d21db8712362df50cbe393b61023610239a1c3",
+    "examples/hosts.csv": "105cff9b2c45345a44e180b440a73f34e232e762b8a2078ae10fcee5a6fe2586",
+    "examples/hosts.json": "918963e42a766c255a5ec47ac34a012260382a3022754787ea5e6bd8bc634fbf",
+    "examples/hosts.txt": "2261dcb1c3ad51ed2fd9eaf498ab3f7095c42da042efd4405beb6ff1c6c6be55",
+    "examples/hosts.yaml": "45bd7c587388d5e96732baea5a7538cdb8aa1b80ccbac22cb4619b6cf3c4e2df",
+    "examples/network/cisco-inventory.json": "38f621bfc39d609199d367fb6fb91888be3f7461ed85c0b29f13e72cee87fe2a",
+    "examples/workflow.json": "0c710316ea5dafb44aa19a40549a6ff5d06fba16deb30a07ee47815f12660707",
+    "pyproject.toml": "371335aec261fb435407b1b5704495ad3817c0bc740c9bfc1daac9faf57ab09c",
+    "scripts/auth_fixture.py": "38fdfa956c202372da2fe052a82e1e44d0b989b48e066a8aab9315ae32ec7e39",
+    "scripts/benchmark.py": "e04535f0fd39c27f2c2633ef04b90c7c0cd7cc931121734846e2b8bc6bdbc551",
+    "scripts/build.py": "07f77049fd7d66410a3f4d4e9c0cbd794ac5b8a86f7ef47f348c4c0272f18f32",
+    "scripts/ci_rsync.sh": "4dbec8f8c746891ca88d3f6cf16d8f48538c687ea18b2670fb5aa8f6ebd7ed20",
+    "scripts/ci_shell.py": "028c81193228dcdd43bd3e0c9e8238e5fc7ba2c76ac08bdbe35fab8d9c112005",
+    "scripts/coverage.py": "d98ee59cdf696f4bcfc26ac86d3deb547b66b3d5910822cca026bc81b5f99043",
+    "scripts/coverage_child.py": "ec87c8133138c04e378c3bde6b302f1823ae8ba3264fd5798af9eda486b7e630",
+    "scripts/coverage_diagnostics.py": "0e5e2a9bb4c3afc99200b547acf49e8d4109ec6fa6702e7e8e1cb751e163ee87",
+    "scripts/coverage_metrics.py": "ec6ce91cf64d9118fc876576752bf593f09f12e5ba9299965e74012e2ee7407c",
+    "scripts/coverage_processes.py": "77792af709b10ec452168bc0ea70b709f287434f3fe88a5adf95e8d6db58d8d9",
+    "scripts/coverage_source.py": "b7625e43fabd498ef9c03678e4991ed00a98c5481040f88dd2cee68d18329308",
+    "scripts/import_policy.py": "8b2fefcb644b5d8d7bd688ea73f16c01d471cc11a64c95ce208b81d3e1696406",
+    "scripts/install.py": "1f36f8d2a785ebfa3e5351e8e9b8b3a28747692af1017499fd0a8d8d16b13b66",
+    "scripts/native_auth_gate.py": "3d044de6b2de86425b1131c3dac86aac0168f9651604bdfd169a798cc9fc95b9",
+    "scripts/native_network_gate.py": "76e56d8d56ed2102c4c186d9aac4e37755c46673112e887140e8c7ef449c87f1",
+    "scripts/package.py": "2dfd1507b3bec6c1f35c1f2b878fc29b991e04df68ff8bacefc2580bdf71fcd0",
+    "scripts/platform_gate.py": "5a75ca15d8e5501c89c3e82a24a6aaf949d082428c05b93b6e9f5b81d00eada8",
+    "scripts/qualify_schedule.py": "03f9b9ea784661159f03c589575f0ef54333f3f44abd6c5d913e8c5facbdda7d",
+    "scripts/remote_portability.py": "6aba93377f5616b95b640c88dcf77a06a7d5d600436068c11e2f5a027afd229d",
+    "scripts/rsync-release-key.asc": "23894377787e607d0620bbaba69d5f6f8dbc6d83e4b099d5eebdf1f327d6c240",
+    "scripts/sast_gate.py": "e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803",
+    "scripts/scheduler_service.py": "161a5ad326e89ebf807fa8f44ab1046e53a4950f7bb22626a2b6d8e47e89f80f",
+    "scripts/validate_deployment.py": "bb99e57bccdada5ac5f787009b7d4b3c16447bfba07a36225ef757ab4fe0d8a9",
+    "scripts/validate_installation.py": "a35ac9e10bdb99fb8d2e2f8324dc9f33e1280923b4a9a3b4f30a294703d9b162",
+    "scripts/verify.py": "741eeba8dcd3408159c1936a1911ee314c35d877b56c3eb5ca935fe3903d19d6",
+    "scripts/wiki.py": "65ae830fdbbf8ea1999cc7d29ebf898dcf332882715f40ffc756f1e95a08d147",
+    "src/swassh/__init__.py": "f99f92be0e629d9b2c983ad9519edacf100b43e3d9b83008f26c21a5e89c8f04",
+    "src/swassh/__main__.py": "8b2737967a464b584139cfa24338e618d53b73724d7220e6bd5505b1a95d2e23",
+    "src/swassh/application/__init__.py": "e3796b37f169b0ce05544d7d17707d0c1a4b6dabad651e211a161023697493f5",
+    "src/swassh/application/admission.py": "583f0d2c617d82c32e87fa0de36fb1386c0c9873b84acf80a1a2ed55fa9c8538",
+    "src/swassh/application/boundaries.py": "96b4d9d81d725a81cf9e3d73851572fd8fa6a12f63fdb62d78e94b64691892c0",
+    "src/swassh/application/contracts.py": "9db810d1303a9465b56fd773791f61f36b1b91e0c58eea00c2ffa6dba57cb958",
+    "src/swassh/application/convergence.py": "238346d1d4c9c4191aedf0744024e151ec77596c1b35b3df10d3f68ac5f68850",
+    "src/swassh/application/durable.py": "97fa8ca82ca8ce0dc9be17f0acc0b0fdf16e25e7d6686e95f2ffbf49444c77d5",
+    "src/swassh/application/options.py": "3107288099c6c52d7783078572d3932aba395eb1619981f7685d85e9064f5472",
+    "src/swassh/application/pacing.py": "8c0c6ada66ca12c865c3c57d79a79db77cc8797f54e68ec2a3d75b9cb08f3710",
+    "src/swassh/application/ports.py": "cb73f20d9e66168572547a476b485e00f9d4fea8751b3ab192731a5cca3d42a8",
+    "src/swassh/application/preflight.py": "3b858fc6a8c8038d1158aad85e67db068fbe0ff9b29daf17f18029e868c4e40b",
+    "src/swassh/application/profiles.py": "f858229f5e1468e471a88b336b00f1c39e333c281ee162b25104ab04e1959e80",
+    "src/swassh/application/schedule_contracts.py": "bb828f90f6763aab4cb0345ca945012656ee9c88d439b38c7663fdc3be3b039d",
+    "src/swassh/application/scheduling.py": "cc32d8fb553534e6e1a7dde9b88532c59527c65d160923c6a618134c69d5a3fe",
+    "src/swassh/application/swarm.py": "9a6dfe7f24a8c682fa31bd94722dac961b4fb8fcccb24f101bd57381142fac3f",
+    "src/swassh/application/task_ownership.py": "0d209b7c08922371d120795d37af759d9b5824919617ee56fd2067d7d6dc10bf",
+    "src/swassh/application/transfer_settings.py": "a86655aea59e5be50f577ed610efca812039dfe308030e87ee8b028d3ba2fc58",
+    "src/swassh/application/transfers.py": "e1011ad0c0edd2a13199905a308874381937a5ed211f1ccaa961171c1a2dc22d",
+    "src/swassh/application/workflow_contracts.py": "021cbcebe332d4128b775a20bee2510a717f3406ebac07c652b54347ac0e4ff0",
+    "src/swassh/application/workflows.py": "56d83c6a132994244ab2b7d6e41530b8a272734502e27942ce21648900bd1a9b",
+    "src/swassh/bootstrap.py": "0324fc531a9223d3cfbd0ba270cdf3c4c05a30f6f473b92c593e926b2bf252d4",
+    "src/swassh/domain/__init__.py": "37811a41a4903fd317246c39f7da2c4aff17b8142c1c14174f3f6a9133b435d9",
+    "src/swassh/domain/bandwidth.py": "5394b404ccb3c645e384afd9e85784d2647125fb6e5334ef10ff9f2788a1cab4",
+    "src/swassh/domain/byte_credits.py": "012c2746c13a292ec784f75a387484e3c2b3e6f6910c503a9c58e60c07d2d49b",
+    "src/swassh/domain/channels.py": "51ecc677c1fe47dc8f54877fd52cd57af851bb05c33118c7d190d1e42d781d9c",
+    "src/swassh/domain/commands.py": "b717619aade0d191327812484f53f937e1868a13efe1163f63cfd3eb2804ffad",
+    "src/swassh/domain/convergence.py": "729ece744b78be3bbd2b1e6b827a20cd0e8a4a123e96b7bab653911854f60d36",
+    "src/swassh/domain/credit_state.py": "50cb03938cedbbf7007894c979dc7b44a45f0cd1b3fba1e62cd07b97df95191e",
+    "src/swassh/domain/endpoints.py": "0536a20530cb640c8d4b88eb98d0cfe3b024dc1b5f8065d4913ee82d4c3dde13",
+    "src/swassh/domain/errors.py": "5fcd8678e0ac9bc8e25acfe607afd0c211f2b59c450fc0fa4da98b1533546749",
+    "src/swassh/domain/hosts.py": "162f7e47450fafb03c9ee575899cefd1b4cda2186279d7b718efbd96c420eddc",
+    "src/swassh/domain/interaction.py": "7ac31e260c1e716aaf3d79aab71a3f5ef1f757e15970dc1d1e00178943840127",
+    "src/swassh/domain/inventory.py": "37e6d6c7982180c94546de6cf37c233d99c0a1ae752ebad59ed77b49b053e1b4",
+    "src/swassh/domain/models.py": "0747b87bbc36018bd1e2f59fc2be06c0fa85b504cab7d5768f539ff611cbeae9",
+    "src/swassh/domain/network.py": "18c776a7fee4b0413738e8122beed9e29fd3098e7ae39f6a00d40a21dbcbd5eb",
+    "src/swassh/domain/report.py": "f9f91310f0c7e2643bc90311f8dd46cd96466cf6a1e1849522013b15802e0e37",
+    "src/swassh/domain/repository/__init__.py": "7df83507e2adfeb6c8e7b2b5e27f40fc63868abdc84d997edafb7ed6a89b6e5b",
+    "src/swassh/domain/repository/convergence.py": "dc544ecdfc4260237803cfa54f12924a2bd87e2689a4ba7fea379cac5c215b5f",
+    "src/swassh/domain/scheduling.py": "bec920ab3d2d033f12ae7d99d11e6df4e7e3ef0194bc1e2684b15c695c668563",
+    "src/swassh/domain/transfers.py": "648ee68ed588bd7d1e08748a1af9e2d9417075dec002450139cc735c2d1dd46e",
+    "src/swassh/domain/workflows.py": "4f57cf4644d0b80ba800aae7f58273de006bc0b866f15bcce52b72da51d1518a",
+    "src/swassh/infrastructure/__init__.py": "a043465f5b41e674aa155ba92a69931c1eecadff6183e3ef5fd6fa3b1123bdfc",
+    "src/swassh/infrastructure/admission_deadline.py": "bf8ed0b6590685d83db9023b8f68553b8cf2ad3e641460f77f21d3873f307efb",
+    "src/swassh/infrastructure/audit.py": "383d58328dc9ef41d667a28175c913b8533b0c2a8c54f88a4027ec24bfc5f962",
+    "src/swassh/infrastructure/authentication.py": "4226a01ca3c674938713b10f2482b7be39a853871f2b604d97ba0964ba453c7b",
+    "src/swassh/infrastructure/bandwidth.py": "7c13b5fac6f5be15fc8636632ed053969f3545ba9ba9024e4263c90b2d5503f2",
+    "src/swassh/infrastructure/bastion.py": "114878bdf3e4689c49eb5b1325cea12388cb249d2f0de0c6ad5e4ca46a8ecf41",
+    "src/swassh/infrastructure/channels.py": "4f305fda1b961c107d69ef2498facde4bebf0c04392004fb61dc64a421891993",
+    "src/swassh/infrastructure/convergence.py": "e80fdd9e82920359416ac9d87c5841d199ca96b6edde6b4beb77e55e8f253a2d",
+    "src/swassh/infrastructure/database/__init__.py": "533e46b0812b55b88211c0fd383eab0ac6b9214f25bf6c8d80c8c507b58ba70b",
+    "src/swassh/infrastructure/database/migration/__init__.py": "db15046e7cd3eb87f7f1cc81fbf629177cae97401efdb156193ab9f57dce2dfa",
+    "src/swassh/infrastructure/database/migration/convergence_v1.py": "731e330e382136cfd8a40b6ea122f42c5dd10e8b89574ebfc904beaac048cfc7",
+    "src/swassh/infrastructure/database/migration/encrypted_bytes_v2.py": "4e352e9eb2a0d7ade8cb4dd24b0523f7d906aeec5d972120560fc751c1369416",
+    "src/swassh/infrastructure/database/migration/workflows_v1.py": "14dbabf8f94be6afc79d5c9ef0799240de36f0712774dd31ddbe88a4d8839899",
+    "src/swassh/infrastructure/execution_input.py": "ec444826b402825cc331ee2ee2c9e45b254eec7aeb2a2f951ad499b1b8b37c0f",
+    "src/swassh/infrastructure/filesystem.py": "c7e06a159ff9b77ff82fb44f9852cf399e3edb39a8452f463bc18e7ed25d2a85",
+    "src/swassh/infrastructure/installation.py": "2b74f637df7a238b7820cfabeacf913258632fbe8614d43eaa93078a4f15d606",
+    "src/swassh/infrastructure/integrity.py": "a45e6e06989dd5258f3ea9da557d37cc532f9f81e1b3a48dc94d64c2f4f705f6",
+    "src/swassh/infrastructure/interaction.py": "69a9f388bc559c52f5d6cd901546a63a2e646c14865bc3a9bd208e81cc48491f",
+    "src/swassh/infrastructure/inventory.py": "b2db20fe25729ada962b97492dc98ea1ce39bc655028fd8d5f67a3274feaa673",
+    "src/swassh/infrastructure/json_data.py": "7e61806e1e824e3079e710f6317f805a9fe8511e4cfeb4a73a53d4a7b28ef1bb",
+    "src/swassh/infrastructure/lifecycle.py": "66610e03e94ebf4cd953d5bad3f85a022af644db13a881b2a847f788753abe36",
+    "src/swassh/infrastructure/live_output.py": "8bce2d595047267c05cf07ccc9232b9b4e57321fc5e1a506ecaf48627829dbab",
+    "src/swassh/infrastructure/native_budget.py": "dd7982aea32c8aa121717389f7b0a15028cfa1aaa72cc52d94c98f785ffc6a29",
+    "src/swassh/infrastructure/native_ready.py": "87f58fc020ecd83a8318967e6bb0afe054efffb259355e04927ece89a89386de",
+    "src/swassh/infrastructure/network.py": "60e6078a2be20475ea5cec087c90d35dccc31b218f0fce222a7752b755116a24",
+    "src/swassh/infrastructure/preflight.py": "63a78c40f41de788c03f3e7a0c9f87b9f947af5434df6e238380a39efdc76918",
+    "src/swassh/infrastructure/preview.py": "96035910ad7bf2f6364b3b48f120ca967dc643271e6608a4ba069bccb6076929",
+    "src/swassh/infrastructure/process_guard.py": "ae0ca96b7870a4e62e5d1d300d7c11050c18b40f214069196b8c347141ba01b6",
+    "src/swassh/infrastructure/process_reporter.py": "c39e33906d8db3d093f4fe66b5717f0be13670e13443d1d98adb39518c237c97",
+    "src/swassh/infrastructure/progress.py": "a4806b08c7cee4f9cbaaf92533486723abc8a835c0fdafd0d436867fd5d796d9",
+    "src/swassh/infrastructure/relay_connect.py": "1f7a141fb60538ae415dda9573c34d7b91090fc96982f8979b3c11d1b231d5b7",
+    "src/swassh/infrastructure/report.py": "f4ad9a0a94ef8dff8dbf418d1c5342bb6983600808f9c9cfaaef712edb8e5c75",
+    "src/swassh/infrastructure/resources.py": "f39bd41091ee1ac272cec361aed0571c4b36c799c88c20af0edd1b711574d14d",
+    "src/swassh/infrastructure/schedule_store.py": "5535a78332f94a06d0c6b91bd09f885882d0a60b95c8cd847bb4da63675cf5d2",
+    "src/swassh/infrastructure/scheduled_execution.py": "9be99763d70d1c820cc770d4928526d3264d7231822bec1b4cab71064025c6aa",
+    "src/swassh/infrastructure/session.py": "cebf1ea1a3fc7c376b1bc74192b3c231c77a4566d9e5b5c6275e4f87d557c459",
+    "src/swassh/infrastructure/socket_relay.py": "6f05e9970457322bb8cb5e46a81c5b59ee3a2c5209778824a8db597c57e9fc91",
+    "src/swassh/infrastructure/spool.py": "dedd0700d5b0325af33df044d3ef4c9ce78e9a411fe6a664ca7f3003cd5a461a",
+    "src/swassh/infrastructure/ssh.py": "56b498594ce3dbff59e122ace14b75295576b35adc39670065ebb47ab9cfe7c0",
+    "src/swassh/infrastructure/tcp_proxy.py": "a4a39ae2d8301191e7a408956d0cfd7baea857647eaaedfd15c290c97893b32a",
+    "src/swassh/infrastructure/terminal.py": "a0397dce83d5c36f73bd5a6c1fb0ab7ecba84066e4eac3faa5c84c34d7d9aeb3",
+    "src/swassh/infrastructure/transfers.py": "1001fe9a5093be9c8904b249c75748261c3b70a535bc73981e73a1dd7b77544a",
+    "src/swassh/infrastructure/windows.py": "fcd2f896f31e318d74d04a67e9b784a459ac9185cbded342b0e10753101601c1",
+    "src/swassh/infrastructure/workflow_execution.py": "37c45d011be3b32938e34d5ff3b85f306a26974473d9efae1a9e09095a61ba2c",
+    "src/swassh/infrastructure/workflow_store.py": "2bfe009b2a3d8768b98aec6bdf9f108b862a9f1a6d866a007d9c2d2ba2030ca6",
+    "src/swassh/interfaces/__init__.py": "58990fbac18af4fa3e822940b4439efcdcc7a2d4cc6fb015c26e1abe6e6b406c",
+    "src/swassh/interfaces/api.py": "81e7e49bd8ca9ff3a2a5dcc91f7fa6dd4468455d3c990eef1c6dda50430fd1cc",
+    "src/swassh/interfaces/channels.py": "f7a8dd12983aaf26edc052b31993494e6e3406b5b414b71e70a8c9847b842fa5",
+    "src/swassh/interfaces/cli.py": "02f8a8aaeab5fd1d1e927a9bbe408756467f8e1534a3425bc0733b4a742775fc",
+    "src/swassh/interfaces/client.py": "2fe8e6d7a7146f7d6afeae3dcb758b75dfec68e84a1aef895a7baebd376504f9",
+    "src/swassh/interfaces/convergence.py": "3729460d87b51466f8467286018b2ae617e7ecff0800e83ce3dd8acbc55fb3d1",
+    "src/swassh/interfaces/network.py": "ea8143e5d4b918d84959d73dfe9f01b2b83fdc27c1aa1e595ceea228a7ebf31d",
+    "src/swassh/interfaces/restore_cleanup.py": "af35d953761fd268cd4a16d0514dfb74f2dca7e5a0bd959a7fe3a3dfa28ee1ad",
+    "src/swassh/interfaces/restore_workflows.py": "40d3f81f123bccb723b88a1bcb67626369e4c87149114ad52079cfa4c0377311",
+    "src/swassh/interfaces/scheduling.py": "8c17a68d4b13a09c8943774bcbadd90e9baa482e7e6a4c371e7d13e4757106f3",
+    "src/swassh/interfaces/session.py": "3dc35d8a82050f50b1caf1c7ec0888ee7870ec56febaf6b7f3a0ccd435ff22ef",
+    "src/swassh/interfaces/transfers.py": "a75679ddfb70e8594042c5698dd8ddd690bcc3037bf5e485b58eab740f52ae47",
+    "src/swassh/interfaces/workflows.py": "785253bc8f7b81489d76891d3b4fbb13abe2d7cfa2398a7698f81ed1a6a6e5ea",
+    "src/swassh/py.typed": "7d37ba492d69dde824684c25063eabb942d26243e526ed90a1ac3057198d4c27",
+    "tests/channel_exit_probe.py": "65c75a16205ec33c8872388bfcb74a6f0ea7eb56a679a89a3c759bb656076daf",
+    "tests/channel_peer.py": "7a1fa73540ffc5d45a4a10d54fa0dda4734bf84655a8704ef3ff7a80f8b21c3d",
+    "tests/control_cases/decisions.py": "1ac4425dd4eeea3c44cefb879f442f347b3092a774b7f345b9325a4fb39f8764",
+    "tests/coverage_annotation_cases/annotations.py": "3e948cec587b4227c5904258dec9ee27879ee70a906dbbdec2b6bf30047a6d9a",
+    "tests/coverage_cases/choice.py": "8e9abd64fa6c29e0d45688085c947d7db0d87dabe1d87bbd1dfdf9cf016c6659",
+    "tests/coverage_chained_cases/choice.py": "3d146364bf5937c6d7930d12453c0b1f1746eef22cdc43c43833b5587abe648b",
+    "tests/coverage_chained_loop_cases/iteration.py": "fe7c7d7f5fe8cb549b732e8918fb7ceec11f4a7c1c9f4f7868b60dc21461caad",
+    "tests/coverage_class_cases/declaration.py": "0501c4d42164904080ab7e34c5f657a16df34a6d7dce2fcebe5e93ae3f8db564",
+    "tests/coverage_compiler_cases/dispatch.py": "1c60446625c255c29b05e45ca4fa3675e2e926e725d0b4d1ca715098daabe29c",
+    "tests/coverage_definition_cases/definitions.py": "7b105fcd17c999e32c41f1afd7dd083718fa450ea2b00be7d4e7aeb8d663392b",
+    "tests/coverage_empty_function_cases/unfinished.py": "232889189e9983ab4942bba86f6b5a42a5f8b3e1cede77ae7ba55ee94092fbb0",
+    "tests/coverage_iteration_cases/iteration.py": "d16e9d5e7f00d80a62a7fdc756c9a5e4b21667790632e3fe0954be861f78f044",
+    "tests/coverage_lambda_cases/lambdas.py": "1bbc6ebd69bb21a141fd6f40b19970d1e1690c85ff19056e995f44980c449198",
+    "tests/coverage_source_identity_cases/identity.py": "3c6320aebb330a207f9d80c24a3b6410ecda137e9008a1fde0850123c0f0fa71",
+    "tests/coverage_statement_cases/statements.py": "0617a89f55f344246f2eebd40f35ccba0b51f5edd49cd688f54b6a39510c3042",
+    "tests/extended_cases/decisions.py": "3bd16e5edd9c8586a1217dc9dcfb78bcac6bd2f67b85d0f912de81c945835d60",
+    "tests/fake_ssh.py": "f93323588399190f457fc3cbb6c0cc6847175e2e5e93100224a7b1e20fb82272",
+    "tests/network_fixture.py": "d4085724088bfeb7cd8cbeedd1c50e782472d5c911d7e5d0c4599cbc5c808a43",
+    "tests/runtime_cases/decisions.py": "d33ce33a34522ba90dd0a6c7777c5f0aff7ed84bb628f5030f7c61d44c71a860",
+    "tests/sast_v1_reference/.github/bandit-requirements.txt": "b00277e797c2149ec6ce69bfda42bb1413bb77424094c7128423343221d98460",
+    "tests/sast_v1_reference/.github/workflows/ci.yml": "dfd6abeddeaa7c138b45da01a36575addb5f76c299575208fd24dfd2fbeddff9",
+    "tests/sast_v1_reference/.github/workflows/release.yml": "23951e76c3521f1ee89b297737df48e0f4299435f65d8359ec8c77943db372a0",
+    "tests/sast_v1_reference/pyproject.toml": "6958cb2a626d581bb39dd4f0cbd1943d93428991758b1d4233e3e2953d426179",
+    "tests/sast_v1_reference/tests/test_sast_workflow_contracts.py": "d2f130fe71f27a5c6cad196e17fca6cbac266a4109b4ed559e1a21a3a620b9e2",
+    "tests/source_cases/decisions.py": "a8df75041beec14d5c1e5c84482a0afb752bdd0eb82071cefb6c9a2b220f330c",
+    "tests/source_unsupported_cases/decisions.py": "bf262da2078004a77eef4362b57a56bcb7ae0a9cd243e0e899f399ff3ef93db1",
+    "tests/statement_cases/decisions.py": "bec96ad00f7774c05261378660fbc5b535b04c6237adc496c7ce7dfe3bef350c",
+    "tests/test_adapter_contracts.py": "2e127f76e4cb405458133ee4ecbafbd0fec56212b8dcbba4af696207260bf6ee",
+    "tests/test_admission_deadline.py": "935e0cab22424f97ffbe1198379e5e1bceb0c810008e1fafbb9dae0028f42437",
+    "tests/test_admission_deadline_hint.py": "331504ae5e005091285405dfe1487257ac76c30a0e79faeafb9704dbf0473ac5",
+    "tests/test_application.py": "085b7e75e8d9e82df544b306489350d15288420f3f23ad379a48c4da51372d66",
+    "tests/test_application_resilience.py": "2ed2637c5a612c9e2237e50503182fbd4f769ff5946ba4da6acb614372d64baf",
+    "tests/test_architecture.py": "545b03993a129980f39951f5174f443f6e08ac2d921e76e75cc31b0cbbfb8f07",
+    "tests/test_audit_storage_contracts.py": "cce0922bd3d582c1382d17294c479ce41df889b92858b6995afe6122f27738ce",
+    "tests/test_bandwidth.py": "671f26c13c82ef00f5ee322b8b89d49cc332e657a0d52726fafda35458ea6627",
+    "tests/test_budget_cleanup.py": "fcf4cd58a41b2463bd57e832b2acde36a54cefca4d3d57197c757c91effbd46f",
+    "tests/test_byte_budget_failures.py": "1063addabb6a363e53a6605509c3d0fa5ea0d07c46c53286658458139e0ecf40",
+    "tests/test_byte_credits.py": "89715f9cffb029ec9c8c081fbd7eb69e9ffba392563c018cffb037c2b3d6d197",
+    "tests/test_canary.py": "3e128add9ac49107a88f7117ac17d8544d9c54558f98538e9c8053a2427009f5",
+    "tests/test_channel_input_contracts.py": "fb0d767d65b1d5b37d0391c64082f42e52b53cd737152aa854bd23ec8232f9ce",
+    "tests/test_channel_scope_ownership.py": "3dc1b07efb0574a68b296906dd798e3320d8fbcd3acf0f2f6f13003775c91a1d",
+    "tests/test_channels.py": "54eb7efdfbae42e8d21f001f331b1d756fdb07b3314b4ec1d940eda73f2040ff",
+    "tests/test_ci_contracts.py": "4a626fa886330efdd644303c107eb0276e6746398fcb681ae0eba52ee4cb4eeb",
+    "tests/test_ci_shell.py": "f3cdfa080435aaf71def11161d1bd38c73f6fda2fd0d95242fdd7a84afa8ce1d",
+    "tests/test_cli.py": "6d25aadeb08899a60c3d2d1c55664d5a31f46d112b33717abd9e2304e0da8e33",
+    "tests/test_cli_execution_ports.py": "5dfc5b01a860254ed62d6eed4de67dd7022f0c2bc5133351f5cd03be001ad787",
+    "tests/test_cli_management_contracts.py": "94cbcf158c59cd250cedae08a45430ec4508865921bc32bbce4395528ba0ec69",
+    "tests/test_client.py": "7e81d6428844bf40ec37a98fb60e42abf1d050ca57b92fcb2fca6a77f63a53ef",
+    "tests/test_client_ownership_contracts.py": "dd6964cd604fd021d93d911b732931126898060cad7e10b237586bd9f0dc295a",
+    "tests/test_composition_contracts.py": "f41b907cb06ecddf751c492bdb795f50db0473e33a5185af97ada1ac9673dcbe",
+    "tests/test_configuration_matrix.py": "7658f6f7859bb42664c089ce9e48d9cbae3848c9f88b71588a8b4ce34af3e38c",
+    "tests/test_connector_contracts.py": "4e0b36a4a78e701f24384593ed375832f6e354d18dc776cf523025e9744a80d9",
+    "tests/test_connector_lifecycle.py": "9866840e46b0ac7a9628447558af8f94e372ca340b1db7610a99a25e208f9531",
+    "tests/test_control_coverage.py": "ac5d5285837e340dc3d4d4bd0455bdd9491fcf8c221d003702762de9aa231618",
+    "tests/test_convergence.py": "f80f72a31e592d14ad0c12e17d50b7963f4e8adba7e155d156f30fd1317e5e48",
+    "tests/test_convergence_storage_failures.py": "e174eddc7f4c3045c3c904ea7da866bee8c7f9962bd8a19eae532edc17086545",
+    "tests/test_coverage_diagnostics.py": "cb46473c41dca2860a4d907c85dd423c51074eedf733714dfc4395dcdac20713",
+    "tests/test_coverage_metrics.py": "0a9441149dd52bf078a8c417b558489eb39e7236e39651e7f7e13536347d18e7",
+    "tests/test_credit_state_compatibility.py": "ff0346a5a294874bcc36efdfb95f22e3d833f9851f6fb26be12af7a730cf5179",
+    "tests/test_cross_platform_windows_policies.py": "93d0bc935db49e7c8582d85797b4f7db3e2373561508135a4b420ad7629e1d45",
+    "tests/test_diagnostic_read.py": "4c663df1239786697575493dde0d78a09ea86cef52614dc0a8332c02e220eb25",
+    "tests/test_domain.py": "62fc89baf75222fdf2c67963a8a7644a170381bd0ee4ae4dbedb127009eaf4f8",
+    "tests/test_domain_boundaries.py": "b47cf15a4100e0f81808a7318066948e5e7c937e199b8fe11e7c7c98f3f51bc8",
+    "tests/test_durable_contracts.py": "6f454d60534f767449dab03692b05a4ae7c1ec81dad84d6c6c0711d8356c8edd",
+    "tests/test_execution_features.py": "2d3396d3ef36783de57f3e83208b46b9094fbc8c41d9395c42c70151eb9778f7",
+    "tests/test_extended_coverage.py": "3736800192c55d4aa6d8c1e0bfb04911c268013ee92746b2fb12f8ad3100f5d6",
+    "tests/test_fdpass_socket_contract.py": "ecf941379610f58ca0269a4b9886b9922d836c8abd258017a839251937acbf7a",
+    "tests/test_filesystem_contracts.py": "182bdcb18a31f3e8f77f4ca8e9f426a155d2438c5ee2189c88c87da0a2f380ac",
+    "tests/test_guardian_relay.py": "15a113bbb602aae9057f04f09705994586103a7fcaf59b31ffac3fcdbf91a7e4",
+    "tests/test_hardening.py": "ce08c595594768f9029142b0fda8b61f7cdca3f8ef93c2d695fde1ed25adb859",
+    "tests/test_hardening_massive.py": "1721a7e6065d009506b9faaaf5497370c3b30b692bd252eb2de51b508bf95f89",
+    "tests/test_import_policy.py": "eb09c8287335933c05a95a38ff1e8a270ad48269981378ef21657ee7eb363aae",
+    "tests/test_improvements.py": "508386db0a33dd13d1b0187c6045d8d75369777301ec37b12a53b71c0f315e8b",
+    "tests/test_input_snapshot_boundaries.py": "ab560761ac9fb918b140cd226a3c27eda18f7c15fb513394c4614a2ba95f5337",
+    "tests/test_installation.py": "223d18f4f57a0a7df24abe76450eb6b785708236678b91d9cdaa9816b5a32463",
+    "tests/test_installation_boundary_contracts.py": "d61a20999c474fc47b53a080c69e91255eb88aca367094ccbb6e50875d85594d",
+    "tests/test_installation_probe.py": "fd9dac5bf92032f517c4102168a9f9d7885fbffd6394adf0ea90ecc3e37c2e6f",
+    "tests/test_interaction.py": "980cc6b2999b64b477c887d913933e69b28d19b13a50b3d2e092492d7bd8786c",
+    "tests/test_inventory_boundaries.py": "8b0b239b02a7e7035dc4f3a77fe29e2f8969a3dbe5734cb222b1fa4b4346d6fa",
+    "tests/test_live_output_failures.py": "58b1b89f7547fcfe07b6eb598691872075ea5c072af899f17b7cae486028fbaa",
+    "tests/test_lock_cleanup.py": "8112505b1f789d349a30fcd7a87c302940ef05f399583d0536ffdee7aa133d2c",
+    "tests/test_native_auth.py": "2eefce8ffb7aeda4446530f92dc2ca3eb78f3cb55d5e31a1c7aa4ddbc843761e",
+    "tests/test_native_cleanup_contracts.py": "0ee3598e8e5afad82a226ef6129c9069b90ee68d80fa58542a52538f3ffaf397",
+    "tests/test_native_control_contracts.py": "49d7a8de6fd00e756ea0acdfb9b2b6dd6a796b2371c8ec606498ec12e9e403c0",
+    "tests/test_native_readiness_contracts.py": "b4e1a8ff87b89103cff8e429e2dbead74f46619f2ce2f62f9e7c414d3161751a",
+    "tests/test_native_ssh.py": "885d7a3f5ffe403c08401ea832338706b0f1b0758ffa268fa08cf10ee714ec22",
+    "tests/test_native_staging_lifecycle.py": "736a3188c50c82bfdfbf2d5402710994f03a06e8d678b95177775beb39b8613a",
+    "tests/test_network.py": "2d7ab2f27eb31557fd72ba8dd38eb3aeb1bc7dd5c0f48c9806fd7e7752cff27b",
+    "tests/test_network_failure_contracts.py": "bd76d80d5f15cfdb2cfc1beb31c0902afac174e4024396623b29420dae034e12",
+    "tests/test_network_reboot.py": "097a71ed0262eee53746edc76fc2f819325ec07be314221e51d18f7017a8905f",
+    "tests/test_network_relay_integration.py": "ffc6d7e6a4a298e3c4a3687637463d9e8462d74704cc0ec64c21845c799a65c9",
+    "tests/test_nop_coverage.py": "e296d33b63e630aabd61870acd9444bdb4e88ac027ec3493217c9f3871e4cc70",
+    "tests/test_pacing_clock_contracts.py": "90f26d2eae13c9fcf103d6916c4338381bdb60baedd9517f518ae86610bb772f",
+    "tests/test_packaging.py": "483a3ab7f8ae284d4eca63ae10e87a71ee83c3a1dc3a186b6ad1e64e460db2fa",
+    "tests/test_portability.py": "fd6bf6c7bfac0ce35229504f9ca4973cdeadb59ea445a3bf8eeb22e586026d86",
+    "tests/test_preflight.py": "b4e645e31433cbc3091576c5870d9f2e3cb4181d1c903e5f84cf8ba2383768db",
+    "tests/test_preflight_boundary_contracts.py": "eccf0ae6f9140cbaf3e66d7d786d77fbee0a5e8f36737055a2d026ff36baa709",
+    "tests/test_presentation.py": "1be1e5e5a2ff50711ae9880ba9e3e4f76f53a2d911ba87d5e3b23481238e68f8",
+    "tests/test_process_guard_contracts.py": "30c5119b17719250bc8f2e923f376b9a11447aac3c8de10a5dc924d6a0ae9f1e",
+    "tests/test_public_annotations.py": "544c18adc8bfc2761f9c3240ec6ab60472f5ba8b0e64dae3468d6a39eaabd3de",
+    "tests/test_readiness_sharing.py": "a45214e8418230b90523151c596ae2e2e9db49b8255b03a42559e2d8ef79bafa",
+    "tests/test_relay_failures.py": "bda5cd84e09c8c897bb202548f09ab9af0dabecd279bcd491d531c0b32626e9d",
+    "tests/test_report_worker_parent_protocol.py": "97882245b25a94591b09620ddd039778075d952e852e3ac1002bd755326dc029",
+    "tests/test_reporter_shutdown_contracts.py": "737633184e51d7f9204cf2f5c3e3582793051718441ff8c9b5dbc7ffd946ceca",
+    "tests/test_resource_boundaries.py": "e90305d845bb287c51521319ea212fe89fd4430425b4cde3e9d09fa90aac937f",
+    "tests/test_restore_cleanup.py": "92da340d98e808580efba9ae92fd5d4a6bcc53267d10d34480ad6e8446b2743b",
+    "tests/test_restore_workflows.py": "ac0219d76a39ad974e62c4aef563339c63332652aa1fffbfbabac869616c8150",
+    "tests/test_revision.py": "1dbbbcfd52c77a4d8c6c8391f2a4598f1af97186fe5ed1820627beb7e6f9cf30",
+    "tests/test_runtime_coverage.py": "61bebae727c615168bab51d5c407fe45334a94f55a5f91716828e6a34ed03a2b",
+    "tests/test_sast_authority_preflight.py": "4ad1b31dd86da8fb7133c91e0f4e7706e54d985683f8f09917838cd4090d7bc1",
+    "tests/test_sast_review_policy.py": "c2fcb4ac89519e19d1930dfcfc9b6e57028ff8d6477d746134700ca5add79846",
+    "tests/test_sast_toolchain_integrity.py": "dcc3d2bc9821c09bb5ac6b70a42e08c9ddc01cd7925e81f7dbb692cb2066d11c",
+    "tests/test_sast_workflow_contracts.py": "69bab1000bf23edba63cd76c670b6213eaa263cae5678f221f48656a103a999d",
+    "tests/test_scheduler_service.py": "c2672c2c4865176e120526fcfcbe86238251d0293867766262bbaadd6e250bf3",
+    "tests/test_scheduling.py": "fd4dab5687b2b47a4720c10686f57df1c6d3c031a3d1ec4bbf3bbea3e7e342f8",
+    "tests/test_schema_refusal_contracts.py": "775b6437fbeae246fd0e2bcbfdb99f9ed258ccc8656c9398246be06e2c9edff8",
+    "tests/test_session_shutdown.py": "790ca33292b924c5eace648fef0f90c7a512564082924c477391484abaef13f0",
+    "tests/test_sessions.py": "c22334a668a6ac16b8c043608fda21784c34b902fa0b9e78b779a838ed897e17",
+    "tests/test_shared_budget_failures.py": "ed423cfc253c62f8fb048d4a0737220e1b528853926e602796e7aa0e6a611171",
+    "tests/test_source_contract_invariants.py": "23b461d560dfb47754f784c5e0c368173b11fddbc329e858ec0282b5bc11c15c",
+    "tests/test_source_coverage.py": "8344c8f8111b4e0d8ba3c968b3b62f2ef9d7954bc898e43e0441954c1439fdd4",
+    "tests/test_spool_failure_contracts.py": "c5d2c8bd45835ddaf42b44b2c6f2df775a9e1f87485ba1e8e11a7cbd485f2f46",
+    "tests/test_ssh_exit_receipts.py": "d4c9ba454a6ebbecf82a36c20d1d823774e877825ad6f601915efe5daf223cc3",
+    "tests/test_ssh_failure_boundaries.py": "7c463fcf61590d4a4c23ee94404a58e4042d989ffbc120e5474c8158fb1c86b6",
+    "tests/test_store.py": "0e6933b83bb5fab2a5c1e0bf18cd33b8a4a82e6965069788f5ec0d944643d6cc",
+    "tests/test_task_ownership.py": "88cccfe5638cfab1e25eab72a7ee35b838a48825d2e4829516a3fd9471103cc7",
+    "tests/test_tcp_proxy_lifecycle.py": "42b342eef5c04b5a7db0df322ca4e52b55da634e73aa828304e03228294f9b80",
+    "tests/test_terminal_contracts.py": "4144078f7d809c85cf320830c454d6c49219d7bbcb0b8a07285aeb43f55e47c4",
+    "tests/test_timeout_boundaries.py": "a16ec387c52a38fc9d2b6d588622a80a97393f63a7ad63352219289407006f77",
+    "tests/test_trace_coverage.py": "8a403494b5c17679326b06d126656daab8eb8af4e6d984707fd4700c19527528",
+    "tests/test_transfer_cancellation_contracts.py": "3643f8bbfc07c4771fce2177395da96edc66bf139676ce6e7b9868ecd36efd06",
+    "tests/test_transfer_failure_contracts.py": "1f0405b091257bff4da0bab6377eba9b3c0957cc2f86d884a15a205df0c56515",
+    "tests/test_transfer_publication_contracts.py": "a441d98231d22dec44ab94237c0b52ccac4020c36f19b4c0bbe04354baab7ffd",
+    "tests/test_transfers.py": "690db207e87eca6acfcbcf472fc70b972fbd8921c526f276ed669ca76e57e17b",
+    "tests/test_transport.py": "bba9d8d279ab6aba6f7b9dca9c661cf5fb2763cb18979fc739115fe35fee78c3",
+    "tests/test_wiki.py": "5e808d3f4370561784074faa96e684d9c636777b9a3d241f7a4cd89944311477",
+    "tests/test_windows_failure_contracts.py": "a59382f720d704ed74cb43c73c91039642829c12435a536277957b51ae73c5fd",
+    "tests/test_windows_filesystem_boundary.py": "3c7cacdc9629d596886e68698d1365ff9fcfaff166232dedf0bc6c877a82ab59",
+    "tests/test_workflow_boundaries.py": "a25f22d53461e791562d149f42ad14e5dbd769dfcc32445779bf1efff67aba8c",
+    "tests/test_workflow_store_failures.py": "3da360683486fc0337dd93c7664119b3a9940a05dec1ff0ad5d2bc7658a715c8",
+    "tests/test_workflows.py": "0f5081104c38ce6e4b29d75129cb76005bce624e81b3cb06a1e859f51eaa02fc"
+  },
+  "candidate_archive_sha256": "a62481f4f729da917674786e48c60720f01439958252a1ce016d2718604d0b4c",
+  "approved_review_sha256": "02927b0c27010c5c8f884735d6d7b528d24d84d5bfaa2280046ff6b6714c7d41",
+  "child_campaign": {
+    "descriptor_sha256": "9ec76c61cde4fb28f08dedd6333b715332fd34fdcc6bc0c8f26c30cfcc717ce8",
+    "children": [
+      {
+        "file": "process-1624-c943121cfcade41a.events",
+        "pid": 1624,
+        "observations": 1948,
+        "sha256": "ab07aa9585d75609bdd9f0353fbde5a96e68cc1bc24871dc7b261884b1e6c330"
+      },
+      {
+        "file": "process-1625-04d3b922b04a82f3.events",
+        "pid": 1625,
+        "observations": 0,
+        "sha256": "13a01769500e20b20f23089cd870d7334a9d01f68e77ec57057b1f94cfe9d580"
+      },
+      {
+        "file": "process-1627-47d50b8c72246652.events",
+        "pid": 1627,
+        "observations": 1948,
+        "sha256": "7d51ab74fe7742d56ed389c99774503f9aea6a872e3f003be46bd422d822bfde"
+      },
+      {
+        "file": "process-1629-46634ea8ddb97ffd.events",
+        "pid": 1629,
+        "observations": 0,
+        "sha256": "adf2463e8c24f505a95376d28e999d55a94b6649827df28b9500a62a91ec8973"
+      },
+      {
+        "file": "process-1631-7ee07f6a7dd8f96f.events",
+        "pid": 1631,
+        "observations": 1926,
+        "sha256": "35f3abcd1c1f19b3520e8527931b91ffa961452e506084f5d71d026d97ae7b71"
+      },
+      {
+        "file": "process-1635-b1dfddd02cabd57f.events",
+        "pid": 1635,
+        "observations": 0,
+        "sha256": "1297101825e642f785b6eb6a58ec06633e37343a80870069af1005aa642fbe9b"
+      },
+      {
+        "file": "process-1637-0907eb2b3852be51.events",
+        "pid": 1637,
+        "observations": 1926,
+        "sha256": "88a98abcece9d7584fcf9b3df4666852bd94021881045ac72bfa41d4b14b855a"
+      },
+      {
+        "file": "process-1638-e6278986e0d99fa7.events",
+        "pid": 1638,
+        "observations": 0,
+        "sha256": "5fb2df745616ee140725a66ab541a055fed375eda87490343932a6555b357e61"
+      },
+      {
+        "file": "process-1640-cf4c79b4bdc046e0.events",
+        "pid": 1640,
+        "observations": 1948,
+        "sha256": "b76825cafee4fb69deecd569f25dc075963bc0526f8168f0597920d43f2adaee"
+      },
+      {
+        "file": "process-1642-0d72a1e605e8e219.events",
+        "pid": 1642,
+        "observations": 0,
+        "sha256": "7998637ed8df040f243079c900226c98e0f21c487cd69dfc10ef7f3bd393b043"
+      },
+      {
+        "file": "process-1644-7c4ff1a9bcf2a055.events",
+        "pid": 1644,
+        "observations": 1949,
+        "sha256": "0a03d14ff572cad82a67c71375d84b6863e640bac96aaf0170c21a2601adf1ea"
+      },
+      {
+        "file": "process-1645-6b603eae704765bf.events",
+        "pid": 1645,
+        "observations": 0,
+        "sha256": "03e72b4277b7b0f93a02191c906b8b0f8e89a111a4f9c1939650b0260b466136"
+      },
+      {
+        "file": "process-1647-ed1bb6aca7674d70.events",
+        "pid": 1647,
+        "observations": 1948,
+        "sha256": "d5f71ff03fe7e93085c17c681940407eac7e4b7475c9015810dd91483a0c496d"
+      },
+      {
+        "file": "process-1648-f47d22b7eec87083.events",
+        "pid": 1648,
+        "observations": 0,
+        "sha256": "4514433217a8401f87359b3a378d61bc3c760625153c20fbfe08eafb68b52fa8"
+      },
+      {
+        "file": "process-1650-61c33c48ee1fb056.events",
+        "pid": 1650,
+        "observations": 1926,
+        "sha256": "a8316c5611675cda83d463b2c35ad64077e56ce9269b465fd848a334606b310d"
+      },
+      {
+        "file": "process-1652-9f9be64bb91fbb94.events",
+        "pid": 1652,
+        "observations": 0,
+        "sha256": "b5ca6b4015989d9fdaba15eb11a27f481375edc7725c1ab49dcd1361bae0d287"
+      },
+      {
+        "file": "process-1654-bf4250cd6b829f29.events",
+        "pid": 1654,
+        "observations": 1879,
+        "sha256": "3a02a2d006d5a29f62ede87f067dd515d42e76df9f193094a48784c0907e3a9b"
+      },
+      {
+        "file": "process-1657-247cbace3cc06f56.events",
+        "pid": 1657,
+        "observations": 0,
+        "sha256": "283d2bd7679e81fb0ff96cb79ba5a0f9fdccdd501c00f6897c45dfcdeb208e27"
+      },
+      {
+        "file": "process-1658-90ee882ad302c0ef.events",
+        "pid": 1658,
+        "observations": 0,
+        "sha256": "fefdcbc512e35a8d2394bb97003a8654704d3a7263026a31872c8b6f18308427"
+      },
+      {
+        "file": "process-1659-e65fcaa9a714e27a.events",
+        "pid": 1659,
+        "observations": 1949,
+        "sha256": "7f093860a3566abf173953c65cdd75c1e1dcc54fde820ad89f7ab5eaa48e27ab"
+      },
+      {
+        "file": "process-1672-4b6412c9e0bb54f8.events",
+        "pid": 1672,
+        "observations": 0,
+        "sha256": "30f4e47540927fdd948e4e529492ecbe3e76474d0eaa1b9e3c806309985601fe"
+      },
+      {
+        "file": "process-1681-2a8086eaa7f25491.events",
+        "pid": 1681,
+        "observations": 1879,
+        "sha256": "1676fdb5a5ba071624b373dcedf5db61f7a08af86d2faf1ccd4f819ad767eec2"
+      },
+      {
+        "file": "process-1691-94a88df20b17ee7b.events",
+        "pid": 1691,
+        "observations": 0,
+        "sha256": "f8d542ba66d911ce4392febc16c7f6e0c3de6f1c7522035aeb732f9ccfaf01bd"
+      },
+      {
+        "file": "process-1692-45c7c2d71ec2f8d9.events",
+        "pid": 1692,
+        "observations": 0,
+        "sha256": "4a1d7406f832614f8d6adc45c0b6048a74c51d8435cb36cb893ad395ad11ca10"
+      },
+      {
+        "file": "process-1698-5c179ec95618b93c.events",
+        "pid": 1698,
+        "observations": 1927,
+        "sha256": "2b809b2685fece5c1eed88b3607286fce91d31788c1a6720f7141f99727798b8"
+      },
+      {
+        "file": "process-1709-5db059bd5e0bfa28.events",
+        "pid": 1709,
+        "observations": 0,
+        "sha256": "be40acca0145da0f2adc6bf1b004b6a4d1822b091ba1da5c55eeb5b41ddddd25"
+      },
+      {
+        "file": "process-1713-95ec8ba5f5f00bd4.events",
+        "pid": 1713,
+        "observations": 0,
+        "sha256": "d55acf89ee255924bf7dacc7df78efa484c105fbb50b6edbe039b88210a0174f"
+      },
+      {
+        "file": "process-1760-e0897e440a543642.events",
+        "pid": 1760,
+        "observations": 1926,
+        "sha256": "c9a61f95072f8c6563a51aa74e02d150bf385e354e1b3bbd5f2881107876bb51"
+      },
+      {
+        "file": "process-1787-341099e25cec2c94.events",
+        "pid": 1787,
+        "observations": 0,
+        "sha256": "b01fc95cbb24119befddec1d86711214d4797b269411c056e981843cb70c04b0"
+      },
+      {
+        "file": "process-1795-2a9f74039ee868b4.events",
+        "pid": 1795,
+        "observations": 1948,
+        "sha256": "cf461d962d7364aefe3f87079bf73983e1f93d5358004542fa5006dcf070732f"
+      },
+      {
+        "file": "process-1802-1ad41b62b490fdce.events",
+        "pid": 1802,
+        "observations": 0,
+        "sha256": "bbe9271dda4409120d66bdbc3d87a69485f5e427df4a73ae4e147daaa208c040"
+      },
+      {
+        "file": "process-1803-9674903c6cffc552.events",
+        "pid": 1803,
+        "observations": 0,
+        "sha256": "da100e6c28b2bc3d5f86e1f2bc3fbbefd05cd1a2101de691224848e8ba06bd6e"
+      },
+      {
+        "file": "process-1804-16ea9fe87de649ea.events",
+        "pid": 1804,
+        "observations": 1948,
+        "sha256": "c9a9b61da73fcd5c54903fd7bd7d28b975d1b1bb2f63fd2be16e6075e4d6e04c"
+      },
+      {
+        "file": "process-1805-18961f25c6c5991b.events",
+        "pid": 1805,
+        "observations": 0,
+        "sha256": "f8dad43535139dcb657ee3a0c12624d4ebbeb14e6e542a1d3fa57b50a7d042c8"
+      },
+      {
+        "file": "process-1806-c075ffd674146d2b.events",
+        "pid": 1806,
+        "observations": 0,
+        "sha256": "5a9f54c30eb3e8ebc16ab2561ab92c56ba28fdf7bf990a124c5f4f1d1e89f81f"
+      },
+      {
+        "file": "process-1807-c9c7b1dc176865f8.events",
+        "pid": 1807,
+        "observations": 1948,
+        "sha256": "631f8ba378b0b3c41b38b1b90b136b83efb220c797489b3c0987443662f720a4"
+      },
+      {
+        "file": "process-1810-2f9fb3bcd8cfd10e.events",
+        "pid": 1810,
+        "observations": 0,
+        "sha256": "4d27a4dedc815130de85971d8ee700f584a9acd87b5e6134eb31a276d3ff8c77"
+      },
+      {
+        "file": "process-1812-7a24a539dd3b2305.events",
+        "pid": 1812,
+        "observations": 1948,
+        "sha256": "14e38c56936aa9d001f63fd8def0fd22d1d365ade5cae8288646c45ba98827f3"
+      },
+      {
+        "file": "process-1813-385a479fefbe6b5d.events",
+        "pid": 1813,
+        "observations": 0,
+        "sha256": "03dbecee304aafbb8fe3ddce03e1afbbe64e0a27191f2c482c7d3a09bf66a2b2"
+      },
+      {
+        "file": "process-1815-85a75d353c42a55a.events",
+        "pid": 1815,
+        "observations": 1948,
+        "sha256": "0a80d749f22d9d59a0db395126d9138de304fc783b7e77ad6c2958f2eba67ec1"
+      },
+      {
+        "file": "process-1816-dc93609b86171d64.events",
+        "pid": 1816,
+        "observations": 0,
+        "sha256": "9b94bd5a0d3fe415654b45ab8083591047247afc61dc94e9ea1c4c918f5c753d"
+      },
+      {
+        "file": "process-1819-c7302c9e734108ae.events",
+        "pid": 1819,
+        "observations": 1926,
+        "sha256": "39552d420d14d303520d39c877dab9c7c6420e94de9ebbb551d461c9a2b8181e"
+      },
+      {
+        "file": "process-1821-002d992df47eac1a.events",
+        "pid": 1821,
+        "observations": 0,
+        "sha256": "caa09579aa8e72952b846a0b9cc6b77da07c4c12f841187af7d7196cd3abfeb8"
+      },
+      {
+        "file": "process-1823-2d2b227306f7afaa.events",
+        "pid": 1823,
+        "observations": 1949,
+        "sha256": "3f24d8db60db9d993b830639d79fabc62aca8bb3dfad48f4f336ee9fda4545f6"
+      },
+      {
+        "file": "process-1824-0f83bf73df407e58.events",
+        "pid": 1824,
+        "observations": 0,
+        "sha256": "810e7f59be3b66678597da0bf7cf0a75aca65aa2547d5a1691793905b9378c55"
+      },
+      {
+        "file": "process-1826-f4d3b8eabae4a603.events",
+        "pid": 1826,
+        "observations": 1949,
+        "sha256": "c2c09d135286c3c846431556e326381cb480a4db9d7d75dd6a5de4626b54d45f"
+      },
+      {
+        "file": "process-1827-39265066c1d4952b.events",
+        "pid": 1827,
+        "observations": 0,
+        "sha256": "857ad72f24a762f59fcb42dc5dffbc0f9867cc8a75c5a0bf4a69287845afe420"
+      },
+      {
+        "file": "process-1828-e000655727245794.events",
+        "pid": 1828,
+        "observations": 0,
+        "sha256": "d520efdb2334bae6c4aa8cc2d33fb85903387a1ea3c0a9b1421c2d848a248e22"
+      },
+      {
+        "file": "process-1831-16d9a864671d3f36.events",
+        "pid": 1831,
+        "observations": 1949,
+        "sha256": "8477cd3c879f800f5f83724c4fe1e2a16ad1007022a5555c4e6b9a18ced8c330"
+      },
+      {
+        "file": "process-1832-8bc74777743215bb.events",
+        "pid": 1832,
+        "observations": 0,
+        "sha256": "9f5f981a6ab8f11733370c17173933fdbf2b42d5ac8bf163eefa958118a412ab"
+      },
+      {
+        "file": "process-1834-847a124c80ce9e2f.events",
+        "pid": 1834,
+        "observations": 1948,
+        "sha256": "05032afe730e3feb79167f95acd9d3672764d3337c263480b5414448995b3ddd"
+      },
+      {
+        "file": "process-1835-a09f28891a9e972e.events",
+        "pid": 1835,
+        "observations": 0,
+        "sha256": "74b2c6f1c25dc7353db8132ba9242e6761153fe40df30c520f169e3244aa20c9"
+      },
+      {
+        "file": "process-1837-20d56001656686da.events",
+        "pid": 1837,
+        "observations": 1926,
+        "sha256": "04ad3573585ffe6b2329a647b7417eb068a62ecaf310415a835657aad98f13f8"
+      },
+      {
+        "file": "process-1838-0453613287f3faaa.events",
+        "pid": 1838,
+        "observations": 0,
+        "sha256": "72ebdd48c252cfc3d945c7482566f4b6d044f24e183a7986c7db931cd597ac8b"
+      },
+      {
+        "file": "process-1842-2ffb72d718d2ea57.events",
+        "pid": 1842,
+        "observations": 1949,
+        "sha256": "c6e7d8710d7b1a34cf686d9fbcbe84070f1b8db1ff92b74c169736f942dc0b0a"
+      },
+      {
+        "file": "process-1843-9ecaf0cb1d1bae1e.events",
+        "pid": 1843,
+        "observations": 0,
+        "sha256": "fc7d1aca4339998bf9e3690d1a9d298266f1fc61716cdbece1b63a3423d0db31"
+      },
+      {
+        "file": "process-1844-c79bd860afeba9cf.events",
+        "pid": 1844,
+        "observations": 0,
+        "sha256": "e089a799f819079e226c013ec224bf67b0569e3352a2b1f4d12c7140a6f935d2"
+      },
+      {
+        "file": "process-1845-ce3dbe931eb32120.events",
+        "pid": 1845,
+        "observations": 1948,
+        "sha256": "766f8a24ab6a0edd64ed80e903edc8ee738ce4557aa1dfdbcb0f203484d472b7"
+      },
+      {
+        "file": "process-1846-53213a42c04c2928.events",
+        "pid": 1846,
+        "observations": 0,
+        "sha256": "d25f0789d8db90ce54d0081bb28a162dbb81cfb81556703635658a718f2adb4c"
+      },
+      {
+        "file": "process-1848-afd79472f07f343b.events",
+        "pid": 1848,
+        "observations": 1926,
+        "sha256": "76f62b57409d59f21ff66010572cd566c0c95023f3e6f60bc9845fe69a816f33"
+      },
+      {
+        "file": "process-1849-afd98bab6db2223e.events",
+        "pid": 1849,
+        "observations": 0,
+        "sha256": "1fce04b37adfc90c63350a2ca4cff925dab42dcd0550b1c7062500df55f1924e"
+      },
+      {
+        "file": "process-1854-8c22122a7e58e3a9.events",
+        "pid": 1854,
+        "observations": 1949,
+        "sha256": "4a7898878ebfa4e6b88cada4b3551163503615ffbe638cd28f25f226a529b34a"
+      },
+      {
+        "file": "process-1855-44eb0bd7c68483f5.events",
+        "pid": 1855,
+        "observations": 0,
+        "sha256": "fe15d0e952e2e550acef69d8a71bb2197ef87ff733990c098393a5ed2b173cfa"
+      },
+      {
+        "file": "process-1856-5f7b9ee8c32fcc5f.events",
+        "pid": 1856,
+        "observations": 0,
+        "sha256": "7ac2f7849b0a98257e43bc0a5a66a20d31f472b1e97d796e321a926d58560473"
+      },
+      {
+        "file": "process-1857-fad35a1a0d5da27d.events",
+        "pid": 1857,
+        "observations": 1927,
+        "sha256": "6bc41336931d6af1fb219e2e8feabaa6685188ac189f59adf5f802a71c79c9d8"
+      },
+      {
+        "file": "process-1858-5e955c144025b2f4.events",
+        "pid": 1858,
+        "observations": 0,
+        "sha256": "ff32a8e5efc2c3f82803e4f13f10bfdb2ec3474a216f6c1627fc2c87616689b5"
+      },
+      {
+        "file": "process-1859-9f8d62be32512469.events",
+        "pid": 1859,
+        "observations": 0,
+        "sha256": "6bf66140831453d9ac01ea79ae488e453e2430d384e8739df4c7e2dfdb259caa"
+      },
+      {
+        "file": "process-1860-422ebcae21337ddc.events",
+        "pid": 1860,
+        "observations": 1949,
+        "sha256": "a1b64d13f1c3e159984b1cb02c57c741eec56c88cf2bdb682fe6b24b0c5e29d6"
+      },
+      {
+        "file": "process-1863-8cc8df98d61ae526.events",
+        "pid": 1863,
+        "observations": 0,
+        "sha256": "d15e4817280dac8f9c06859c7ab1b11401700eab0a2e66b59550d69c4b698df6"
+      },
+      {
+        "file": "process-1864-2a3ae064519222b5.events",
+        "pid": 1864,
+        "observations": 0,
+        "sha256": "6215539ae78cb1d407efe3f98c7d97ad901bc1bdfe25e6a4a8650987cb7f53e7"
+      },
+      {
+        "file": "process-1865-febbe345d6198b08.events",
+        "pid": 1865,
+        "observations": 1949,
+        "sha256": "36dd0da81951d3394b0925b951e960a2882836cb04841080df3ca792e393b32a"
+      },
+      {
+        "file": "process-1866-2c7cf8d637fa3726.events",
+        "pid": 1866,
+        "observations": 0,
+        "sha256": "fbb54e4e01c956dafb75339194f86249a8a41a3e2fd3838aaf56e710b3413337"
+      },
+      {
+        "file": "process-1867-15860c063adffb6e.events",
+        "pid": 1867,
+        "observations": 0,
+        "sha256": "7db6acd2b276976237dca50a34f005f19762e982da6eb9b4efef9b1af0c72cea"
+      },
+      {
+        "file": "process-1868-9dd5252b7f60e33f.events",
+        "pid": 1868,
+        "observations": 1926,
+        "sha256": "ff09729f54975b8d0bc7b590c60fafcc0b1f3c001e95676440faebcccf36c657"
+      },
+      {
+        "file": "process-1869-db29de2c17c750fe.events",
+        "pid": 1869,
+        "observations": 0,
+        "sha256": "088ae7d44408082cf522921c48ce269b3cd4124170aa921a0de5c246202d48a3"
+      },
+      {
+        "file": "process-1871-2fa06e3e789b5e13.events",
+        "pid": 1871,
+        "observations": 1949,
+        "sha256": "b00cbbc6fb85f5c9eea620fd960f5f029b9a5509a25ecee4f6a8fbc1beb37a75"
+      },
+      {
+        "file": "process-1874-b1b03edf677da3a1.events",
+        "pid": 1874,
+        "observations": 0,
+        "sha256": "80604f910e4ff763740966b9208d0cec3ba40292d778e4700a451517a6579372"
+      },
+      {
+        "file": "process-1875-b6b0c5a31dc83cb3.events",
+        "pid": 1875,
+        "observations": 0,
+        "sha256": "be31717ef236b16ee0f1c20611e862a4c8757e4e5a3b12edac59597cbbcf542b"
+      },
+      {
+        "file": "process-1876-c12afef4fc9354b1.events",
+        "pid": 1876,
+        "observations": 1878,
+        "sha256": "798f1f3754ca194d5dd3b95033b8b946a836769fe22af06244f41c4cc683e236"
+      },
+      {
+        "file": "process-1877-deb6abdd566c62c1.events",
+        "pid": 1877,
+        "observations": 0,
+        "sha256": "f8ed1e7d1582e7b687b37075b5d4da1e89c52afcf644cdf2705e370a39e00556"
+      },
+      {
+        "file": "process-1879-b6cd7d072aed1b57.events",
+        "pid": 1879,
+        "observations": 1948,
+        "sha256": "6af1f7ae9094211a377ec2ae2ca976e70ae31013b694facbb4234a7ce134894d"
+      },
+      {
+        "file": "process-1880-cfda09f100c1520b.events",
+        "pid": 1880,
+        "observations": 0,
+        "sha256": "c42ee3f85126c4f5db4ea635d8c0a1918994a9045fa21d852897f0b6e631ec20"
+      },
+      {
+        "file": "process-1882-305c7b196d424d0a.events",
+        "pid": 1882,
+        "observations": 1949,
+        "sha256": "9ce592716fc5878778a87144d92b2512fa7aed494a51e5942995be4da8035993"
+      },
+      {
+        "file": "process-1885-0211333f14b8d68a.events",
+        "pid": 1885,
+        "observations": 0,
+        "sha256": "8b122907f826bb2d9376590fdc293678083a007b294934895c37f94724446967"
+      },
+      {
+        "file": "process-1887-e3b054acbb8296f6.events",
+        "pid": 1887,
+        "observations": 1926,
+        "sha256": "3b64f81c71a7c1e05742881b37bca56b71cfa792039001a8e32dc9ca096fafda"
+      },
+      {
+        "file": "process-1888-32c67506a154a7d7.events",
+        "pid": 1888,
+        "observations": 0,
+        "sha256": "59603ac529fe8cd423863cf47a97431176dfcecfa29ff883c621ac63f2ce9c32"
+      },
+      {
+        "file": "process-1890-6c6f67b11f01b669.events",
+        "pid": 1890,
+        "observations": 1949,
+        "sha256": "a542ca55b4d5eb339b7ff613407f4144db8f4912e6aef4e3aede77417a803e81"
+      },
+      {
+        "file": "process-1891-107894a0254c9ed2.events",
+        "pid": 1891,
+        "observations": 0,
+        "sha256": "e84ebfe59955793548425f053268091737c94af846a35c353c2ec21fe672bb33"
+      },
+      {
+        "file": "process-1895-521db8e398eb9519.events",
+        "pid": 1895,
+        "observations": 1949,
+        "sha256": "f6a837348e58a6d52224be326e23c0c9c69e07a2aa05943ba577e274c059ae87"
+      },
+      {
+        "file": "process-1896-226cf9524d7bbe6b.events",
+        "pid": 1896,
+        "observations": 0,
+        "sha256": "7a89a8002106dda60b6d60f68a7fb152c1b8b4ff4cda326b19e093c6afb97fda"
+      },
+      {
+        "file": "process-1897-d16d48fc4f14da67.events",
+        "pid": 1897,
+        "observations": 0,
+        "sha256": "e6cab9ecc8503bd1e37faa9795be1c1d6e5207ddc47b8a436c2edeb847eaf1c1"
+      },
+      {
+        "file": "process-1898-ee3910348127947b.events",
+        "pid": 1898,
+        "observations": 1885,
+        "sha256": "fac01a0b300dfb87f889f7eb15639f4f360ba03e1d8a95dd7b0315ce2a3f4b64"
+      },
+      {
+        "file": "process-1899-485a92da4fa83789.events",
+        "pid": 1899,
+        "observations": 0,
+        "sha256": "d4a13f789876dcd279adae40e6fbad3e20f57d2844eea8275a7480d1d290fc16"
+      },
+      {
+        "file": "process-1900-a0e24bf34fdf8812.events",
+        "pid": 1900,
+        "observations": 0,
+        "sha256": "d1c3e06a03200b3fafbe232f19d378fb7da219d9736423e88b219a5ace64792a"
+      },
+      {
+        "file": "process-1901-30b6a05168cd92cb.events",
+        "pid": 1901,
+        "observations": 1926,
+        "sha256": "1a6d22131c00587b854a89b9114805f3f0cd9043ea95b518234dd08436cb1c16"
+      },
+      {
+        "file": "process-1927-dc0741d10f30ebb4.events",
+        "pid": 1927,
+        "observations": 0,
+        "sha256": "bda79755d7510b486a6bd3689cc6acf0ab6fc66ad4c42c043266f40ba13c71d5"
+      },
+      {
+        "file": "process-1939-7ca0246c4ee831b1.events",
+        "pid": 1939,
+        "observations": 0,
+        "sha256": "3020c9e43e0eb5981142506c7a3dd9f1e504e27c82bb79bbbbf33d4a05d12205"
+      },
+      {
+        "file": "process-1955-a0ad0daf6003c867.events",
+        "pid": 1955,
+        "observations": 1926,
+        "sha256": "8b6521a93d428b9f080227ceeaa3c3190444af1361f53c144ec7e49c4bad91ab"
+      },
+      {
+        "file": "process-1956-23e5aa16b735742e.events",
+        "pid": 1956,
+        "observations": 0,
+        "sha256": "5b44d2464035123e4dde78421833ca238c6146feb9ead4c5734331bd7a14ec5a"
+      },
+      {
+        "file": "process-1957-29599ba36f814502.events",
+        "pid": 1957,
+        "observations": 0,
+        "sha256": "9b37c8ec4298be9f312b62a3482996a1b62f33aeca1dd6f22f9e5d810527bc84"
+      },
+      {
+        "file": "process-1958-730e63c961c898a7.events",
+        "pid": 1958,
+        "observations": 1927,
+        "sha256": "53d4c6dd651bffecb2e2c6ef3471ff5008ed0c435f0eef4e81d47484e3dc48f1"
+      },
+      {
+        "file": "process-1959-b4ee416165da6fb1.events",
+        "pid": 1959,
+        "observations": 0,
+        "sha256": "1c296a11a80ddf9e4fcc340320bd4cdd1e1bc99ef52b08152afa1907b3c9af4a"
+      },
+      {
+        "file": "process-1960-248aab031b8cc5c1.events",
+        "pid": 1960,
+        "observations": 0,
+        "sha256": "605b3518bce6e437ceada93a08f1edcfa41a789ac402cc734f8e8d5252b94445"
+      },
+      {
+        "file": "process-1961-ecb847e178a6734f.events",
+        "pid": 1961,
+        "observations": 1879,
+        "sha256": "5c2805543cbff935d05eb114d1e67cbaa866e03b45fdf18afa8f6bd19059cf88"
+      },
+      {
+        "file": "process-1962-032db9f47bc91876.events",
+        "pid": 1962,
+        "observations": 0,
+        "sha256": "4eb8bbd6549ccb7dadd4fd5ca0d44233f407919e2561d2a5c4cc932188a49c30"
+      },
+      {
+        "file": "process-1966-5bfb52dcfd2cf619.events",
+        "pid": 1966,
+        "observations": 1948,
+        "sha256": "f2ac3e1c36b80e8bfb9294d3ec85013cb6b74d5a050422e48f7f9d92f7fd6d35"
+      },
+      {
+        "file": "process-1967-614de925cb1734c7.events",
+        "pid": 1967,
+        "observations": 0,
+        "sha256": "8120929ac3a0c09f955db5aa2f365c17672ee04d5b3f1d4af18f21d601d22296"
+      },
+      {
+        "file": "process-1969-a192dc9b58cf0d51.events",
+        "pid": 1969,
+        "observations": 1948,
+        "sha256": "179314833b0ec137531a274cc3f285dbd22df4fd142511237a24c8ed14723b8a"
+      },
+      {
+        "file": "process-1970-795a5bb40a306168.events",
+        "pid": 1970,
+        "observations": 0,
+        "sha256": "215a2db74430059b7fff3912aaa77a17430d12e2b92b48c6a156178b8f3fb92b"
+      },
+      {
+        "file": "process-1971-dc5598c59fd5658d.events",
+        "pid": 1971,
+        "observations": 0,
+        "sha256": "21a8f9a30a3a72fdef00e07549c327d19e47b5e233409a51d86dc15aa5eae20a"
+      },
+      {
+        "file": "process-1972-d5f2b7a31c8404ad.events",
+        "pid": 1972,
+        "observations": 1949,
+        "sha256": "8c20e5dd9f7c584b369ce0ba8ef02f6db94ed72a5992fbd3515b9648e33e94a7"
+      },
+      {
+        "file": "process-1973-900bda010dda36cf.events",
+        "pid": 1973,
+        "observations": 0,
+        "sha256": "78d0f3114be013a2b4bbe643135fe3b190bd550716a6bc6634ca2e630966cfa3"
+      },
+      {
+        "file": "process-1974-51283342a88266cb.events",
+        "pid": 1974,
+        "observations": 0,
+        "sha256": "703bed2dbca062d6f12bd3d966af7eff6991411ddba129d1584fc1c442ebc4d2"
+      },
+      {
+        "file": "process-1977-36356ed50f8507e3.events",
+        "pid": 1977,
+        "observations": 1926,
+        "sha256": "bfe0e64f91658c83798387b6d64d2e5da44197ccfc1fb10e703682ffe271ba87"
+      },
+      {
+        "file": "process-1978-ba863f447a745370.events",
+        "pid": 1978,
+        "observations": 0,
+        "sha256": "aa930abf69bdc9b1c47d3e9b2d5760d699a5e6615bd59960bc345008e07bf533"
+      },
+      {
+        "file": "process-1980-51481cd898cc3e2b.events",
+        "pid": 1980,
+        "observations": 1949,
+        "sha256": "940ac57b1c758c75ce7616a6d017a2cbfa145bb013f8850adcb5210ac8e6dee4"
+      },
+      {
+        "file": "process-1981-51ccba5adeb2940c.events",
+        "pid": 1981,
+        "observations": 0,
+        "sha256": "de9d9135f68258c103ab480f4870b0bb5e4b6e8b787705773a0de5ea82ee6964"
+      },
+      {
+        "file": "process-1982-086bd05749f9f7d0.events",
+        "pid": 1982,
+        "observations": 0,
+        "sha256": "0acdb04342d78e49d2d13530f5f7451f206da02c457e204609b2f6f59d9bcdce"
+      },
+      {
+        "file": "process-1983-10f5627b108431b5.events",
+        "pid": 1983,
+        "observations": 1949,
+        "sha256": "6e1cdd3ed4fa93c0c6a2c0f23f001b2ad263358cd1755d2cc693944c58395cba"
+      },
+      {
+        "file": "process-1984-76b34455c252c0d2.events",
+        "pid": 1984,
+        "observations": 0,
+        "sha256": "fef3be20165bdc2460a62f5a77563b78e30003a4dce4d12c96c2a4fc5c88f396"
+      },
+      {
+        "file": "process-1987-87ef94c61b3acf6f.events",
+        "pid": 1987,
+        "observations": 0,
+        "sha256": "2b342c51433ed18347ec19ce951acedd9d1fc643118bd37cc2a642b105261432"
+      }
+    ],
+    "units_observed": 1957,
+    "unpublished_bootstraps": [],
+    "scope": "CPython children inheriting the measurement environment; isolated/external interpreters are not inferred"
+  },
+  "all_original_assertions_succeeded": true
+}

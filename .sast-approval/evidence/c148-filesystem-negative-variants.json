@@ -1,0 +1,23 @@
+[
+  {
+    "variant": "suppress-creation-errors",
+    "test": "test_creation_errors_are_not_retried_or_hidden",
+    "detected": true,
+    "failures": 1,
+    "errors": 0
+  },
+  {
+    "variant": "recreate-removed-entry",
+    "test": "test_existing_open_errors_never_recreate_or_follow_an_entry",
+    "detected": true,
+    "failures": 0,
+    "errors": 2
+  },
+  {
+    "variant": "omit-pinned-parent",
+    "test": "test_concurrent_creator_and_existing_opener_avoid_observed_enoent",
+    "detected": true,
+    "failures": 0,
+    "errors": 2
+  }
+]
