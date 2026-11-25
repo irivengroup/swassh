@@ -1,3 +1,0 @@
-# Remplacer par les cibles autorisées de votre infrastructure.
-srv01.example.net
-admin@srv02.example.net:2222

@@ -1,7 +1,0 @@
-{
-  "schema_version": 1,
-  "name": "demo-directory",
-  "check": "test -d \"$HOME/swassh-demo\"",
-  "apply": "umask 077; mkdir \"$HOME/swassh-demo\"",
-  "verify": "test -d \"$HOME/swassh-demo\""
-}
