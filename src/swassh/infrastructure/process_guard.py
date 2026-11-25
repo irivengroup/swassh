@@ -142,13 +142,53 @@ def native_metrics(process):
         return {}
 
 
+class _GroupAbsence:
+    """Require kernel ESRCH within the existing grace; EPERM alone is no proof.
+
+    Darwin excludes zombies while selecting signalable group members and can
+    return EPERM until their group is reaped. Probe with signal zero only: a
+    live or persistently inaccessible group remains a cleanup failure.
+    """
+
+    def __init__(self, group, deadline):
+        self.group = group
+        self.deadline = deadline
+
+    def _absent(self):
+        try:
+            os.killpg(self.group, 0)
+        except ProcessLookupError:
+            return True
+        except PermissionError:
+            return False
+        return False
+
+    def confirmed(self):
+        while time.monotonic() < self.deadline:
+            if self._absent():
+                # A delayed observation must not grant cleanup after expiry.
+                return time.monotonic() <= self.deadline
+            remaining = self.deadline - time.monotonic()
+            if remaining <= 0:
+                return False
+            time.sleep(min(0.025, remaining))
+        return False
+
+
 def _stop_native(process):
     if os.name == 'posix':
+        deadline = time.monotonic() + 0.35
         for sig in (signal.SIGTERM, signal.SIGKILL):
             try:
                 os.killpg(process.pid, sig)
             except ProcessLookupError:
                 pass
+            except PermissionError:
+                if _GroupAbsence(process.pid, deadline).confirmed():
+                    # Do not send another signal after confirmed disappearance;
+                    # the numeric group id could subsequently be reused.
+                    break
+                raise
             if sig == signal.SIGTERM:
                 try:
                     process.wait(timeout=0.35)

@@ -7,6 +7,7 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock,patch
 
+from swassh import Host, Options
 from swassh.infrastructure import tcp_proxy
 
 
@@ -72,6 +73,47 @@ class RelayWireBoundaryTests(unittest.TestCase):
 
 
 class RelayProgramBoundaryTests(unittest.TestCase):
+    def test_produced_literal_request_preserves_all_typed_fields_without_legacy_parser(self):
+        # The same wire contract must be exercised without a Linux-only SSH
+        # fixture: a real encoded ProxyCommand still uses the bounded parser.
+        options = Options(budget_dir=os.path.abspath('synthetic path%'),
+                          bastion_concurrency=7, bastion_connect_rate=3.25,
+                          bastion_memory_mib=96, bastion_bandwidth_kib=128,
+                          connect_timeout=2.5, command_timeout=12)
+        command = tcp_proxy.proxy_command(Host('one', port=2222), options, lifetime=7.25)
+        encoded = command.rsplit(' ', 1)[-1]
+        with patch.object(tcp_proxy, '_legacy_arguments', side_effect=AssertionError('unexpected legacy parser')):
+            args = tcp_proxy._arguments(['--request', encoded])
+        self.assertEqual(set(vars(args)), {'host', 'port', 'budget_root', 'connections', 'connect_rate',
+                                          'memory_bytes', 'bandwidth_kib', 'connect_timeout', 'lifetime'})
+        self.assertEqual(args.host, 'one')
+        self.assertEqual(args.port, 2222)
+        self.assertEqual(args.connections, 7)
+        self.assertEqual(args.connect_rate, 3.25)
+        self.assertEqual(args.memory_bytes, 96 * 1024**2)
+        self.assertEqual(args.bandwidth_kib, 128)
+        self.assertEqual(args.connect_timeout, 2.5)
+        self.assertEqual(args.lifetime, 7.25)
+        self.assertEqual(os.path.dirname(args.budget_root), options.budget_dir)
+        self.assertRegex(os.path.basename(args.budget_root), r'^[0-9a-f]{32}$')
+        for field in ('port', 'connections', 'memory_bytes', 'bandwidth_kib'):
+            self.assertIs(type(getattr(args, field)), int)
+        for field in ('connect_rate', 'connect_timeout', 'lifetime'):
+            self.assertIs(type(getattr(args, field)), float)
+
+    def test_utf8_configuration_limit_preserves_bounded_wire_and_rejects_excess(self):
+        # Exercise a valid 4096-byte UTF-8 path and the existing refusal above
+        # that boundary; do not bypass Options to manufacture an impossible input.
+        options = Options(budget_dir='\u00e9' * 2048)
+        command = tcp_proxy.proxy_command(Host('one'), options)
+        encoded = command.rsplit(' ', 1)[-1]
+        self.assertLessEqual(len(encoded), 32768)
+        self.assertLessEqual(len(base64.urlsafe_b64decode(encoded)), 16384)
+        args = tcp_proxy._arguments(['--request', encoded])
+        self.assertEqual(os.path.dirname(args.budget_root), os.path.abspath(options.budget_dir))
+        with self.assertRaisesRegex(ValueError, 'configuration paths must be literal and contain no controls'):
+            Options(budget_dir='\u00e9' * 2049)
+
     def test_literal_legacy_arguments_and_wrong_request_container(self):
         arguments = ['--host', 'one']
         self.assertIs(tcp_proxy.request_arguments(arguments), arguments)

@@ -17,6 +17,14 @@ sur un second PTY : aucun bit n'est masqué et aucune entrée utilisateur n'est 
 La reprise après SIGKILL exige à la fois la disparition du client et la capacité
 libérée dans le même budget de récupération de 2,5 secondes, sans rejeu.
 
+Le nettoyage du groupe natif conserve son délai de grâce de 0,35 seconde.
+Un refus de signal peut déclencher des observations avec le signal zéro : seul
+ESRCH, constaté avant l'expiration du délai initial, établit la disparition du
+groupe. Un groupe encore présent, inaccessible ou observé trop tard reste un
+échec ; aucune commande n'est rejouée. Les contrats portables vérifient aussi
+l'enveloppe littérale produite par le relais TCP et la limite UTF-8 de sa
+configuration, indépendamment des fixtures SSH propres à chaque plateforme.
+
 macOS reçoit la même source rsync 3.5.2, avec SHA-256 et signature vérifiés ; le
 binaire système est conservé. Les essais de cette CI sur runners macOS ne valent
 pas recette sur un équipement réel ou sur un bastion macOS d'entreprise.

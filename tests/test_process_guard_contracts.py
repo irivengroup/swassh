@@ -74,6 +74,122 @@ class GuardianRequestTests(unittest.TestCase):
                 guard.main('unused-request')
 
 
+class GuardianGroupAbsenceTests(unittest.TestCase):
+    """A permission error alone never establishes that descendants stopped."""
+
+    @contextlib.contextmanager
+    def cleanup_case(self, *, denied_signal=SIGKILL, probes=(), on_probe=None,
+                     wait_elapsed=0., sleep_overshoot=0.):
+        clock = SimpleNamespace(now=0., sleeps=[])
+        denial = PermissionError(1, 'synthetic group permission denied')
+        outcomes = iter(probes)
+        calls = []
+
+        def killpg(group, number):
+            self.assertEqual(group, 100)
+            calls.append(number)
+            if number == denied_signal:
+                raise denial
+            if number == 0:
+                if on_probe is not None:
+                    outcome = on_probe(clock)
+                else:
+                    outcome = next(outcomes, 'present')
+                if outcome == 'denied':
+                    raise PermissionError(1, 'synthetic zero-signal refusal')
+                if outcome == 'absent':
+                    raise ProcessLookupError(3, 'synthetic group absent')
+                if isinstance(outcome, BaseException):
+                    raise outcome
+
+        def sleep(seconds):
+            self.assertGreater(seconds, 0.)
+            self.assertLessEqual(seconds, 0.025)
+            clock.sleeps.append(seconds)
+            clock.now += seconds + sleep_overshoot
+
+        def wait(*args, **kwargs):
+            if kwargs:
+                self.assertEqual(kwargs, {'timeout': 0.35})
+                clock.now += wait_elapsed
+            return 0
+
+        process = Mock(pid=100)
+        process.wait.side_effect = wait
+        port = SimpleNamespace(name='posix', killpg=killpg)
+        signals = SimpleNamespace(SIGTERM=signal.SIGTERM, SIGKILL=SIGKILL)
+        timer = SimpleNamespace(monotonic=lambda: clock.now, sleep=sleep)
+        case = SimpleNamespace(process=process, clock=clock, denial=denial, calls=calls)
+        with patch.object(guard, 'os', port), patch.object(guard, 'signal', signals), \
+                patch.object(guard, 'time', timer):
+            yield case
+
+    def test_permission_race_requires_kernel_absence_before_original_deadline(self):
+        for denied in (signal.SIGTERM, SIGKILL):
+            with self.subTest(signal=denied), self.cleanup_case(
+                    denied_signal=denied, probes=('denied', 'present', 'absent')) as case:
+                guard._stop_native(case.process)
+                expected = [signal.SIGTERM] if denied == signal.SIGTERM else [signal.SIGTERM, SIGKILL]
+                self.assertEqual([number for number in case.calls if number], expected)
+                self.assertEqual(case.calls.count(0), 3)
+                self.assertAlmostEqual(case.clock.now, 0.05)
+                self.assertEqual(case.process.wait.call_args_list[-1].kwargs, {})
+                self.assertEqual(case.process.wait.call_count, 1 if denied == signal.SIGTERM else 2)
+
+    def test_persistent_permission_or_live_group_preserves_original_failure(self):
+        for state in ('denied', 'present'):
+            with self.subTest(state=state), self.cleanup_case(probes=(state,) * 20) as case:
+                with self.assertRaises(PermissionError) as failure:
+                    guard._stop_native(case.process)
+                self.assertIs(failure.exception, case.denial)
+                self.assertEqual([number for number in case.calls if number], [signal.SIGTERM, SIGKILL])
+                self.assertAlmostEqual(case.clock.now, 0.35)
+                case.process.wait.assert_called_once_with(timeout=0.35)
+
+    def test_late_wakeup_cannot_accept_absence_after_deadline(self):
+        with self.cleanup_case(probes=('present', 'absent'), sleep_overshoot=0.4) as case:
+            with self.assertRaises(PermissionError) as failure:
+                guard._stop_native(case.process)
+            self.assertIs(failure.exception, case.denial)
+            self.assertEqual(case.calls.count(0), 1)
+
+    def test_absence_observed_after_deadline_is_not_cleanup_evidence(self):
+        def late_absence(clock):
+            clock.now = 0.36
+            return 'absent'
+        with self.cleanup_case(on_probe=late_absence) as case:
+            with self.assertRaises(PermissionError) as failure:
+                guard._stop_native(case.process)
+            self.assertIs(failure.exception, case.denial)
+            self.assertEqual(case.calls.count(0), 1)
+
+    def test_slow_present_probe_exhausts_remaining_budget_without_sleep(self):
+        def slow_present(clock):
+            clock.now = 0.35
+            return 'present'
+        with self.cleanup_case(on_probe=slow_present) as case:
+            with self.assertRaises(PermissionError) as failure:
+                guard._stop_native(case.process)
+            self.assertIs(failure.exception, case.denial)
+            self.assertEqual(case.clock.sleeps, [])
+
+    def test_native_grace_cannot_be_extended_by_permission_observations(self):
+        with self.cleanup_case(wait_elapsed=0.35, probes=('absent',)) as case:
+            with self.assertRaises(PermissionError) as failure:
+                guard._stop_native(case.process)
+            self.assertIs(failure.exception, case.denial)
+            self.assertNotIn(0, case.calls)
+            self.assertEqual(case.clock.sleeps, [])
+
+    def test_unexpected_probe_error_is_never_translated_into_success(self):
+        error = OSError(5, 'synthetic kernel observation failure')
+        with self.cleanup_case(probes=(error,)) as case:
+            with self.assertRaises(OSError) as failure:
+                guard._stop_native(case.process)
+            self.assertIs(failure.exception, error)
+            case.process.wait.assert_called_once_with(timeout=0.35)
+
+
 class GuardianLifecycleTests(unittest.TestCase):
     def run_case(self,*,exit_code=0,alive=None,polls=None,lifetime=None,connection_failure=None,
                  relay=False,relay_error=False,signal_during_poll=None,existing_metrics=False,connections=1,invocation=None,
