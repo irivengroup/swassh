@@ -56,7 +56,7 @@ class DescriptorOptionProbeTests(unittest.TestCase):
         return result,connection,close,process
 
     def test_only_successful_undelayed_socket_is_accepted_and_always_closed(self):
-        for nodelay,code,expected in ((1,0,True),(0,0,False),(1,7,False)):
+        for nodelay,code,expected in ((1,0,True),(4,0,True),(0,0,False),(1,7,False),(4,7,False)):
             with self.subTest(nodelay=nodelay,code=code):
                 result,connection,close,process=self.probe(nodelay=nodelay,exit_code=code)
                 self.assertIs(result,expected)
@@ -125,7 +125,7 @@ class NativeDescriptorIntegrationTests(unittest.TestCase):
         with patch.dict(NativeConnector._cache,clear=True):
             chosen=NativeConnector.find()
         if chosen is not None:
-            self.assertEqual(self.descriptor_nodelay(chosen),1,
+            self.assertNotEqual(self.descriptor_nodelay(chosen),0,
                 'a fast helper must not reintroduce Nagle delays on the socket passed to OpenSSH')
         # This is a capability test: an installed but incompatible nc remains
         # unsupported, with the Python connector selected before SSH starts.

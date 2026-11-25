@@ -211,7 +211,9 @@ else:
             channel.sendmsg([b'\\0'],[(socket.SOL_SOCKET,socket.SCM_RIGHTS,array.array('i',[peer.fileno()]))])
 """.replace('HELP_DATA',repr(HELP))
             with tempfile.TemporaryDirectory(prefix='swassh-connector-cache-') as temporary:
-                root=Path(temporary);program=root/'nc.openbsd'
+                # Discovery returns the canonical trusted path (macOS /var is
+                # a system alias); the permission assertions use that same path.
+                root=Path(temporary).resolve();program=root/'nc.openbsd'
                 program.write_text('#!/bin/sh\nexec '+shlex.join([sys.executable,'-I','-B','-c',source])+' "$@"\n',encoding='utf-8')
                 program.chmod(0o700)
                 with patch.dict(os.environ,{'PATH':str(root)}),patch.dict(NativeConnector._cache,clear=True):

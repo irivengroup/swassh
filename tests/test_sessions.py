@@ -319,16 +319,28 @@ class SessionLifecycle(unittest.IsolatedAsyncioTestCase):
     async def test_terminal_restored_when_body_raises(self):
         import pty
         import termios
+        import tty
         master, slave = pty.openpty()
+        reference_master, reference_slave = pty.openpty()
         try:
             with os.fdopen(os.dup(slave), 'r') as input_stream, os.fdopen(os.dup(slave), 'w') as output_stream:
                 saved = termios.tcgetattr(slave)
+                # Compare every field with the kernel's direct round trip on a
+                # separate fresh PTY. Darwin sets its PENDIN state bit when
+                # ICANON is restored; it is not a lost user setting. Do not
+                # mask flags, flush queued input or change the production API.
+                self.assertEqual(termios.tcgetattr(reference_slave), saved)
+                tty.setraw(reference_slave, termios.TCSANOW)
+                termios.tcsetattr(reference_slave, termios.TCSANOW, saved)
+                expected = termios.tcgetattr(reference_slave)
                 with patch('sys.stdin', input_stream), patch('sys.stdout', output_stream):
                     with self.assertRaisesRegex(RuntimeError, 'fixture'):
                         with TerminalMode():
                             self.assertNotEqual(termios.tcgetattr(slave), saved)
                             raise RuntimeError('fixture')
-                self.assertEqual(termios.tcgetattr(slave), saved)
+                self.assertEqual(termios.tcgetattr(slave), expected)
         finally:
             os.close(master)
             os.close(slave)
+            os.close(reference_master)
+            os.close(reference_slave)

@@ -1,4 +1,30 @@
-# Protocole et historique de validation SWASSH 2.0.0
+# Protocole et historique de validation SWASSH 2.0.1
+
+## Correctif CI et portabilité 2.0.1 — conditions d'admission
+
+Cette candidate conserve les douze cases Python 3.11–3.14 de la CI et les cinq
+seuils à 98 % par module/composant. Le checkout désactive la conversion automatique
+des fins de ligne ; les empreintes des oracles v1 restent inchangées. Le lanceur
+QA configure uniquement le propriétaire par défaut des nouveaux objets du
+processus Windows. Il ne modifie ni les privilèges, ni les groupes, ni les DACL ou
+propriétaires existants ; le refus des répertoires étrangers reste inchangé.
+Les erreurs des commandes natives PowerShell et des pipelines bash restent bloquantes.
+
+Le contrôle TCP_NODELAY accepte le booléen natif non nul (1 sous Linux, 4 sous
+Darwin) et refuse toujours zéro, une remise de descripteur invalide ou un helper
+en échec. Le test du terminal compare tous les attributs à un aller-retour natif
+sur un second PTY : aucun bit n'est masqué et aucune entrée utilisateur n'est vidée.
+La reprise après SIGKILL exige à la fois la disparition du client et la capacité
+libérée dans le même budget de récupération de 2,5 secondes, sans rejeu.
+
+macOS reçoit la même source rsync 3.5.2, avec SHA-256 et signature vérifiés ; le
+binaire système est conservé. Les essais de cette CI sur runners macOS ne valent
+pas recette sur un équipement réel ou sur un bastion macOS d'entreprise.
+
+Les recettes et couvertures historiques ci-dessous restent rattachées à leurs
+révisions d'origine. La livraison 2.0.1 exige de nouvelles preuves locales, une
+revue SAST détachée de ses octets exacts et la réussite de toute la CI avant
+publication. L'approbation C139 ne qualifie pas automatiquement ces modifications.
 
 ## Correctifs de reproduction de la CI Linux
 

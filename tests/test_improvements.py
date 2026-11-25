@@ -649,19 +649,27 @@ class GuardTests(unittest.IsolatedAsyncioTestCase):
                 native_pid = int(pidfile.read_text())
                 parent.kill()
                 await asyncio.to_thread(parent.wait)
-                for _ in range(100):
-                    try:
-                        os.kill(native_pid, 0)
-                    except ProcessLookupError:
-                        break
-                    await asyncio.sleep(0.025)
-                else:
-                    self.fail('native client survived parent SIGKILL')
-                self.assertEqual(calls.read_text(), 'once')
+                deadline = time.monotonic() + 2.5
                 pool = SharedBudget(specification(Options(budget_dir=directory)))
                 lease = pool.ticket(connections=32)
                 try:
-                    self.assertTrue(lease.poll())
+                    # Client reaping and the guardian's lease close are separate
+                    # observations. Require BOTH inside the original 2.5 s
+                    # recovery budget, instead of racing the final close.
+                    stopped = recovered = False
+                    while time.monotonic() < deadline:
+                        try:
+                            os.kill(native_pid, 0)
+                        except ProcessLookupError:
+                            stopped = True
+                        if stopped:
+                            recovered = lease.poll()
+                            if recovered:
+                                break
+                        await asyncio.sleep(0.025)
+                    self.assertTrue(stopped, 'native client survived parent SIGKILL')
+                    self.assertTrue(recovered, 'guardian capacity was not recovered within 2.5 seconds')
+                    self.assertEqual(calls.read_text(), 'once')
                 finally:
                     lease.close()
                     pool.close()
@@ -1183,7 +1191,8 @@ class PinnedAppendContracts(unittest.TestCase):
     def test_pinned_parent_still_rejects_a_hard_link(self):
         from swassh.infrastructure.filesystem import open_private_append
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
+            # Use the live canonical parent exported by the pin contract.
+            root = Path(temporary).resolve()
             target = root / 'target'
             target.write_text('unchanged')
             linked = root / 'linked'

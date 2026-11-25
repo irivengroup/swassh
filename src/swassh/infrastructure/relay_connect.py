@@ -118,7 +118,9 @@ class NativeConnector:
                         connection=socket.socket(fileno=descriptors[-1])
                         descriptors.pop()
                         with connection:
-                            enabled=connection.getsockopt(socket.IPPROTO_TCP,socket.TCP_NODELAY)==1
+                            # Darwin returns the enabled flag bit (4), Linux 1.
+                            # Both are true; a disabled socket must still fail.
+                            enabled=bool(connection.getsockopt(socket.IPPROTO_TCP,socket.TCP_NODELAY))
                         process.wait(timeout=1)
                         return enabled and process.returncode==0
                     except (OSError,subprocess.TimeoutExpired):

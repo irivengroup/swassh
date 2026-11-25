@@ -125,7 +125,7 @@ class DescriptorHandoffIntegrationTests(unittest.TestCase):
                         handles=array.array('i');handles.frombytes(contents)
                         self.assertEqual(len(handles),1)
                         with socket.socket(fileno=handles[0]) as handed:
-                            self.assertEqual(handed.getsockopt(socket.IPPROTO_TCP,socket.TCP_NODELAY),1)
+                            self.assertNotEqual(handed.getsockopt(socket.IPPROTO_TCP,socket.TCP_NODELAY),0)
                             handed.sendall(b'\x00\xffout')
                             self.assertEqual(remote.recv(5),b'\x00\xffout')
                             remote.sendall(b'\xff\x00back')

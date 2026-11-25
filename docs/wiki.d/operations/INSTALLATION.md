@@ -23,7 +23,7 @@ SSH et les outils de transfert restent des prérequis système distincts.
 ## Installation directe
 
 ```sh
-python -m pip install dist/swassh-2.0.0-py3-none-any.whl
+python -m pip install dist/swassh-2.0.1-py3-none-any.whl
 python -m swassh --version
 python -m swassh setup-path
 ```
@@ -32,7 +32,7 @@ python -m swassh setup-path
 PEP 517 fourni. Après publication sur l'index choisi :
 
 ```sh
-python -m pip install swassh==2.0.0
+python -m pip install swassh==2.0.1
 ```
 
 Une wheel standard ne possède pas de hook post-installation arbitraire. Pip
@@ -46,19 +46,19 @@ L'installateur livré orchestre pip puis `setup-path`. Il ne remplace pas pip.
 Utiliser un environnement applicatif persistant pour préserver le Python système :
 
 ```sh
-python3 scripts/install.py --package-version 2.0.0 --venv "$HOME/.local/share/swassh-venv"
+python3 scripts/install.py --package-version 2.0.1 --venv "$HOME/.local/share/swassh-venv"
 ```
 
 Sur Windows :
 
 ```powershell
-py scripts/install.py --package-version 2.0.0 --venv "$env:LOCALAPPDATA\SWASSH\venv"
+py scripts/install.py --package-version 2.0.1 --venv "$env:LOCALAPPDATA\SWASSH\venv"
 ```
 
 La version doit être publiée sur l'index configuré dans pip. `PIP_INDEX_URL`
 ou la configuration habituelle de pip permet un index privé ; conserver TLS
 et les secrets hors des commandes partagées. Sans réseau, remplacer
-`--package-version 2.0.0` par le chemin de la wheel locale. Les dépendances
+`--package-version 2.0.1` par le chemin de la wheel locale. Les dépendances
 de création d'un venv (`venv` et `ensurepip`, ou le paquet système correspondant)
 doivent être disponibles. Le script refuse de réutiliser un répertoire existant
 qui n'est pas un venv. Ne pas déplacer ni supprimer ce venv après déploiement.
@@ -100,7 +100,7 @@ Construire avec `python scripts/build.py`, puis exécuter les contrôles CI,
 Le workflow de publication existant attend le succès de la matrice CI et vérifie
 la correspondance tag/version. Publier les distributions requiert les droits sur
 le projet PyPI ou l'index privé. Aucune publication distante n'est effectuée par
-la fabrication du ZIP. L’état de qualification de la version 2.0.0 est détaillé dans `VALIDATION.md`.
+la fabrication du ZIP. L’état de qualification de la version 2.0.1 est détaillé dans `VALIDATION.md`.
 
 Pour revenir en arrière, arrêter les invocations et le worker, puis réinstaller
 la wheel conservée avec le même Python applicatif. Conserver les bases privées

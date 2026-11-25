@@ -1,6 +1,6 @@
 > API Python rc4 (dialogue bidirectionnel asynchrone) : [clients synchrones/asynchrones, flux gérés et erreurs structurées](docs/wiki.d/usage/PYTHON-SDK.md).
 
-> Version 2.0.0 : [procédures réseau et durcissement des sessions](docs/wiki.d/usage/NETWORK.md). La reconnexion après redémarrage est implémentée. Le périmètre de qualification courant couvre Linux et Windows ; les équipements réels, macOS, AIX et Solaris en sont exclus à la demande de l’utilisateur. Voir VALIDATION.md.
+> Version 2.0.1 : [procédures réseau et durcissement des sessions](docs/wiki.d/usage/NETWORK.md). La reconnexion après redémarrage est implémentée. Le périmètre de qualification courant couvre Linux et Windows ; les équipements réels, macOS, AIX et Solaris en sont exclus à la demande de l’utilisateur. Voir VALIDATION.md.
 
 Voir aussi le [comparatif fonctionnel avec ssh2-python, Paramiko, Netmiko et Fabric](docs/wiki.d/reference/COMPARISON.md).
 
@@ -13,7 +13,7 @@ numéro de clé et la correction attendue sans divulguer son contenu ni son chem
 
 # SWASSH
 
-Version 2.0.0 : idempotence déclarative, workflows persistants avec reprise
+Version 2.0.1 : idempotence déclarative, workflows persistants avec reprise
 sans rejeu, canaux binaires, tunnels loopback et plafond commun des flux SSH.
 Vérifier le reçu de qualification locale correspondant au SHA-256 du ZIP et les
 contrôles de [VALIDATION.md](VALIDATION.md) avant le déploiement. Le [Wiki](docs/index.md)
@@ -47,7 +47,7 @@ fournit pas de client SSH : SWASSH pilote OpenSSH via
 requis, notamment pour le saut facultatif via ProxyJump.
 
 ```bash
-python -m pip install --no-deps dist/swassh-2.0.0-py3-none-any.whl
+python -m pip install --no-deps dist/swassh-2.0.1-py3-none-any.whl
 swassh --version
 ```
 
@@ -448,25 +448,25 @@ Voir [PORTABILITY.md](docs/wiki.d/operations/PORTABILITY.md) pour les capacités
 les prérequis et la campagne de certification native par SSH. La compatibilité
 de conception ne remplace pas les tests exécutés sur chaque OS réel.
 
-## Installation et affichage 2.0.0
+## Installation et affichage 2.0.1
 
 Le paquet fournit une wheel et une archive source standard, installables par
-`python -m pip install dist/swassh-2.0.0-py3-none-any.whl` ou
+`python -m pip install dist/swassh-2.0.1-py3-none-any.whl` ou
 `python -m pip install .`. Après publication sur votre index, l'installation
-directe devient `python -m pip install swassh==2.0.0`.
+directe devient `python -m pip install swassh==2.0.1`.
 
 Pour un déploiement complet via pip avec mise à jour du PATH si nécessaire,
 dans un environnement applicatif conservé :
 
 ```sh
-python3 scripts/install.py --package-version 2.0.0 --venv "$HOME/.local/share/swassh-venv"
+python3 scripts/install.py --package-version 2.0.1 --venv "$HOME/.local/share/swassh-venv"
 ```
 
 Cette commande nécessite que la version existe sur l'index configuré dans pip.
 L'archive livrée ne vaut pas publication PyPI. En mode hors ligne :
 
 ```sh
-python3 scripts/install.py dist/swassh-2.0.0-py3-none-any.whl --venv "$HOME/.local/share/swassh-venv"
+python3 scripts/install.py dist/swassh-2.0.1-py3-none-any.whl --venv "$HOME/.local/share/swassh-venv"
 ```
 
 L'installateur appelle pip et sauvegarde les profils modifiés. Il affiche
@@ -480,7 +480,7 @@ fonctionne aussi sans changer le PATH.
 Sous Windows :
 
 ```powershell
-py scripts/install.py --package-version 2.0.0 --venv "$env:LOCALAPPDATA\SWASSH\venv"
+py scripts/install.py --package-version 2.0.1 --venv "$env:LOCALAPPDATA\SWASSH\venv"
 ```
 
 Le PATH utilisateur Windows est complété sans doublon, avec sauvegarde et

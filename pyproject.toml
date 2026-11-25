@@ -5,7 +5,7 @@ backend-path = ["build_support"]
 
 [project]
 name = "swassh"
-version = "2.0.0"
+version = "2.0.1"
 description = "Massively parallel SSH execution, built like a swarm."
 readme = "README.md"
 requires-python = ">=3.11"
