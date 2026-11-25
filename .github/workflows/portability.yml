@@ -1,0 +1,46 @@
+name: Native Solaris and AIX certification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    environment: native-portability
+    runs-on: [self-hosted, linux, swassh-portability]
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [solaris, aix]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Configure identical checkout and native interpreter
+        env:
+          TARGET_PLATFORM: ${{ matrix.platform }}
+          SOLARIS_HOST: ${{ vars.SWASSH_SOLARIS_HOST }}
+          SOLARIS_PYTHON: ${{ vars.SWASSH_SOLARIS_PYTHON }}
+          SOLARIS_CHECKOUT: ${{ vars.SWASSH_SOLARIS_CHECKOUT }}
+          AIX_HOST: ${{ vars.SWASSH_AIX_HOST }}
+          AIX_PYTHON: ${{ vars.SWASSH_AIX_PYTHON }}
+          AIX_CHECKOUT: ${{ vars.SWASSH_AIX_CHECKOUT }}
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, subprocess, sys
+          target = os.environ['TARGET_PLATFORM']
+          prefix = target.upper() + '_'
+          values = [os.environ[prefix + key] for key in ('HOST','PYTHON','CHECKOUT')]
+          assert all(values), 'Provision all SWASSH target repository variables'
+          pathlib.Path('dist').mkdir(exist_ok=True)
+          raise SystemExit(subprocess.call([sys.executable, 'scripts/remote_portability.py',
+              '--platform', target, '--host', values[0], '--python', values[1],
+              '--checkout', values[2], '--report', 'dist/native-' + target + '.json']))
+          PY
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: native-${{ matrix.platform }}
+          path: |
+            dist/native-${{ matrix.platform }}.json
+            dist/native-${{ matrix.platform }}.audit.jsonl*

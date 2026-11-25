@@ -1,0 +1,8 @@
+hosts:
+  - hostname: srv01.example.net
+    username: admin
+    label: production
+  - hostname: srv02.example.net
+    port: 2222
+    username: admin
+    label: staging

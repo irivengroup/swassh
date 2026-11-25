@@ -1,0 +1,160 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  quality:
+    needs: security
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest, macos-latest]
+        python: ['3.11', '3.12', '3.13', '3.14']
+    timeout-minutes: 30
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Signed native OpenSSH and rsync integration prerequisites
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y openssh-server openssh-client ca-certificates curl gnupg build-essential \
+            libacl1-dev libattr1-dev libidn2-dev liblz4-dev libpopt-dev libssl-dev libxxhash-dev libzstd-dev zlib1g-dev
+          bash scripts/ci_rsync.sh
+      - name: Native authentication fixture prerequisites
+        if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.12'
+        run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y krb5-kdc krb5-admin-server krb5-user
+      - name: Standard-library QA and DDD dependency boundaries
+        run: python scripts/verify.py
+      - name: Wiki hierarchy, navigation, fences and local links
+        run: python scripts/wiki.py
+      - name: Bounded local core benchmarks
+        if: matrix.python == '3.12'
+        run: python benchmarks/core.py --operations 8 --workers 2 --output validation/core-benchmarks.json
+      - name: Native guardian descendants, budget recovery and pinned Windows directories
+        run: python -m unittest discover -s tests -p test_improvements.py -v
+        env:
+          PYTHONPATH: src
+      - run: python scripts/coverage.py
+      - name: Authenticated SSH, device dialogue, ProxyJump and verified transfers without skips
+        if: runner.os == 'Linux'
+        run: python scripts/native_network_gate.py
+      - name: Durable scheduling, concurrent manual invocations and no replay
+        if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.12'
+        run: python scripts/qualify_schedule.py --iterations 50
+      - name: Password and Kerberos authentication in private namespaces, without skips
+        if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.12'
+        run: sudo "$(which python)" scripts/native_auth_gate.py
+      - run: python scripts/build.py
+      - name: Offline wheel and source installation in fresh environments
+        run: python scripts/validate_installation.py
+      - name: Real pip index deployment and automatic POSIX PATH
+        run: python scripts/validate_deployment.py
+      - run: python scripts/package.py
+      - name: Install wheel without dependencies
+        shell: bash
+        run: python -m pip install --no-deps dist/*.whl
+      - run: swassh --version
+      - name: Installed run CLI syntax
+        run: swassh run 'uname -r' -H example --plan-only
+      - name: Installed command output and PATH setup contracts
+        run: |
+          swassh run 'ip a' -H example --show-output --output-lines 0 --plan-only
+          python -m swassh setup-path --help
+      - name: Installed schedule CLI and UTC planning
+        run: swassh schedule 'uname -r' -H example --at '2099-01-01 00:00' --plan-only
+      - name: Installed desired state, workflow and tunnel planning
+        run: |
+          swassh converge --action-file examples/desired-state.json -H example --plan-only
+          swassh workflow --workflow-file examples/workflow.json --plan-only
+          swassh tunnel -H example --local-port 18443 --remote-host service.internal --remote-port 443 --plan-only
+      - run: swassh push -H example --source ./data/ --destination /srv/data/ --plan-only
+      - run: swassh pull -H example --source /srv/data/ --destination ./downloads/ --plan-only
+      - name: Installed improvements CLI contracts
+        run: |
+          swassh run 'true' -H example --adaptive --progress --plan-only
+          swassh push -H example --source ./data/ --destination /srv/data/ --dry-run --plan-only
+          swassh push -H example --source ./release.tar --destination /srv/release.tar --verify-sha256 --plan-only
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.12'
+        with:
+          name: distributions
+          path: dist/
+  security:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Require fresh operator-owned QA directories
+        shell: bash
+        run: |
+          test ! -e .qa-bandit
+          test ! -L .qa-bandit
+          test ! -e .qa-approved-review
+          test ! -L .qa-approved-review
+      - name: Require detached operator authority
+        env:
+          REVIEW_REF: ${{ vars.SWASSH_SAST_REVIEW_REF }}
+          REVIEW_SHA: ${{ vars.SWASSH_SAST_REVIEW_SHA256 }}
+          GATE_SHA: ${{ vars.SWASSH_SAST_GATE_SHA256 }}
+        run: >-
+          python -I -B -c "import os,re,sys;
+          invalid=[public for name,pattern,public in [('REVIEW_REF','[0-9a-f]{40}','SWASSH_SAST_REVIEW_REF'),('REVIEW_SHA','[0-9a-f]{64}','SWASSH_SAST_REVIEW_SHA256'),('GATE_SHA','[0-9a-f]{64}','SWASSH_SAST_GATE_SHA256')] if not re.fullmatch(pattern,os.environ.get(name,''))];
+          sys.exit('Missing or invalid operator-approved SAST authority: '+', '.join(invalid) if invalid else 0)"
+      - name: Read the immutable approved review revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ vars.SWASSH_SAST_REVIEW_REF }}
+          path: .qa-approved-review
+          persist-credentials: false
+      - name: Materialize the detached review outside candidate sources
+        shell: bash
+        run: >-
+          python -I -B -c "import os,shutil;from pathlib import Path;
+          shutil.copytree('.qa-approved-review/.sast-approval',Path(os.environ['RUNNER_TEMP'])/'swassh-sast-review',symlinks=True)"
+      - name: Verify source and QA lock authority before installation
+        shell: bash
+        env:
+          SWASSH_SAST_REVIEW_SHA256: ${{ vars.SWASSH_SAST_REVIEW_SHA256 }}
+          SWASSH_SAST_GATE_SHA256: ${{ vars.SWASSH_SAST_GATE_SHA256 }}
+        run: |
+          python -I -B -c 'import hashlib,os,runpy,sys;from pathlib import Path;from datetime import datetime,timezone;p=Path("scripts/sast_gate.py");expected=os.environ["SWASSH_SAST_GATE_SHA256"];actual=hashlib.sha256(p.read_bytes()).hexdigest();sys.exit("untrusted gate bytes") if actual!=expected else None;api=runpy.run_path(str(p));review=Path(os.environ["RUNNER_TEMP"])/"swassh-sast-review/review.json";policy=api["ReviewPolicy"](review.read_bytes(),os.environ["SWASSH_SAST_REVIEW_SHA256"],datetime.now(timezone.utc));policy.verify_sources(api["SourceSnapshot"].capture(Path(os.environ["GITHUB_WORKSPACE"])))'
+      # QA dependencies stay outside SWASSH's standard-library-only runtime.
+      - name: Install hash-locked QA scanner
+        shell: bash
+        run: |
+          python -I -B -m venv .qa-bandit
+          python -I -m pip --isolated download --require-hashes --only-binary=:all: --no-deps --requirement .github/bandit-requirements.txt --dest "$RUNNER_TEMP/swassh-qa-wheels"
+          .qa-bandit/bin/python -I -m pip --isolated install --require-hashes --only-binary=:all: --no-deps --no-compile --no-index --find-links "$RUNNER_TEMP/swassh-qa-wheels" --requirement .github/bandit-requirements.txt
+          .qa-bandit/bin/python -I -m pip check
+      - name: Verified SAST v2 scan and individual qualification
+        id: sast_scan
+        shell: bash
+        env:
+          SWASSH_SAST_REVIEW_SHA256: ${{ vars.SWASSH_SAST_REVIEW_SHA256 }}
+          SWASSH_SAST_GATE_SHA256: ${{ vars.SWASSH_SAST_GATE_SHA256 }}
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python -I -B -c 'import hashlib,os,runpy,sys;from pathlib import Path;p=Path(sys.argv[1]);expected=os.environ["SWASSH_SAST_GATE_SHA256"];actual=hashlib.sha256(p.read_bytes()).hexdigest();sys.exit("untrusted gate bytes") if actual!=expected else None;sys.argv=sys.argv[1:];runpy.run_path(str(p),run_name="__main__")' scripts/sast_gate.py --root "$GITHUB_WORKSPACE" --scanner-python "$GITHUB_WORKSPACE/.qa-bandit/bin/python" --wheels "$RUNNER_TEMP/swassh-qa-wheels" --review "$RUNNER_TEMP/swassh-sast-review/review.json" --evidence "$RUNNER_TEMP/swassh-sast-review/evidence" --output "$RUNNER_TEMP/swassh-sast-output"
+      - name: Preserve the unfiltered scan report
+        if: ${{ always() && (steps.sast_scan.outcome == 'success' || steps.sast_scan.outcome == 'failure' || steps.sast_scan.outcome == 'cancelled') }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: raw-bandit-report
+          path: ${{ runner.temp }}/swassh-sast-output/
+          if-no-files-found: error

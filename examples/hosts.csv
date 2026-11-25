@@ -1,0 +1,3 @@
+hostname,port,username,label
+srv01.example.net,22,admin,production
+srv02.example.net,2222,admin,staging
