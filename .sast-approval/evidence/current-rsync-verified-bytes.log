@@ -1,0 +1,16 @@
+pristine 0 rsync-3.5.2.tar.gz: OK
+ gpg: keybox '/tmp/tmp.f4neSNaz4d/pubring.kbx' created
+gpg: /tmp/tmp.f4neSNaz4d/trustdb.gpg: trustdb created
+gpgv: Signature made Tue Nov  3 21:13:22 2026 UTC
+gpgv:                using EDDSA key 8EDF88F4731A1E8B45D67FBE6909546B2C52EC2D
+gpgv: Good signature from "Zen Dodd <mail@steadytao.com>"
+
+changed-checksum 1 rsync-3.5.2.tar.gz: FAILED
+ sha256sum: WARNING: 1 computed checksum did NOT match
+
+changed-signature 1  gpg: keybox '/tmp/tmp.2etLLw53mc/pubring.kbx' created
+gpg: /tmp/tmp.2etLLw53mc/trustdb.gpg: trustdb created
+gpgv: Signature made Tue Nov  3 21:13:22 2026 UTC
+gpgv:                using EDDSA key 8EDF88F4731A1E8B45D67FBE6909546B2C52EC2D
+gpgv: BAD signature from "Zen Dodd <mail@steadytao.com>"
+

@@ -1,0 +1,12 @@
+{
+  "winner_exit": 0,
+  "contender_exit": 75,
+  "contender_stderr": "volume verrouillé",
+  "contender_writes_in_target": 0,
+  "first_cleaner_pid": 2247,
+  "lock_kernel_identity": "08:50:62203",
+  "retained_sibling_lock": true,
+  "wheel_sha256": "fc1802491678ec6e0a496727e5652604d2a4833111d4bef441187a0468702521",
+  "destination": "/var/lib/swassh-qualification-0b018e78902d/restored",
+  "workflow_id": "944f3a1d546b44858d50a7e6456517a3"
+}
