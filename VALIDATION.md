@@ -25,6 +25,23 @@ groupe. Un groupe encore présent, inaccessible ou observé trop tard reste un
 l'enveloppe littérale produite par le relais TCP et la limite UTF-8 de sa
 configuration, indépendamment des fixtures SSH propres à chaque plateforme.
 
+La création d'un fichier partagé sous Darwin utilise une création exclusive,
+puis une ouverture sans création uniquement après EEXIST. Le descripteur du
+parent, les protections contre les liens, les permissions et les vérifications
+de propriétaire/type/nombre de liens restent inchangés. Une entrée supprimée
+entre ces deux opérations est refusée ; aucune temporisation, répétition ou
+ouverture par chemin absolu ne masque l'erreur. Les ouvertures explicitement
+exclusives, sans création et sur les autres systèmes conservent leur parcours.
+La régression reproduit l'ENOENT observé sur la référence conservée et vérifie
+les refus de liens, fichiers spéciaux, permissions et erreurs de stockage.
+Le benchmark conserve ses opérations, sa concurrence et tous ses délais.
+
+La sonde de déploiement résout strictement son propre répertoire temporaire
+avant de construire les chemins attendus. Cela préserve la comparaison exacte
+du lanceur et du profil installés lorsque le système utilise un alias /var.
+La recette conserve toutes ses assertions d'installation, d'idempotence et
+de refus ; sa régression utilise un véritable alias de dossier privé.
+
 macOS reçoit la même source rsync 3.5.2, avec SHA-256 et signature vérifiés ; le
 binaire système est conservé. Les essais de cette CI sur runners macOS ne valent
 pas recette sur un équipement réel ou sur un bastion macOS d'entreprise.

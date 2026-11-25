@@ -13,8 +13,130 @@ import stat
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import tempfile
+import threading
 
 from swassh.infrastructure import filesystem as fs
+
+
+class DarwinCreationContractTests(unittest.TestCase):
+    """Model the observed openat ENOENT while retaining every refusal boundary."""
+
+    def setUp(self):
+        self.directory = object.__new__(fs.PinnedDirectory)
+        self.directory.fd = 41
+        self.flags = os.O_CREAT | os.O_APPEND | os.O_WRONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0)
+
+    @contextlib.contextmanager
+    def kernel(self, operation, platform='darwin'):
+        port = SimpleNamespace(**vars(os))
+        port.name = 'posix'
+        port.open = Mock(side_effect=operation)
+        # The saved predecessor has no sys import. Injecting this module port
+        # there keeps its failure attributable to the actual open operation.
+        with patch.object(fs, 'os', port), patch.object(fs, 'sys', SimpleNamespace(platform=platform), create=True):
+            yield port.open
+
+    def test_concurrent_creator_and_existing_opener_avoid_observed_enoent(self):
+        for exists in (False, True):
+            calls = []
+
+            def operation(name, flags, mode, *, dir_fd):
+                calls.append((name, flags, mode, dir_fd))
+                if flags & os.O_CREAT:
+                    if not flags & os.O_EXCL:
+                        raise FileNotFoundError(errno.ENOENT, 'observed concurrent openat creation failure', name)
+                    if exists:
+                        raise FileExistsError(errno.EEXIST, 'another creator won', name)
+                return 61
+
+            with self.subTest(existing=exists), self.kernel(operation):
+                self.assertEqual(self.directory.open('budget.sqlite3', self.flags), 61)
+                expected = [('budget.sqlite3', self.flags | os.O_EXCL, 0o600, 41)]
+                if exists:
+                    expected.append(('budget.sqlite3', self.flags & ~os.O_CREAT, 0o600, 41))
+                self.assertEqual(calls, expected)
+
+    def test_explicit_exclusivity_is_preserved_with_no_existing_open(self):
+        error = FileExistsError(errno.EEXIST, 'already exists')
+        with self.kernel(error) as operation, self.assertRaises(FileExistsError) as caught:
+            self.directory.open('entry', self.flags | os.O_EXCL, 0o640)
+        self.assertIs(caught.exception, error)
+        operation.assert_called_once_with('entry', self.flags | os.O_EXCL, 0o640, dir_fd=41)
+
+    def test_other_platforms_and_non_creating_opens_remain_single_operations(self):
+        for platform, flags in (('linux', self.flags), ('win32', self.flags), ('darwin', self.flags & ~os.O_CREAT)):
+            with self.subTest(platform=platform, flags=flags), self.kernel(lambda *args, **kwargs: 62, platform) as operation:
+                self.assertEqual(self.directory.open('entry', flags, 0o640), 62)
+                operation.assert_called_once_with('entry', flags, 0o640, dir_fd=41)
+
+    def test_creation_errors_are_not_retried_or_hidden(self):
+        for error in (PermissionError(errno.EACCES, 'denied'), FileNotFoundError(errno.ENOENT, 'missing parent'), OSError(errno.EIO, 'storage failure')):
+            with self.subTest(error=error), self.kernel(error) as operation, self.assertRaises(OSError) as caught:
+                self.directory.open('entry', self.flags)
+            self.assertIs(caught.exception, error)
+            operation.assert_called_once_with('entry', self.flags | os.O_EXCL, 0o600, dir_fd=41)
+
+    def test_existing_open_errors_never_recreate_or_follow_an_entry(self):
+        for error in (OSError(errno.ELOOP, 'link'), PermissionError(errno.EACCES, 'denied'), FileNotFoundError(errno.ENOENT, 'removed'), OSError(errno.EIO, 'storage failure')):
+            with self.subTest(error=error), self.kernel([FileExistsError(errno.EEXIST, 'exists'), error]) as operation, self.assertRaises(OSError) as caught:
+                self.directory.open('entry', self.flags)
+            self.assertIs(caught.exception, error)
+            self.assertEqual(operation.call_args_list, [unittest.mock.call('entry', self.flags | os.O_EXCL, 0o600, dir_fd=41),
+                                                       unittest.mock.call('entry', self.flags & ~os.O_CREAT, 0o600, dir_fd=41)])
+
+    def test_invalid_names_are_rejected_before_any_syscall(self):
+        for name in ('', '.', '..', 'outside/entry', 'outside\\entry', None):
+            with self.subTest(name=name), self.kernel(None) as operation, self.assertRaisesRegex(ValueError, 'literal directory entry'):
+                self.directory.open(name, self.flags)
+            operation.assert_not_called()
+
+
+@unittest.skipUnless(os.name == 'posix', 'Native descriptor and link semantics require POSIX')
+class DarwinCreationFilesystemTests(unittest.TestCase):
+    """Exercise the creation protocol with real private files and hostile entries."""
+
+    def test_concurrent_appenders_share_one_private_inode(self):
+        with tempfile.TemporaryDirectory(prefix='swassh-create-race-') as temporary, patch.object(fs, 'sys', SimpleNamespace(platform='darwin')):
+            root = Path(temporary).resolve(strict=True)
+            with fs.PinnedDirectory(root) as directory, ThreadPoolExecutor(max_workers=4) as pool:
+                for index in range(16):
+                    barrier = threading.Barrier(4)
+                    destination = root / f'budget-{index}.sqlite3'
+
+                    def append():
+                        barrier.wait(timeout=5)
+                        with fs.open_private_append(destination, directory=directory) as stream:
+                            info = os.fstat(stream.fileno())
+                            stream.write('x')
+                            return info.st_dev, info.st_ino, info.st_uid, info.st_nlink, stat.S_IMODE(info.st_mode)
+
+                    identities = [future.result(timeout=10) for future in [pool.submit(append) for _ in range(4)]]
+                    self.assertEqual(len(set(identities)), 1)
+                    self.assertEqual(identities[0][2:], (os.geteuid(), 1, 0o600))
+                    self.assertEqual(destination.read_bytes(), b'xxxx')
+
+    def test_links_and_special_files_still_refuse_without_modifying_targets(self):
+        with tempfile.TemporaryDirectory(prefix='swassh-create-boundary-') as temporary, patch.object(fs, 'sys', SimpleNamespace(platform='darwin')):
+            root = Path(temporary).resolve(strict=True)
+            target = root / 'untouched'
+            target.write_bytes(b'original')
+            target.chmod(0o640)
+            target_before = target.stat()
+            (root / 'link').symlink_to(target)
+            (root / 'dangling').symlink_to(root / 'absent')
+            os.link(target, root / 'hardlink')
+            os.mkfifo(root / 'fifo', 0o600)
+            with fs.PinnedDirectory(root) as directory:
+                for name in ('link', 'dangling', 'hardlink', 'fifo'):
+                    with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'regular file'):
+                        fs.open_private_append(root / name, directory=directory)
+            self.assertEqual(target.read_bytes(), b'original')
+            self.assertEqual(stat.S_IMODE(target.stat().st_mode), 0o640)
+            self.assertEqual(target.stat().st_ino, target_before.st_ino)
+            self.assertFalse((root / 'absent').exists())
 
 
 class MemoryDirectories:

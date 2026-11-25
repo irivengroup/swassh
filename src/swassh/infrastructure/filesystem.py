@@ -3,6 +3,7 @@ from __future__ import annotations
 import errno
 import os
 import stat
+import sys
 from contextlib import nullcontext
 from pathlib import Path
 
@@ -226,9 +227,24 @@ class PinnedDirectory:
     def open(self, name, flags, mode=0o600):
         self._name(name)
         if self.fd is not None:
+            if sys.platform == 'darwin' and flags & os.O_CREAT and not flags & os.O_EXCL:
+                return self._create_or_open(name, flags, mode)
             return os.open(name, flags, mode, dir_fd=self.fd)
         from .windows import open_file_without_reparse
         return open_file_without_reparse(self.path / name, flags)
+
+    def _create_or_open(self, name, flags, mode):
+        """Avoid Darwin's concurrent create-or-open ENOENT without path fallback.
+
+        Exclusive creation is atomic. Only EEXIST permits opening the existing
+        entry, keeping its pinned parent and every other flag. Removal between
+        those operations remains an error; no retry recreates a missing entry.
+        Callers still validate the opened file's type, links and ownership.
+        """
+        try:
+            return os.open(name, flags | os.O_EXCL, mode, dir_fd=self.fd)
+        except FileExistsError:
+            return os.open(name, flags & ~os.O_CREAT, mode, dir_fd=self.fd)
 
     @staticmethod
     def _name(name):

@@ -29,7 +29,8 @@ class DeploymentProbe:
     def run(self):
         version = tomllib.loads((ROOT / 'pyproject.toml').read_text())['project']['version']
         with tempfile.TemporaryDirectory(prefix='swassh-deployment-') as directory:
-            root = Path(directory)
+            # The installer records canonical venv paths, including system aliases.
+            root = Path(directory).resolve(strict=True)
             index = root / 'index' / 'simple' / 'swassh'
             index.mkdir(parents=True)
             backend = runpy.run_path(str(ROOT / 'build_support/swassh_build.py'))

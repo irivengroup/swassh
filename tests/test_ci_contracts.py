@@ -230,5 +230,36 @@ class QualityCommandIOContracts(unittest.TestCase):
                 operator['ScheduleCampaign'](1).run()
 
 
+class DeploymentAliasIntegrationTests(unittest.TestCase):
+    """Keep the real installed-shell and unchanged-profile checks through an alias."""
+
+    probe_script = ROOT / 'scripts/validate_deployment.py'
+
+    @unittest.skipUnless(os.name == 'posix', 'POSIX shell and owned symbolic-link contract')
+    def test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts(self):
+        from contextlib import nullcontext
+        from types import SimpleNamespace
+        from swassh import __version__
+        with tempfile.TemporaryDirectory(prefix='swassh-deployment-alias-') as fixture:
+            owner = Path(fixture).resolve(strict=True)
+            actual = owner / 'actual'
+            actual.mkdir(mode=0o700)
+            alias = owner / 'alias'
+            alias.symlink_to(actual, target_is_directory=True)
+            operator = runpy.run_path(str(self.probe_script))
+            # Only the probe's temporary-directory factory is replaced. Its
+            # installer, wheel, venv, HTTP index, shell and assertions are real.
+            # ROOT also makes a preserved predecessor executable in this case.
+            port = SimpleNamespace(TemporaryDirectory=lambda **kwargs: nullcontext(str(alias)))
+            with patch.dict(operator['DeploymentProbe'].run.__globals__, {'ROOT': ROOT, 'tempfile': port}):
+                result = operator['DeploymentProbe']().run()
+            self.assertEqual(result['version'], __version__)
+            self.assertEqual(result['status'], 'EXÉCUTÉ')
+            self.assertEqual(result['pip_index'], 'isolated loopback')
+            for field in ('fresh_app_venv', 'installed_entrypoint', 'repeat_deployment_idempotent',
+                          'pip_failure_propagated', 'posix_path_in_real_shell'):
+                self.assertIs(result[field], True, field)
+
+
 if __name__ == '__main__':
     unittest.main()
