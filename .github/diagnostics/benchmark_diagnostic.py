@@ -58,6 +58,9 @@ def observe(frame,event,arg):
         record={'module':frame.f_code.co_filename.rsplit('/',1)[-1],'function':frame.f_code.co_name,'line':frame.f_lineno,'type':type(error).__name__,'errno':getattr(error,'errno',None),'message':str(error)[:512]}
         os.write(fd,json.dumps(record,ensure_ascii=True).encode('ascii')+bytes([10]))
     return observe
+import faulthandler
+stack=os.open(path+'.stack.log',os.O_WRONLY|os.O_CREAT|os.O_EXCL|getattr(os,'O_NOFOLLOW',0),0o600)
+faulthandler.dump_traceback_later(6,file=stack)
 sys.settrace(observe)
 runpy.run_module('swassh.infrastructure.tcp_proxy',run_name='__main__')
 '''
@@ -86,6 +89,16 @@ def launch(argv,*args,**kwargs):
         return peer
     return original(argv,*args,**kwargs)
 
+fresh=[]
+for index in range(20):
+    log=output/f'fresh-{index}.log'
+    with log.open('xb') as stream:
+        result=subprocess.run([sys.executable,'-B',str(benchmark),'--operations','8','--workers','2',
+                               '--output',str(output/f'fresh-benchmark-{index}.json')],
+                              cwd=root,stdout=stream,stderr=subprocess.STDOUT,timeout=110,check=False)
+    fresh.append({'sample':index,'returncode':result.returncode,'log':log.name})
+    print(json.dumps({'fresh_original_process':index,'returncode':result.returncode}),flush=True)
+    assert gate['SourceSnapshot'].capture(root)==before
 results=[]
 with patch.object(subprocess,'Popen',side_effect=launch):
     for index in range(10):
@@ -102,8 +115,8 @@ with patch.object(subprocess,'Popen',side_effect=launch):
 receipt={'diagnostic_only':True,'publication_authorized':False,'python':sys.version,'iterations':10,
          'source_unchanged':True,'source_files':before,'approved_review_sha256':hashlib.sha256(review_data).hexdigest(),
          'original_benchmark_sha256':before['benchmarks/core.py'],'parameters_unchanged':True,
-         'results':results,'peers':peers,'observation_overhead_not_performance_evidence':True,
+         'fresh_original_process_runs':fresh,'results':results,'peers':peers,'observation_overhead_not_performance_evidence':True,
          'exception_limit_per_peer':128,'truncated_if_event_count_reaches_limit':True,
-         'all_original_assertions_succeeded':all(r['succeeded'] for r in results)}
+         'all_original_assertions_succeeded':all(r['succeeded'] for r in results) and all(r['returncode']==0 for r in fresh)}
 (output/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
 raise SystemExit(0 if receipt['all_original_assertions_succeeded'] else 1)
