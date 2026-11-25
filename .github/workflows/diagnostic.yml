@@ -31,10 +31,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-core-diagnostic.py" | cut -d' ' -f1)" = 0810d9883de8e00c037420404660b608ac4f4f653829bd66e76135b517a8fcb9
+          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-core-diagnostic.py" | cut -d' ' -f1)" = eff408c6b41c93afd15cfc55817aabdab55e2e23275c3a113c43d40a3879407f
           curl --disable --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --connect-timeout 10 --max-time 60 --max-filesize 1048576 --output "$RUNNER_TEMP/swassh-approved-review.json" https://raw.githubusercontent.com/irivengroup/swassh/b3c4b273498e756e487a8d4ef2ce8712fc5c8e6f/.sast-approval/review.json
           test "$(shasum -a 256 "$RUNNER_TEMP/swassh-approved-review.json" | cut -d' ' -f1)" = 02927b0c27010c5c8f884735d6d7b528d24d84d5bfaa2280046ff6b6714c7d41
-      - name: Observe twenty fresh original runs then ten traced runs with unchanged assertions
+      - name: Observe twenty cold runs and retain descriptor identity on native errors
         id: diagnostic
         shell: bash
         run: python -B "$RUNNER_TEMP/swassh-core-diagnostic.py" --root "$GITHUB_WORKSPACE" --review "$RUNNER_TEMP/swassh-approved-review.json" --output "$RUNNER_TEMP/swassh-core-diagnostic"
@@ -42,6 +42,6 @@ jobs:
         if: ${{ always() && (steps.diagnostic.outcome == 'success' || steps.diagnostic.outcome == 'failure' || steps.diagnostic.outcome == 'cancelled') }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: benchmark-fresh-diagnostic-c146
+          name: benchmark-descriptor-diagnostic-c146
           path: ${{ runner.temp }}/swassh-core-diagnostic/
           if-no-files-found: error
