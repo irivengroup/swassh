@@ -1,0 +1,18 @@
+{
+  "guardian_before_sha256": "524771249a1fbb075baa98a32b24bcb4edafeaf70ddc337a1afb4ec746f8ca26",
+  "guardian_after_sha256": "ae0ca96b7870a4e62e5d1d300d7c11050c18b40f214069196b8c347141ba01b6",
+  "added_private_class": "_GroupAbsence",
+  "changed_existing_definitions": [
+    "_stop_native"
+  ],
+  "unchanged_existing_definitions": [
+    "launch_native",
+    "main",
+    "native_metrics",
+    "native_relay",
+    "release_guardian"
+  ],
+  "validated_request_and_Popen_main_ast_identical": true,
+  "launch_native_ast_identical": true,
+  "review_is_not_operator_approval": true
+}

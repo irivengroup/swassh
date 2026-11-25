@@ -1,0 +1,10 @@
+{
+  "tool": "github_create_tree",
+  "action": "create public diagnostic Git tree with four unapproved C146 source patches encoded in prototype.json",
+  "result": "rejected by automatic approval review; no tree SHA returned and no branch updated",
+  "reason": "Fresh exact-source SAST approval is required before source publication or remote mutation",
+  "response": "No workaround attempted. Continue offline Windows/WSL qualification and prepare a complete review for actual operator approval before any C146 upload.",
+  "expected_tree_sha_if_later_authorized": "27af66ea46e2d1089af769d3a4cd240c2e61e68d",
+  "source_archive_sha256": "a62481f4f729da917674786e48c60720f01439958252a1ce016d2718604d0b4c",
+  "publication_authorized": false
+}

@@ -1,0 +1,256 @@
+--- a/VALIDATION.md
++++ b/VALIDATION.md
+@@ -16,6 +16,14 @@
+ sur un second PTY : aucun bit n'est masqué et aucune entrée utilisateur n'est vidée.
+ La reprise après SIGKILL exige à la fois la disparition du client et la capacité
+ libérée dans le même budget de récupération de 2,5 secondes, sans rejeu.
++
++Le nettoyage du groupe natif conserve son délai de grâce de 0,35 seconde.
++Un refus de signal peut déclencher des observations avec le signal zéro : seul
++ESRCH, constaté avant l'expiration du délai initial, établit la disparition du
++groupe. Un groupe encore présent, inaccessible ou observé trop tard reste un
++échec ; aucune commande n'est rejouée. Les contrats portables vérifient aussi
++l'enveloppe littérale produite par le relais TCP et la limite UTF-8 de sa
++configuration, indépendamment des fixtures SSH propres à chaque plateforme.
+ 
+ macOS reçoit la même source rsync 3.5.2, avec SHA-256 et signature vérifiés ; le
+ binaire système est conservé. Les essais de cette CI sur runners macOS ne valent
+--- a/src/swassh/infrastructure/process_guard.py
++++ b/src/swassh/infrastructure/process_guard.py
+@@ -142,13 +142,53 @@
+         return {}
+ 
+ 
++class _GroupAbsence:
++    """Require kernel ESRCH within the existing grace; EPERM alone is no proof.
++
++    Darwin excludes zombies while selecting signalable group members and can
++    return EPERM until their group is reaped. Probe with signal zero only: a
++    live or persistently inaccessible group remains a cleanup failure.
++    """
++
++    def __init__(self, group, deadline):
++        self.group = group
++        self.deadline = deadline
++
++    def _absent(self):
++        try:
++            os.killpg(self.group, 0)
++        except ProcessLookupError:
++            return True
++        except PermissionError:
++            return False
++        return False
++
++    def confirmed(self):
++        while time.monotonic() < self.deadline:
++            if self._absent():
++                # A delayed observation must not grant cleanup after expiry.
++                return time.monotonic() <= self.deadline
++            remaining = self.deadline - time.monotonic()
++            if remaining <= 0:
++                return False
++            time.sleep(min(0.025, remaining))
++        return False
++
++
+ def _stop_native(process):
+     if os.name == 'posix':
++        deadline = time.monotonic() + 0.35
+         for sig in (signal.SIGTERM, signal.SIGKILL):
+             try:
+                 os.killpg(process.pid, sig)
+             except ProcessLookupError:
+                 pass
++            except PermissionError:
++                if _GroupAbsence(process.pid, deadline).confirmed():
++                    # Do not send another signal after confirmed disappearance;
++                    # the numeric group id could subsequently be reused.
++                    break
++                raise
+             if sig == signal.SIGTERM:
+                 try:
+                     process.wait(timeout=0.35)
+--- a/tests/test_process_guard_contracts.py
++++ b/tests/test_process_guard_contracts.py
+@@ -72,6 +72,122 @@
+             raw=json.dumps({**self.request(),'parent_fd':fd}).encode()
+             with patch('builtins.open',return_value=io.BytesIO(raw)),patch.object(guard,'os',fake_os),patch.object(guard.signal,'signal'),self.assertRaisesRegex(ValueError,'control pipe'):
+                 guard.main('unused-request')
++
++
++class GuardianGroupAbsenceTests(unittest.TestCase):
++    """A permission error alone never establishes that descendants stopped."""
++
++    @contextlib.contextmanager
++    def cleanup_case(self, *, denied_signal=SIGKILL, probes=(), on_probe=None,
++                     wait_elapsed=0., sleep_overshoot=0.):
++        clock = SimpleNamespace(now=0., sleeps=[])
++        denial = PermissionError(1, 'synthetic group permission denied')
++        outcomes = iter(probes)
++        calls = []
++
++        def killpg(group, number):
++            self.assertEqual(group, 100)
++            calls.append(number)
++            if number == denied_signal:
++                raise denial
++            if number == 0:
++                if on_probe is not None:
++                    outcome = on_probe(clock)
++                else:
++                    outcome = next(outcomes, 'present')
++                if outcome == 'denied':
++                    raise PermissionError(1, 'synthetic zero-signal refusal')
++                if outcome == 'absent':
++                    raise ProcessLookupError(3, 'synthetic group absent')
++                if isinstance(outcome, BaseException):
++                    raise outcome
++
++        def sleep(seconds):
++            self.assertGreater(seconds, 0.)
++            self.assertLessEqual(seconds, 0.025)
++            clock.sleeps.append(seconds)
++            clock.now += seconds + sleep_overshoot
++
++        def wait(*args, **kwargs):
++            if kwargs:
++                self.assertEqual(kwargs, {'timeout': 0.35})
++                clock.now += wait_elapsed
++            return 0
++
++        process = Mock(pid=100)
++        process.wait.side_effect = wait
++        port = SimpleNamespace(name='posix', killpg=killpg)
++        signals = SimpleNamespace(SIGTERM=signal.SIGTERM, SIGKILL=SIGKILL)
++        timer = SimpleNamespace(monotonic=lambda: clock.now, sleep=sleep)
++        case = SimpleNamespace(process=process, clock=clock, denial=denial, calls=calls)
++        with patch.object(guard, 'os', port), patch.object(guard, 'signal', signals), \
++                patch.object(guard, 'time', timer):
++            yield case
++
++    def test_permission_race_requires_kernel_absence_before_original_deadline(self):
++        for denied in (signal.SIGTERM, SIGKILL):
++            with self.subTest(signal=denied), self.cleanup_case(
++                    denied_signal=denied, probes=('denied', 'present', 'absent')) as case:
++                guard._stop_native(case.process)
++                expected = [signal.SIGTERM] if denied == signal.SIGTERM else [signal.SIGTERM, SIGKILL]
++                self.assertEqual([number for number in case.calls if number], expected)
++                self.assertEqual(case.calls.count(0), 3)
++                self.assertAlmostEqual(case.clock.now, 0.05)
++                self.assertEqual(case.process.wait.call_args_list[-1].kwargs, {})
++                self.assertEqual(case.process.wait.call_count, 1 if denied == signal.SIGTERM else 2)
++
++    def test_persistent_permission_or_live_group_preserves_original_failure(self):
++        for state in ('denied', 'present'):
++            with self.subTest(state=state), self.cleanup_case(probes=(state,) * 20) as case:
++                with self.assertRaises(PermissionError) as failure:
++                    guard._stop_native(case.process)
++                self.assertIs(failure.exception, case.denial)
++                self.assertEqual([number for number in case.calls if number], [signal.SIGTERM, SIGKILL])
++                self.assertAlmostEqual(case.clock.now, 0.35)
++                case.process.wait.assert_called_once_with(timeout=0.35)
++
++    def test_late_wakeup_cannot_accept_absence_after_deadline(self):
++        with self.cleanup_case(probes=('present', 'absent'), sleep_overshoot=0.4) as case:
++            with self.assertRaises(PermissionError) as failure:
++                guard._stop_native(case.process)
++            self.assertIs(failure.exception, case.denial)
++            self.assertEqual(case.calls.count(0), 1)
++
++    def test_absence_observed_after_deadline_is_not_cleanup_evidence(self):
++        def late_absence(clock):
++            clock.now = 0.36
++            return 'absent'
++        with self.cleanup_case(on_probe=late_absence) as case:
++            with self.assertRaises(PermissionError) as failure:
++                guard._stop_native(case.process)
++            self.assertIs(failure.exception, case.denial)
++            self.assertEqual(case.calls.count(0), 1)
++
++    def test_slow_present_probe_exhausts_remaining_budget_without_sleep(self):
++        def slow_present(clock):
++            clock.now = 0.35
++            return 'present'
++        with self.cleanup_case(on_probe=slow_present) as case:
++            with self.assertRaises(PermissionError) as failure:
++                guard._stop_native(case.process)
++            self.assertIs(failure.exception, case.denial)
++            self.assertEqual(case.clock.sleeps, [])
++
++    def test_native_grace_cannot_be_extended_by_permission_observations(self):
++        with self.cleanup_case(wait_elapsed=0.35, probes=('absent',)) as case:
++            with self.assertRaises(PermissionError) as failure:
++                guard._stop_native(case.process)
++            self.assertIs(failure.exception, case.denial)
++            self.assertNotIn(0, case.calls)
++            self.assertEqual(case.clock.sleeps, [])
++
++    def test_unexpected_probe_error_is_never_translated_into_success(self):
++        error = OSError(5, 'synthetic kernel observation failure')
++        with self.cleanup_case(probes=(error,)) as case:
++            with self.assertRaises(OSError) as failure:
++                guard._stop_native(case.process)
++            self.assertIs(failure.exception, error)
++            case.process.wait.assert_called_once_with(timeout=0.35)
+ 
+ 
+ class GuardianLifecycleTests(unittest.TestCase):
+--- a/tests/test_tcp_proxy_lifecycle.py
++++ b/tests/test_tcp_proxy_lifecycle.py
+@@ -7,6 +7,7 @@
+ import unittest
+ from unittest.mock import Mock,patch
+ 
++from swassh import Host, Options
+ from swassh.infrastructure import tcp_proxy
+ 
+ 
+@@ -72,6 +73,47 @@
+ 
+ 
+ class RelayProgramBoundaryTests(unittest.TestCase):
++    def test_produced_literal_request_preserves_all_typed_fields_without_legacy_parser(self):
++        # The same wire contract must be exercised without a Linux-only SSH
++        # fixture: a real encoded ProxyCommand still uses the bounded parser.
++        options = Options(budget_dir=os.path.abspath('synthetic path%'),
++                          bastion_concurrency=7, bastion_connect_rate=3.25,
++                          bastion_memory_mib=96, bastion_bandwidth_kib=128,
++                          connect_timeout=2.5, command_timeout=12)
++        command = tcp_proxy.proxy_command(Host('one', port=2222), options, lifetime=7.25)
++        encoded = command.rsplit(' ', 1)[-1]
++        with patch.object(tcp_proxy, '_legacy_arguments', side_effect=AssertionError('unexpected legacy parser')):
++            args = tcp_proxy._arguments(['--request', encoded])
++        self.assertEqual(set(vars(args)), {'host', 'port', 'budget_root', 'connections', 'connect_rate',
++                                          'memory_bytes', 'bandwidth_kib', 'connect_timeout', 'lifetime'})
++        self.assertEqual(args.host, 'one')
++        self.assertEqual(args.port, 2222)
++        self.assertEqual(args.connections, 7)
++        self.assertEqual(args.connect_rate, 3.25)
++        self.assertEqual(args.memory_bytes, 96 * 1024**2)
++        self.assertEqual(args.bandwidth_kib, 128)
++        self.assertEqual(args.connect_timeout, 2.5)
++        self.assertEqual(args.lifetime, 7.25)
++        self.assertEqual(os.path.dirname(args.budget_root), options.budget_dir)
++        self.assertRegex(os.path.basename(args.budget_root), r'^[0-9a-f]{32}$')
++        for field in ('port', 'connections', 'memory_bytes', 'bandwidth_kib'):
++            self.assertIs(type(getattr(args, field)), int)
++        for field in ('connect_rate', 'connect_timeout', 'lifetime'):
++            self.assertIs(type(getattr(args, field)), float)
++
++    def test_utf8_configuration_limit_preserves_bounded_wire_and_rejects_excess(self):
++        # Exercise a valid 4096-byte UTF-8 path and the existing refusal above
++        # that boundary; do not bypass Options to manufacture an impossible input.
++        options = Options(budget_dir='\u00e9' * 2048)
++        command = tcp_proxy.proxy_command(Host('one'), options)
++        encoded = command.rsplit(' ', 1)[-1]
++        self.assertLessEqual(len(encoded), 32768)
++        self.assertLessEqual(len(base64.urlsafe_b64decode(encoded)), 16384)
++        args = tcp_proxy._arguments(['--request', encoded])
++        self.assertEqual(os.path.dirname(args.budget_root), os.path.abspath(options.budget_dir))
++        with self.assertRaisesRegex(ValueError, 'configuration paths must be literal and contain no controls'):
++            Options(budget_dir='\u00e9' * 2049)
++
+     def test_literal_legacy_arguments_and_wrong_request_container(self):
+         arguments = ['--host', 'one']
+         self.assertIs(tcp_proxy.request_arguments(arguments), arguments)

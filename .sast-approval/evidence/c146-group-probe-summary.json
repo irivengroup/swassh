@@ -1,0 +1,32 @@
+{
+  "tests_run": 50,
+  "failed": 43,
+  "probes": 43,
+  "signals": {
+    "9": 43
+  },
+  "last_states": {
+    "absent": 43
+  },
+  "maximum_observed_absence_seconds": 0.05197579199999325,
+  "examples": [
+    {
+      "signal": 9,
+      "observations": [
+        {
+          "seconds": 1.058299999101564e-05,
+          "state": "absent"
+        }
+      ]
+    },
+    {
+      "signal": 9,
+      "observations": [
+        {
+          "seconds": 8.291999989751275e-06,
+          "state": "absent"
+        }
+      ]
+    }
+  ]
+}

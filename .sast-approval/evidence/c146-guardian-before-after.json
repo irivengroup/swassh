@@ -1,0 +1,23 @@
+{
+  "same_test_and_inputs": true,
+  "records": [
+    {
+      "revision": "before",
+      "tests": 1,
+      "errors": 2,
+      "failures": 0,
+      "successful": false,
+      "source_sha256": "524771249a1fbb075baa98a32b24bcb4edafeaf70ddc337a1afb4ec746f8ca26",
+      "log": "evidence\\cycle146\\guardian-regression-before.log"
+    },
+    {
+      "revision": "after",
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "successful": true,
+      "source_sha256": "ae0ca96b7870a4e62e5d1d300d7c11050c18b40f214069196b8c347141ba01b6",
+      "log": "evidence\\cycle146\\guardian-regression-after.log"
+    }
+  ]
+}
