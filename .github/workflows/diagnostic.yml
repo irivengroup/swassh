@@ -1,7 +1,7 @@
-name: Diagnose approved C146 core benchmark
+name: Validate approved C148 native regressions
 on:
   push:
-    branches: [diagnostics/c146-macos-guardian]
+    branches: [diagnostics/c148-macos-validation]
 permissions:
   contents: read
 jobs:
@@ -22,19 +22,20 @@ jobs:
         run: cp .github/diagnostics/benchmark_diagnostic.py "$RUNNER_TEMP/swassh-core-diagnostic.py"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: 463a58a9688d7d866ba4cce35c42284b8183911d
+          ref: 5b125ca1b472bf6e87c75ea0fe60f0f9ab6f8e5b
           persist-credentials: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.12.10'
-      - name: Verify fixed external diagnostic and actual C146 operator authority
+      - name: Verify fixed external diagnostic and actual C148 operator authority
         shell: bash
         run: |
           set -euo pipefail
-          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-core-diagnostic.py" | cut -d' ' -f1)" = eff408c6b41c93afd15cfc55817aabdab55e2e23275c3a113c43d40a3879407f
-          curl --disable --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --connect-timeout 10 --max-time 60 --max-filesize 1048576 --output "$RUNNER_TEMP/swassh-approved-review.json" https://raw.githubusercontent.com/irivengroup/swassh/b3c4b273498e756e487a8d4ef2ce8712fc5c8e6f/.sast-approval/review.json
-          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-approved-review.json" | cut -d' ' -f1)" = 02927b0c27010c5c8f884735d6d7b528d24d84d5bfaa2280046ff6b6714c7d41
-      - name: Observe twenty cold runs and retain descriptor identity on native errors
+          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-core-diagnostic.py" | cut -d' ' -f1)" = 0fd8d5ec1f14ff8bc9463b25f55abb1f04890944273d4faa12139f580d04c165
+          curl --disable --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --connect-timeout 10 --max-time 60 --max-filesize 1081308 --output "$RUNNER_TEMP/swassh-approved-review.json" https://raw.githubusercontent.com/irivengroup/swassh/09ba8df129e2b2235d23513f55dbba4441c8959f/.sast-approval/review.json
+          test "$(wc -c < "$RUNNER_TEMP/swassh-approved-review.json" | tr -d ' ')" = 1081308
+          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-approved-review.json" | cut -d' ' -f1)" = 98f2161a4507d3112c8ec06de4b7b8b50de85f283b813898e6e146c06c5a0c29
+      - name: Observe twenty fresh original runs then ten traced runs with unchanged assertions
         id: diagnostic
         shell: bash
         run: python -B "$RUNNER_TEMP/swassh-core-diagnostic.py" --root "$GITHUB_WORKSPACE" --review "$RUNNER_TEMP/swassh-approved-review.json" --output "$RUNNER_TEMP/swassh-core-diagnostic"
@@ -42,6 +43,50 @@ jobs:
         if: ${{ always() && (steps.diagnostic.outcome == 'success' || steps.diagnostic.outcome == 'failure' || steps.diagnostic.outcome == 'cancelled') }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: benchmark-descriptor-diagnostic-c146
+          name: benchmark-fresh-diagnostic-c148
           path: ${{ runner.temp }}/swassh-core-diagnostic/
+          if-no-files-found: error
+  guardian-diagnostic:
+    runs-on: macos-latest
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      GIT_CONFIG_COUNT: '1'
+      GIT_CONFIG_KEY_0: core.autocrlf
+      GIT_CONFIG_VALUE_0: 'false'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Retain the bounded synthetic diagnostic outside application sources
+        shell: bash
+        run: cp .github/diagnostics/guardian_diagnostic.py "$RUNNER_TEMP/swassh-guardian-diagnostic.py"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: 5b125ca1b472bf6e87c75ea0fe60f0f9ab6f8e5b
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12.10'
+      - name: Verify the diagnostic and exact actual operator approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-guardian-diagnostic.py" | cut -d' ' -f1)" = a30049c4b3815bd84e774f07350cdf2b028ae1ee9123c5f818241e95a124d406
+          curl --disable --fail --silent --show-error --location --proto '=https' --proto-redir '=https' \
+            --connect-timeout 10 --max-time 60 --max-filesize 1081308 --output "$RUNNER_TEMP/swassh-approved-review.json" \
+            https://raw.githubusercontent.com/irivengroup/swassh/09ba8df129e2b2235d23513f55dbba4441c8959f/.sast-approval/review.json
+          test "$(wc -c < "$RUNNER_TEMP/swassh-approved-review.json" | tr -d ' ')" = 1081308
+          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-approved-review.json" | cut -d' ' -f1)" = 98f2161a4507d3112c8ec06de4b7b8b50de85f283b813898e6e146c06c5a0c29
+      - name: Observe original synthetic leader-exit assertions with native exception context
+        shell: bash
+        run: python -B "$RUNNER_TEMP/swassh-guardian-diagnostic.py" --root "$GITHUB_WORKSPACE" --review "$RUNNER_TEMP/swassh-approved-review.json" --output "$RUNNER_TEMP/swassh-guardian-diagnostic" --iterations 50
+      - name: Retain every diagnostic outcome including failure
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: guardian-after-c148
+          path: |
+            ${{ runner.temp }}/swassh-guardian-diagnostic/receipt.json
+            ${{ runner.temp }}/swassh-guardian-diagnostic/tests.log
           if-no-files-found: error
