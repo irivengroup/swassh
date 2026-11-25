@@ -1,0 +1,22 @@
+test_failed_socket_constructor_does_not_lose_received_descriptor_ownership (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_failed_socket_constructor_does_not_lose_received_descriptor_ownership) ... ok
+test_missing_multiple_or_truncated_descriptors_are_refused_and_all_received_fds_closed (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_missing_multiple_or_truncated_descriptors_are_refused_and_all_received_fds_closed) ... ok
+test_module_entrypoint_rejects_invalid_port_before_opening_a_connection (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_module_entrypoint_rejects_invalid_port_before_opening_a_connection) ... ok
+test_only_successful_undelayed_socket_is_accepted_and_always_closed (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_only_successful_undelayed_socket_is_accepted_and_always_closed) ... 
+  test_only_successful_undelayed_socket_is_accepted_and_always_closed (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_only_successful_undelayed_socket_is_accepted_and_always_closed) (nodelay=4, code=0) ... FAIL
+test_probe_timeouts_reap_helper_and_never_accept_a_partial_observation (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_probe_timeouts_reap_helper_and_never_accept_a_partial_observation) ... ok
+test_unrelated_ancillary_messages_never_become_owned_file_descriptors (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_unrelated_ancillary_messages_never_become_owned_file_descriptors) ... ok
+test_every_selected_native_helper_passes_a_socket_with_tcp_nodelay (test_fdpass_socket_contract.NativeDescriptorIntegrationTests.test_every_selected_native_helper_passes_a_socket_with_tcp_nodelay) ... skipped 'POSIX fdpass integration'
+
+======================================================================
+FAIL: test_only_successful_undelayed_socket_is_accepted_and_always_closed (test_fdpass_socket_contract.DescriptorOptionProbeTests.test_only_successful_undelayed_socket_is_accepted_and_always_closed) (nodelay=4, code=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle142\candidate\swassh-2.0.0\tests\test_fdpass_socket_contract.py", line 62, in test_only_successful_undelayed_socket_is_accepted_and_always_closed
+    self.assertIs(result,expected)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: False is not True
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.103s
+
+FAILED (failures=1, skipped=1)
