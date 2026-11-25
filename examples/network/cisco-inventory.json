@@ -1,8 +1,0 @@
-{
-  "platform": "cisco_ios",
-  "operation": "administration",
-  "steps": [
-    {"stage": "identify", "command": "terminal length 0", "expect": []},
-    {"stage": "identify", "command": "show version", "expect": ["Cisco", "Version"]}
-  ]
-}
