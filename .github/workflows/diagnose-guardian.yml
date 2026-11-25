@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-guardian-diagnostic.py" | cut -d' ' -f1)" = 59c1a20ba5e2b735e9848b4a748ba19191c32469d73f7e7a06cfe69fb93ddcdc
+          test "$(shasum -a 256 "$RUNNER_TEMP/swassh-guardian-diagnostic.py" | cut -d' ' -f1)" = 5c84de2b71b31e4836f48e251f4c4e126e7098fd4df397ee3da99be176d01db6
           curl --disable --fail --silent --show-error --location --proto '=https' --proto-redir '=https' \
             --connect-timeout 10 --max-time 60 --max-filesize 1048576 --output "$RUNNER_TEMP/swassh-approved-review.json" \
             https://raw.githubusercontent.com/irivengroup/swassh/6b97c88d347fbda5178a3bd825d8fddf196cd200/.sast-approval/review.json

@@ -42,13 +42,36 @@ from coverage_processes import ChildCampaign
 # Only the synthetic fixture's outer error translation is bypassed. The exact
 # approved main/cleanup code, descriptor inheritance and test assertions run.
 # No endpoint, command or credential from an operator is accepted by this driver.
-diagnostic_entry = '''import sys,traceback
+diagnostic_entry = '''import sys,traceback,os,time,json
 from swassh.infrastructure import process_guard
 try:
     result=process_guard.main(sys.argv[1])
 except BaseException as error:
     print("SWASSH_SYNTHETIC_GUARD_EXCEPTION",type(error).__name__,getattr(error,"errno",None),file=sys.stderr,flush=True)
     traceback.print_exc()
+    if isinstance(error, PermissionError):
+        frame=error.__traceback__
+        while frame is not None and frame.tb_frame.f_code.co_name!="_stop_native":
+            frame=frame.tb_next
+        if frame is not None:
+            pid=frame.tb_frame.f_locals["process"].pid
+            signum=int(frame.tb_frame.f_locals["sig"])
+            began=time.monotonic()
+            observations=[]
+            for _ in range(32):
+                try:
+                    os.killpg(pid,0)
+                    state="present-and-signalable"
+                except ProcessLookupError:
+                    state="absent"
+                except PermissionError:
+                    state="permission-denied"
+                elapsed=time.monotonic()-began
+                observations.append({"seconds":elapsed,"state":state})
+                if state=="absent" or elapsed>=0.35:
+                    break
+                time.sleep(min(0.025,0.35-elapsed))
+            print("SWASSH_SYNTHETIC_GROUP_OBSERVATIONS",json.dumps({"signal":signum,"observations":observations}),file=sys.stderr,flush=True)
     raise SystemExit(125)
 raise SystemExit(result)
 '''
