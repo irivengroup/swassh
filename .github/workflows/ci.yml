@@ -44,7 +44,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if ! brew list --versions gnupg >/dev/null; then brew install gnupg; fi
+          for formula in gnupg libidn2; do
+            if ! brew list --versions "$formula" >/dev/null; then brew install "$formula"; fi
+          done
+          idn_prefix=$(brew --prefix libidn2)
+          test -f "$idn_prefix/include/idn2.h"
+          export CPPFLAGS="-I$idn_prefix/include${CPPFLAGS:+ $CPPFLAGS}"
+          export LDFLAGS="-L$idn_prefix/lib${LDFLAGS:+ $LDFLAGS}"
           bash scripts/ci_rsync.sh
       - name: Native authentication fixture prerequisites
         if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.12'
