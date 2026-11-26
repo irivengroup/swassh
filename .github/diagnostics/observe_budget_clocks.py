@@ -41,6 +41,8 @@ class NativeClockObservation:
         expected = json.loads(review_bytes)['source_files']
         assert all(hashlib.sha256((source / name).read_bytes()).hexdigest() == sha for name, sha in expected.items())
         sys.path[:0] = [str(source / 'src'), str(source / 'tests')]
+        # Child interpreters need the same explicit source path as the CI QA.
+        os.environ['PYTHONPATH'] = str(source / 'src')
         spec = importlib.util.spec_from_file_location('original_budget_tests', source / 'tests/test_improvements.py')
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
