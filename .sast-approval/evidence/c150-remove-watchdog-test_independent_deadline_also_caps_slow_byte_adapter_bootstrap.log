@@ -1,0 +1,30 @@
+test_independent_deadline_also_caps_slow_byte_adapter_bootstrap (test_bandwidth.RelayIntegrationTests.test_independent_deadline_also_caps_slow_byte_adapter_bootstrap)
+The real cold entry point retains its timer before adapter creation. ... FAIL
+
+======================================================================
+FAIL: test_independent_deadline_also_caps_slow_byte_adapter_bootstrap (test_bandwidth.RelayIntegrationTests.test_independent_deadline_also_caps_slow_byte_adapter_bootstrap)
+The real cold entry point retains its timer before adapter creation.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle150\candidate\swassh-2.0.1\tests\test_bandwidth.py", line 541, in test_independent_deadline_also_caps_slow_byte_adapter_bootstrap
+    output,error=peer.communicate(timeout=4)
+                 ~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\subprocess.py", line 1664, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['C:\\Program Files\\Python314\\python.exe', '-c', "import sys,time\nfrom pathlib import Path\nfrom swassh.infrastructure import bandwidth,tcp_proxy\noriginal=bandwidth.SharedBudget\nmode=sys.argv.pop(1)\nclass DelayedBudget(original):\n    def __init__(self,spec):\n        if mode=='stall' or not (Path(spec['directory'])/'budget.sqlite3').exists():\n            time.sleep(30 if mode=='stall' else 0.75)\n        super().__init__(spec)\nbandwidth.SharedBudget=DelayedBudget\nif mode=='bytes':\n    original_bytes=tcp_proxy.SQLiteByteBudget\n    class DelayedByteBudget(original_bytes):\n        def __init__(self,spec):\n            time.sleep(0.75)\n            super().__init__(spec)\n    tcp_proxy.SQLiteByteBudget=DelayedByteBudget\n\nimport threading\n_original_start=threading.Thread.start\n_pending=[]\ndef changed_start(thread):\n    if thread.name=='swassh-relay-deadline':\n        _pending.append(thread)\n        return None\n    return _original_start(thread)\nthreading.Thread.start=changed_start\n\nraise SystemExit(tcp_proxy.main())\n", 'bytes', '--host', '127.0.0.1', '--port', '59444', '--budget-root', 'C:\\Users\\IRIVEN~1\\AppData\\Local\\Temp\\tmplag_s5pb\\cc3a14d6f3973db22bc12170b817e8a7', '--connections', '32', '--connect-rate', '20.0', '--memory-bytes', '536870912', '--bandwidth-kib', '32', '--connect-timeout', '2', '--lifetime', '0.5']' timed out after 4 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle150\candidate\swassh-2.0.1\tests\test_bandwidth.py", line 543, in test_independent_deadline_also_caps_slow_byte_adapter_bootstrap
+    self.fail('the unchanged relay lifetime did not stop byte adapter initialization')
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: the unchanged relay lifetime did not stop byte adapter initialization
+
+----------------------------------------------------------------------
+Ran 1 test in 4.066s
+
+FAILED (failures=1)

@@ -1,0 +1,18 @@
+{
+  "source_commit": "5b125ca1b472bf6e87c75ea0fe60f0f9ab6f8e5b",
+  "required_ci_run": 45714936694,
+  "failed_job": 139558732239,
+  "python": "3.12.10",
+  "test": "test_bandwidth.RelayIntegrationTests.test_idle_deadline_uses_the_guardian_prepared_policy",
+  "assertion": "server.ready.wait(4) must be true before peer.wait(timeout=4) == 124",
+  "lifetime_seconds": 0.5,
+  "actual_exit_status_at_original_failure": "Not present in original CI failure output; do not infer it",
+  "diagnostic_commit": "11eab04dd06741caec6c45951d95f32b371acfd4",
+  "diagnostic_tree": "ba2f4c1a29981b226d5769f02168412ea9eb302c",
+  "diagnostic_branch": "diagnostics/c148-windows-relay",
+  "diagnostic_workload": "20 original assertions, same child program, arguments, timer and waits; additive parent-side failure/status observation only",
+  "candidate_modified": false,
+  "ci_rerun_requested": false,
+  "production_published": false,
+  "publication_refused": true
+}

@@ -1,0 +1,82 @@
+{
+  "main_sha": "1428e12902d64683438dcf162366151673aa7f47",
+  "protected": true,
+  "protection": {
+    "enabled": true,
+    "required_status_checks": {
+      "enforcement_level": "everyone",
+      "contexts": [
+        "security",
+        "quality (macos-latest, 3.11)",
+        "quality (macos-latest, 3.12)",
+        "quality (macos-latest, 3.13)",
+        "quality (macos-latest, 3.14)",
+        "quality (ubuntu-24.04, 3.11)",
+        "quality (ubuntu-24.04, 3.12)",
+        "quality (ubuntu-24.04, 3.13)",
+        "quality (ubuntu-24.04, 3.14)",
+        "quality (windows-latest, 3.11)",
+        "quality (windows-latest, 3.12)",
+        "quality (windows-latest, 3.13)",
+        "quality (windows-latest, 3.14)"
+      ],
+      "checks": [
+        {
+          "context": "security",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (macos-latest, 3.11)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (macos-latest, 3.12)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (macos-latest, 3.13)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (macos-latest, 3.14)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (ubuntu-24.04, 3.11)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (ubuntu-24.04, 3.12)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (ubuntu-24.04, 3.13)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (ubuntu-24.04, 3.14)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (windows-latest, 3.11)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (windows-latest, 3.12)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (windows-latest, 3.13)",
+          "app_id": 15368
+        },
+        {
+          "context": "quality (windows-latest, 3.14)",
+          "app_id": 15368
+        }
+      ]
+    }
+  },
+  "all_13_checks_from_github_actions_apply_to_everyone": true,
+  "administration_details_endpoint_unavailable_but_branch_read_succeeded": true,
+  "mutations_performed": false
+}

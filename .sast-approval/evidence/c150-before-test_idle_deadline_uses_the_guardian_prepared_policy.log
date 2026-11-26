@@ -1,0 +1,20 @@
+test_idle_deadline_uses_the_guardian_prepared_policy (relay_before.RelayIntegrationTests.test_idle_deadline_uses_the_guardian_prepared_policy)
+An idle-open test needs the policy the real guardian prepares first. ... FAIL
+
+======================================================================
+FAIL: test_idle_deadline_uses_the_guardian_prepared_policy (relay_before.RelayIntegrationTests.test_idle_deadline_uses_the_guardian_prepared_policy)
+An idle-open test needs the policy the real guardian prepares first.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle150\before\tests\test_bandwidth.py", line 474, in test_idle_deadline_uses_the_guardian_prepared_policy
+    self.test_independent_deadline_stops_an_idle_open_relay()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle150\before\tests\test_bandwidth.py", line 316, in test_independent_deadline_stops_an_idle_open_relay
+    self.assertTrue(server.ready.wait(4))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 4.059s
+
+FAILED (failures=1)

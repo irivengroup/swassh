@@ -1,0 +1,14 @@
+{
+  "original_observer_sha256": "daae4f9cb4f34fbb4c0b847ebdb47662c23d3cdc8436cd6e8a82b665c867c10a",
+  "original_receipt_missing": true,
+  "original_expected_observations": 3,
+  "correct_expected_observations": 4,
+  "reason": "The stalled-bootstrap test communicates once explicitly and once in unchanged cleanup. Each idle test communicates only in cleanup. These are four observations of three processes.",
+  "original_logs_preserved": [
+    "slow-idle.log",
+    "slow-prepared-policy-idle.log",
+    "slow-stalled-bootstrap.log"
+  ],
+  "application_sources_or_test_deadlines_changed": false,
+  "initial_missing_receipt_is_not_a_success": true
+}

@@ -1,0 +1,39 @@
+{
+  "artifact_sha256": "cab8dd03dc001fc1775fd4a2d346b0d6039f061552e27166808a1e1b8a81c87a",
+  "python": "3.13.17 (tags/v3.13.17:64e080d, Oct 21 2026, 14:08:53) [MSC v.1944 64 bit (AMD64)]",
+  "global": {
+    "statements": {
+      "covered": 9550,
+      "total": 9573,
+      "percent": 99.75974093805495
+    },
+    "branches": {
+      "covered": 6087,
+      "total": 6124,
+      "percent": 99.3958197256695
+    },
+    "functions": {
+      "covered": 752,
+      "total": 752,
+      "percent": 100.0
+    },
+    "lines": {
+      "covered": 10636,
+      "total": 10653,
+      "percent": 99.84042053881535
+    },
+    "boolean_conditions": {
+      "covered": 5338,
+      "total": 5372,
+      "percent": 99.36708860759494
+    }
+  },
+  "tests_succeeded": false,
+  "gate_failures": [],
+  "metrics_below_98": [],
+  "scopes_checked": 108,
+  "runtime_diagnostics_sha256": "58f5d41b6b669e86d13cb66f9b0049cdc5c4eed37b80c915ff0dd15f4478961c",
+  "unchanged_admission_checker_exit": 1,
+  "coverage_qualified": false,
+  "publication_authorized": false
+}

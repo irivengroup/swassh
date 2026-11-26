@@ -1,0 +1,13 @@
+{
+  "source": "Native Chrome accessibility data cells after both Update variable submissions returned to the repository variables listing",
+  "url": "https://github.com/irivengroup/swassh/settings/variables/actions",
+  "readback_verified": true,
+  "variables": {
+    "SWASSH_SAST_GATE_SHA256": "e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803",
+    "SWASSH_SAST_REVIEW_SHA256": "98f2161a4507d3112c8ec06de4b7b8b50de85f283b813898e6e146c06c5a0c29",
+    "SWASSH_SAST_REVIEW_REF": "09ba8df129e2b2235d23513f55dbba4441c8959f"
+  },
+  "gate_variable_unchanged": true,
+  "review_variables_updated": true,
+  "user_displayed_correct_tab_after_privacy_refusal": true
+}

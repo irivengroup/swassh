@@ -1,0 +1,58 @@
+{
+  "source_archive_sha256": "5993ea4e1e981383280295d8a50f91ef6964f9f77b052c0369254175fb6bf383",
+  "source_unchanged": true,
+  "dependency_delay_seconds": 0.75,
+  "original_lifetime_seconds": 0.5,
+  "original_ready_and_exit_wait_seconds": 4,
+  "results": [
+    {
+      "case": "slow-idle",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "slow-prepared-policy-idle",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "slow-stalled-bootstrap",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    }
+  ],
+  "process_observations": [
+    {
+      "sample": "slow-idle",
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "slow-prepared-policy-idle",
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "slow-stalled-bootstrap",
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "slow-stalled-bootstrap",
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    }
+  ],
+  "conclusion": "The hard bootstrap deadline correctly prevents connection under a slow dependency; an idle-open test requires its own prepared-adapter precondition. No actual CI child status is inferred.",
+  "publication_authorized": false
+}

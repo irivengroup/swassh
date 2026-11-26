@@ -1,0 +1,12 @@
+{
+  "target": "D:/PROJECTS/LABS/SwarmSsh/sources",
+  "commands_observed": ["git status --porcelain=v1", "git rev-parse HEAD"],
+  "command_exit_code": 0,
+  "status_porcelain": "",
+  "head_sha": "8c568dc6b17b983bf2fdd171da0e9ce9ca4acb16",
+  "unchanged_since_preflight_c149": true,
+  "D_written": false,
+  "cdc_file_resolved": "D:/PROJECTS/LABS/SwarmSsh/sources/docs/wiki.d/reference/ACCEPTANCE-SCALE.md",
+  "cdc_file_bytes": 9117,
+  "publication_authorized": false
+}
