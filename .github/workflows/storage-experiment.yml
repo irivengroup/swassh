@@ -1,7 +1,7 @@
-name: Measure private spool locks on unchanged C154 Windows source
+name: Measure unchanged SQLite spool across allocated Windows QA volumes
 on:
   push:
-    branches: [diagnostics/c156-windows-lock-experiment]
+    branches: [diagnostics/c156-windows-storage-experiment]
 permissions:
   contents: read
 jobs:
@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false
       - name: Retain observer outside the unchanged application source
         shell: pwsh
-        run: Copy-Item -LiteralPath '.github/diagnostics/native_lock_experiment.py' -Destination "$env:RUNNER_TEMP/swassh-lock-experiment.py"
+        run: Copy-Item -LiteralPath '.github/diagnostics/native_storage_experiment.py' -Destination "$env:RUNNER_TEMP/swassh-storage-experiment.py"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: 5ee5b56572e9fc92d64bc1f3447a93678bd18bfd
@@ -30,27 +30,28 @@ jobs:
       - name: Verify exact observer and approved detached review
         shell: pwsh
         run: |
-          if ((Get-FileHash -Algorithm SHA256 -LiteralPath "$env:RUNNER_TEMP/swassh-lock-experiment.py").Hash.ToLowerInvariant() -ne '2c29993be79037cd848b59ab96e4b59653ad46e2f2c14e5276edf86ae1132382') { throw 'Observer identity mismatch' }
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath "$env:RUNNER_TEMP/swassh-storage-experiment.py").Hash.ToLowerInvariant() -ne '77d26e6e748a6b10acc6e264ca9f8490d4ad4861d07e4aa4e865d357dd2ef881') { throw 'Observer identity mismatch' }
           & curl.exe --disable --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --connect-timeout 10 --max-time 60 --max-filesize 1399933 --output "$env:RUNNER_TEMP/swassh-approved-review.json" https://raw.githubusercontent.com/irivengroup/swassh/0ccf2df279733b8ded0d714b51169db3b0357d4f/.sast-approval/review.json
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           if ((Get-Item -LiteralPath "$env:RUNNER_TEMP/swassh-approved-review.json").Length -ne 1399933) { throw 'Review length mismatch' }
           if ((Get-FileHash -Algorithm SHA256 -LiteralPath "$env:RUNNER_TEMP/swassh-approved-review.json").Hash.ToLowerInvariant() -ne '62e93faf3de43884f6fa8b0c2e0fe7dc7a3ad78d9958130a42967f74649e60f6') { throw 'Review identity mismatch' }
-      - name: Measure six fresh private stores with unchanged FULL and 5000 records each
+      - name: Compare default and workspace volumes with identical 1000-record SQLite work
         id: diagnostic
         shell: pwsh
         timeout-minutes: 13
         run: |
           $env:SWASSH_DIAG_SOURCE = $env:GITHUB_WORKSPACE
-          $env:SWASSH_DIAG_OUTPUT = "$env:RUNNER_TEMP/swassh-lock-experiment"
+          $env:SWASSH_DIAG_OUTPUT = "$env:RUNNER_TEMP/swassh-storage-experiment"
           $env:SWASSH_DIAG_REVIEW = "$env:RUNNER_TEMP/swassh-approved-review.json"
-          & python -B "$env:RUNNER_TEMP/swassh-lock-experiment.py" *> "$env:RUNNER_TEMP/swassh-lock-experiment.log"
+          $env:SWASSH_DIAG_ALT_TEMP = Split-Path -Parent $env:GITHUB_WORKSPACE
+          & python -B "$env:RUNNER_TEMP/swassh-storage-experiment.py" *> "$env:RUNNER_TEMP/swassh-storage-experiment.log"
           exit $LASTEXITCODE
       - name: Retain profiles and every observed outcome
         if: ${{ always() && (steps.diagnostic.outcome == 'success' || steps.diagnostic.outcome == 'failure' || steps.diagnostic.outcome == 'cancelled') }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: windows-lock-experiment-c156
+          name: windows-storage-experiment-c156
           path: |
-            ${{ runner.temp }}/swassh-lock-experiment/
-            ${{ runner.temp }}/swassh-lock-experiment.log
+            ${{ runner.temp }}/swassh-storage-experiment/
+            ${{ runner.temp }}/swassh-storage-experiment.log
           if-no-files-found: error

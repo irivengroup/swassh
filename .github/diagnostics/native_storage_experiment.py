@@ -40,21 +40,24 @@ def quantile(values,p):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--operations',type=int,default=5000)
+    parser.add_argument('--operations',type=int,default=1000)
     parser.add_argument('--batch',type=int,default=14)
     parser.add_argument('--repeats',type=int,default=3)
     args=parser.parse_args()
     assert 1<=args.operations<=5000 and 1<=args.batch<=32 and 1<=args.repeats<=4
     output=Path(os.environ['SWASSH_DIAG_OUTPUT']).resolve();output.mkdir()
+    roots={'DEFAULT':Path(tempfile.gettempdir()).resolve(strict=True),
+           'WORKSPACE':Path(os.environ['SWASSH_DIAG_ALT_TEMP']).resolve(strict=True)}
+    assert roots['DEFAULT'].anchor.casefold()!=roots['WORKSPACE'].anchor.casefold(), 'No distinct allocated volume available'
+    assert source not in (roots['WORKSPACE'], *roots['WORKSPACE'].parents), 'Experiment must remain outside source'
     records=[]
     for repeat in range(args.repeats):
-        for mode in (('NORMAL','EXCLUSIVE') if repeat%2==0 else ('EXCLUSIVE','NORMAL')):
-            with tempfile.TemporaryDirectory(prefix='swassh-spool-profile-') as directory:
+        for mode in (('DEFAULT','WORKSPACE') if repeat%2==0 else ('WORKSPACE','DEFAULT')):
+            with tempfile.TemporaryDirectory(prefix='swassh-spool-profile-', dir=roots[mode]) as directory:
                 store=ReportStore(directory,64*1024*1024)
                 try:
-                    assert store.db.execute('PRAGMA journal_mode=DELETE').fetchone()[0].lower()=='delete'
-                    actual=store.db.execute('PRAGMA locking_mode='+mode).fetchone()[0]
-                    assert actual.lower()==mode.lower()
+                    actual=store.db.execute('PRAGMA journal_mode').fetchone()[0]
+                    assert actual.lower()=='delete'
                     assert store.db.execute('PRAGMA synchronous').fetchone()[0]==2
                     measurements=[];sql=[]
                     store.db.set_trace_callback(sql.append)
@@ -77,7 +80,7 @@ def main():
                     assert len(list(csv.DictReader(stream)))==args.operations
                     assert sum(not line.strip() for line in stream.getvalue().splitlines())==args.operations
                     journal=Path(str(store.path)+'-journal')
-                    row={'repeat':repeat,'mode':mode,'operations':args.operations,'batch_limit':args.batch,
+                    row={'repeat':repeat,'mode':mode,'temporary_directory':directory,'sqlite_journal_mode':actual,'operations':args.operations,'batch_limit':args.batch,
                         'transactions':len(measurements),'seconds':elapsed,'cpu_seconds':cpu,'operations_per_second':args.operations/elapsed,
                         'append_p50_seconds':quantile(measurements,.5),'append_p95_seconds':quantile(measurements,.95),
                         'append_p99_seconds':quantile(measurements,.99),'append_seconds':measurements,'parent_tracemalloc_peak_bytes':peak,
