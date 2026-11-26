@@ -1,5 +1,30 @@
 # Protocole et historique de validation SWASSH 2.0.1
 
+## Relais ouvert et initialisation lente sous Windows
+
+La CI C149 a refusé deux tests de relais sous Windows 3.12 et 3.13. Leur
+attente d'une connexion établie mélangeait la préparation SQLite avec la phase
+inactive de 0,5 seconde. Un ralentissement déterministe de 0,75 seconde reproduit
+ce refus sur les sources conservées : le véritable gardien arrête correctement
+le processus avec le code 124 avant toute connexion. Le journal CI initial ne
+contient pas ce code de sortie ; cette reproduction ne permet pas de le déduire.
+
+Le seul scénario « relais déjà ouvert » prépare désormais dans son processus
+enfant un véritable SQLiteByteBudget, avec ses vérifications de fichiers, de
+politique et de schéma. Il exige la politique déjà créée par le gardien et remet
+ce même adaptateur au point d'entrée inchangé. Les attentes de connexion et de
+sortie restent à quatre secondes ; le délai de production reste à 0,5 seconde.
+La préparation ne remplace ni l'horloge, ni les transactions, ni le réseau réel
+de boucle locale. Une spécification différente ou une politique absente est refusée.
+
+Les scénarios d'initialisation froide utilisent toujours le point d'entrée réel
+sans adaptation. Le refus d'une préparation bloquée pendant 30 secondes est
+conservé ; un nouveau cas exige aussi le code 124, sans sortie ni connexion,
+quand l'adaptateur réel prend 0,75 seconde. Les contrôles et instruments de
+couverture ainsi que tous les fichiers de production restent identiques à C148.
+La nouvelle candidate exige une qualification et une revue SAST des octets exacts
+avant approbation, CI complète et publication.
+
 ## Correctif CI et portabilité 2.0.1 — conditions d'admission
 
 Cette candidate conserve les douze cases Python 3.11–3.14 de la CI et les cinq
