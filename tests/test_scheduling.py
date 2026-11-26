@@ -947,12 +947,52 @@ class WorkerTests(unittest.IsolatedAsyncioTestCase):
             return result
         with patch.object(self.service, '_io', io):
             task = asyncio.create_task(self.service.serve(once=True))
-            await asyncio.wait_for(committed.wait(), 2)
-            task.cancel()
-            with self.assertRaises(asyncio.CancelledError):
-                await task
+            try:
+                await asyncio.wait_for(committed.wait(), 2)
+                task.cancel()
+                with self.assertRaises(asyncio.CancelledError):
+                    await task
+            finally:
+                # A refused readiness assertion still owns the service. Join it
+                # while its I/O observer is installed, before closing SQLite.
+                release.set()
+                task.cancel()
+                await asyncio.gather(task, return_exceptions=True)
         self.assertEqual(self.store.get(FIRST).state, JobState.SUCCEEDED)
         self.assertEqual(original.__self__, self.store)
+
+    async def test_terminal_readiness_timeout_joins_service_before_fixture_cleanup(self):
+        tasks = []
+        create = asyncio.create_task
+        async def blocked(job):
+            # This scenario refuses readiness before any terminal commit. Keep
+            # execution pending so the retained faulty observer cannot commit
+            # during the regression test's own emergency teardown.
+            await asyncio.sleep(30)
+        self.service.executor = blocked
+        async def expired(awaitable, timeout):
+            self.assertEqual(timeout, 2)
+            awaitable.close()
+            await asyncio.sleep(0)
+            raise TimeoutError('controlled terminal readiness refusal')
+        def own(coroutine, *args, **kwargs):
+            task = create(coroutine, *args, **kwargs)
+            tasks.append(task)
+            return task
+        try:
+            with patch.object(asyncio, 'create_task', side_effect=own), \
+                    patch.object(asyncio, 'wait_for', side_effect=expired):
+                with self.assertRaisesRegex(TimeoutError, 'controlled terminal readiness refusal'):
+                    await self.test_cancellation_after_terminal_commit_preserves_success()
+            self.assertTrue(tasks)
+            self.assertTrue(all(task.done() for task in tasks),
+                            'service survived its failed terminal readiness assertion')
+            with self.store.worker_lock():
+                pass
+        finally:
+            for task in tasks:
+                task.cancel()
+            await asyncio.gather(*tasks, return_exceptions=True)
 
     async def test_signal_worker_wrapper_and_executor_adapter(self):
         class Worker:

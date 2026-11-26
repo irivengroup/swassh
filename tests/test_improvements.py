@@ -817,6 +817,12 @@ class TransferImprovementTests(unittest.IsolatedAsyncioTestCase):
         (source / 'changed').write_text('different contents')
         (destination / 'changed').write_text('old')
         (destination / 'deleted').write_text('old')
+        # This nominal case changes one file. Archive mode also preserves root
+        # directory times, so equalize that independent fixture metadata after
+        # creation; crossing a wall-clock second must not add a directory change.
+        stamp = 1_600_000_000_000_000_000
+        for directory in (source, destination):
+            os.utime(directory, ns=(stamp, stamp))
         before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in destination.iterdir()}
         with patch('swassh.infrastructure.transfers.launch_native', self.local_native):
             async with self.client(TransferDirection.PUSH, rsync=True, source=str(source)+'/',
@@ -829,6 +835,48 @@ class TransferImprovementTests(unittest.IsolatedAsyncioTestCase):
                 self.assertIsNone(result.transfer.bytes_transferred)
         after = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in destination.iterdir()}
         self.assertEqual(before, after)
+
+    @unittest.skipUnless(shutil.which('rsync'), 'native rsync unavailable')
+    async def test_preview_fixture_parent_times_do_not_depend_on_creation_latency(self):
+        """Cross-second directory creation must not change the nominal file count."""
+        write = Path.write_text
+        writes = []
+        directories = {self.root / 'tree': 1_600_000_000_000_000_000,
+                       self.root / 'remote-tree': 1_600_000_002_000_000_000}
+        def prepare(path, *args, **kwargs):
+            result = write(path, *args, **kwargs)
+            if path.parent in directories:
+                stamp = directories[path.parent]
+                os.utime(path.parent, ns=(stamp, stamp))
+                writes.append((path.parent.name, path.name))
+            return result
+        with patch.object(Path, 'write_text', prepare):
+            await self.test_real_rsync_preview_readonly_add_change_delete()
+        self.assertEqual(writes, [('tree', 'added'), ('tree', 'changed'),
+                                  ('remote-tree', 'changed'), ('remote-tree', 'deleted')])
+
+    @unittest.skipUnless(shutil.which('rsync'), 'native rsync unavailable')
+    async def test_real_rsync_preview_counts_directory_time_change_without_writing(self):
+        """A real root metadata change remains visible and is never applied in preview."""
+        source = self.root / 'metadata-source'
+        destination = self.root / 'metadata-destination'
+        source.mkdir()
+        destination.mkdir()
+        for directory, stamp in ((source, 1_600_000_000_000_000_000),
+                                 (destination, 1_600_000_002_000_000_000)):
+            os.utime(directory, ns=(stamp, stamp))
+        before = {p.name: (p.stat().st_mtime_ns, p.stat().st_mode) for p in (source, destination)}
+        with patch('swassh.infrastructure.transfers.launch_native', self.local_native):
+            async with self.client(TransferDirection.PUSH, rsync=True, source=str(source)+'/',
+                    remote=str(destination)+'/', dry_run=True) as client:
+                result = await client.transfer(self.host)
+                self.assertEqual(result.status, Status.SUCCESS, result)
+                self.assertEqual(result.stdout, 'preview only: added=0 changed=1 deleted=0')
+                self.assertIsNone(result.transfer.bytes_transferred)
+        after = {p.name: (p.stat().st_mtime_ns, p.stat().st_mode) for p in (source, destination)}
+        self.assertEqual(before, after)
+        self.assertEqual(list(source.iterdir()), [])
+        self.assertEqual(list(destination.iterdir()), [])
 
 
 @unittest.skipUnless(os.name == 'posix', 'direct POSIX guardian logic')

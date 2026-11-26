@@ -1,5 +1,41 @@
 # Protocole et historique de validation SWASSH 2.0.1
 
+## Refus de disponibilité du planificateur sous Windows 3.12
+
+La recette PR C151 a conservé trois refus d'attentes de deux secondes sous
+Windows 3.12. L'un produit aussi une seconde erreur : le scénario d'annulation
+après commit ne retire pas son service avant de fermer SQLite et le dossier
+temporaire, si sa propre attente de disponibilité échoue. Le test possède
+désormais un nettoyage inconditionnel du service et de son observateur d'I/O.
+Un refus de disponibilité contrôlé vérifie que les tâches sont terminées et
+que le verrou réel est de nouveau disponible avant le nettoyage des fichiers.
+
+Les trois attentes, leurs valeurs, les assertions de non-rejeu et tous les
+adaptateurs réels sont conservés. Cette correction ne démontre pas que les
+trois refus de délai sont résolus sur le runner natif. Une nouvelle matrice
+complète doit réussir avant publication ; une mesure de couverture suffisante
+ne transforme pas une recette échouée en résultat acceptable.
+
+## Prévisualisation rsync et métadonnées des répertoires
+
+Le push CI C151 a refusé le scénario nominal de prévisualisation sur macOS
+3.12 : un ajout, deux changements et une suppression, au lieu d'un changement.
+Les dates des répertoires source et destination n'étaient pas fixées après la
+création des fichiers. Avec le même test et le vrai rsync, deux secondes d'écart
+produisent l'enregistrement supplémentaire `SWASSH:.d..t......` et le même refus ;
+des dates identiques produisent le résultat attendu. L'itemisation du refus CI
+initial n'a pas été capturée : cette reproduction démontre un état de fixture
+invalide, sans lui attribuer rétrospectivement un enregistrement natif inconnu.
+
+Le scénario nominal fixe maintenant les deux dates de répertoire à la même
+valeur, après création. Toutes ses assertions, options et limites sont conservées.
+Le parseur compte toujours les changements de répertoire. Deux nouveaux cas
+reproduisent une création sur deux secondes différentes et exigent le comptage
+d'un véritable changement de date de répertoire, avec dates, modes et contenu
+inchangés après prévisualisation. Aucune règle, mesure ou source de production
+n'est modifiée. La nouvelle candidate nécessite ses propres contrôles et revue
+des octets exacts avant toute publication.
+
 ## Relais ouvert et initialisation lente sous Windows
 
 La CI C149 a refusé deux tests de relais sous Windows 3.12 et 3.13. Leur
