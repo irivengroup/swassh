@@ -1,0 +1,92 @@
+{
+  "artifact_id": 15094242564,
+  "artifact_sha256": "a10efe3966d7639e3467811d981dc365a54804b9fc5a78403bb822b4e63f4de2",
+  "source_commit": "5ee5b56572e9fc92d64bc1f3447a93678bd18bfd",
+  "source_unchanged": true,
+  "same_runner": true,
+  "full_original_test_count": 2,
+  "rows": [
+    {
+      "label": "default",
+      "tempdir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp",
+      "test_metrics": {
+        "hosts": 50000,
+        "peak_workers": 14,
+        "peak_parent_python_bytes": 11230819,
+        "seconds": 770.3269527000001,
+        "report_worker_pid": 6180,
+        "parent_pid": 8848
+      },
+      "receipt_sha256": "b1d9867a051a38ec061a4a0ac94b8f2043fd2c7fa646fbfd37d3fcbd7edec053",
+      "worker_operation_seconds": {
+        "identity": 9.140000003071691e-05,
+        "append": 734.086076200005,
+        "summary": 6.779999989703356e-05,
+        "export": 5.956907000000001,
+        "close": 0.010500699999965946
+      },
+      "measured": {
+        "source_archive_sha256": "2b4ebbd8672d07c278b4acf4b813e0543e56a2ce27e701baebe645cac9746014",
+        "source_unchanged": true,
+        "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "observed_tempdir": "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp",
+        "seconds": 770.6436040000001,
+        "parent_cpu_seconds": 29.59375,
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "successful": true,
+        "original_test_used_without_changes": true,
+        "profile_overhead_included": true,
+        "production_sources_modified": false,
+        "publication_authorized": false
+      }
+    },
+    {
+      "label": "allocated",
+      "tempdir": "D:\\a\\_temp",
+      "test_metrics": {
+        "hosts": 50000,
+        "peak_workers": 14,
+        "peak_parent_python_bytes": 11219244,
+        "seconds": 57.30420409999988,
+        "report_worker_pid": 5784,
+        "parent_pid": 4020
+      },
+      "receipt_sha256": "74d5d0e4fbdadc40e32857c999b051a974b8e3a719cce2050588151b8a673ce2",
+      "worker_operation_seconds": {
+        "identity": 8.969999998953426e-05,
+        "append": 20.810063099994522,
+        "summary": 0.0001393000000007305,
+        "export": 5.850928099999919,
+        "close": 0.005828199999996286
+      },
+      "measured": {
+        "source_archive_sha256": "2b4ebbd8672d07c278b4acf4b813e0543e56a2ce27e701baebe645cac9746014",
+        "source_unchanged": true,
+        "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "observed_tempdir": "D:\\a\\_temp",
+        "seconds": 57.54152940000017,
+        "parent_cpu_seconds": 29.875,
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "successful": true,
+        "original_test_used_without_changes": true,
+        "profile_overhead_included": true,
+        "production_sources_modified": false,
+        "publication_authorized": false
+      }
+    }
+  ],
+  "allocated_over_default_test_wall_ratio": 0.07438945748834094,
+  "all_original_counts_memory_and_worker_assertions_retained": true,
+  "production_sources_or_SQLite_settings_changed": false,
+  "limitation": "One full pair, default then allocated; cache/order effects are not excluded. Three separately retained alternating microbenchmark pairs also favor the allocated workspace volume. This is synthetic QA, not SSH hardware capacity or a universal latency guarantee.",
+  "candidate_C157_still_requires_complete_CI": true,
+  "publication_authorized": false
+}

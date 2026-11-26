@@ -1,0 +1,6 @@
+test_independent_deadline_stops_an_idle_open_relay (relay_after.RelayIntegrationTests.test_independent_deadline_stops_an_idle_open_relay) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.584s
+
+OK

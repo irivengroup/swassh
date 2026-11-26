@@ -1,0 +1,166 @@
+--- a/VALIDATION.md
++++ b/VALIDATION.md
+@@ -1,4 +1,40 @@
+ # Protocole et historique de validation SWASSH 2.0.1
++
++## Refus de disponibilité du planificateur sous Windows 3.12
++
++La recette PR C151 a conservé trois refus d'attentes de deux secondes sous
++Windows 3.12. L'un produit aussi une seconde erreur : le scénario d'annulation
++après commit ne retire pas son service avant de fermer SQLite et le dossier
++temporaire, si sa propre attente de disponibilité échoue. Le test possède
++désormais un nettoyage inconditionnel du service et de son observateur d'I/O.
++Un refus de disponibilité contrôlé vérifie que les tâches sont terminées et
++que le verrou réel est de nouveau disponible avant le nettoyage des fichiers.
++
++Les trois attentes, leurs valeurs, les assertions de non-rejeu et tous les
++adaptateurs réels sont conservés. Cette correction ne démontre pas que les
++trois refus de délai sont résolus sur le runner natif. Une nouvelle matrice
++complète doit réussir avant publication ; une mesure de couverture suffisante
++ne transforme pas une recette échouée en résultat acceptable.
++
++## Prévisualisation rsync et métadonnées des répertoires
++
++Le push CI C151 a refusé le scénario nominal de prévisualisation sur macOS
++3.12 : un ajout, deux changements et une suppression, au lieu d'un changement.
++Les dates des répertoires source et destination n'étaient pas fixées après la
++création des fichiers. Avec le même test et le vrai rsync, deux secondes d'écart
++produisent l'enregistrement supplémentaire `SWASSH:.d..t......` et le même refus ;
++des dates identiques produisent le résultat attendu. L'itemisation du refus CI
++initial n'a pas été capturée : cette reproduction démontre un état de fixture
++invalide, sans lui attribuer rétrospectivement un enregistrement natif inconnu.
++
++Le scénario nominal fixe maintenant les deux dates de répertoire à la même
++valeur, après création. Toutes ses assertions, options et limites sont conservées.
++Le parseur compte toujours les changements de répertoire. Deux nouveaux cas
++reproduisent une création sur deux secondes différentes et exigent le comptage
++d'un véritable changement de date de répertoire, avec dates, modes et contenu
++inchangés après prévisualisation. Aucune règle, mesure ou source de production
++n'est modifiée. La nouvelle candidate nécessite ses propres contrôles et revue
++des octets exacts avant toute publication.
+ 
+ ## Relais ouvert et initialisation lente sous Windows
+ 
+--- a/tests/test_improvements.py
++++ b/tests/test_improvements.py
+@@ -817,6 +817,12 @@
+         (source / 'changed').write_text('different contents')
+         (destination / 'changed').write_text('old')
+         (destination / 'deleted').write_text('old')
++        # This nominal case changes one file. Archive mode also preserves root
++        # directory times, so equalize that independent fixture metadata after
++        # creation; crossing a wall-clock second must not add a directory change.
++        stamp = 1_600_000_000_000_000_000
++        for directory in (source, destination):
++            os.utime(directory, ns=(stamp, stamp))
+         before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in destination.iterdir()}
+         with patch('swassh.infrastructure.transfers.launch_native', self.local_native):
+             async with self.client(TransferDirection.PUSH, rsync=True, source=str(source)+'/',
+@@ -829,6 +835,48 @@
+                 self.assertIsNone(result.transfer.bytes_transferred)
+         after = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in destination.iterdir()}
+         self.assertEqual(before, after)
++
++    @unittest.skipUnless(shutil.which('rsync'), 'native rsync unavailable')
++    async def test_preview_fixture_parent_times_do_not_depend_on_creation_latency(self):
++        """Cross-second directory creation must not change the nominal file count."""
++        write = Path.write_text
++        writes = []
++        directories = {self.root / 'tree': 1_600_000_000_000_000_000,
++                       self.root / 'remote-tree': 1_600_000_002_000_000_000}
++        def prepare(path, *args, **kwargs):
++            result = write(path, *args, **kwargs)
++            if path.parent in directories:
++                stamp = directories[path.parent]
++                os.utime(path.parent, ns=(stamp, stamp))
++                writes.append((path.parent.name, path.name))
++            return result
++        with patch.object(Path, 'write_text', prepare):
++            await self.test_real_rsync_preview_readonly_add_change_delete()
++        self.assertEqual(writes, [('tree', 'added'), ('tree', 'changed'),
++                                  ('remote-tree', 'changed'), ('remote-tree', 'deleted')])
++
++    @unittest.skipUnless(shutil.which('rsync'), 'native rsync unavailable')
++    async def test_real_rsync_preview_counts_directory_time_change_without_writing(self):
++        """A real root metadata change remains visible and is never applied in preview."""
++        source = self.root / 'metadata-source'
++        destination = self.root / 'metadata-destination'
++        source.mkdir()
++        destination.mkdir()
++        for directory, stamp in ((source, 1_600_000_000_000_000_000),
++                                 (destination, 1_600_000_002_000_000_000)):
++            os.utime(directory, ns=(stamp, stamp))
++        before = {p.name: (p.stat().st_mtime_ns, p.stat().st_mode) for p in (source, destination)}
++        with patch('swassh.infrastructure.transfers.launch_native', self.local_native):
++            async with self.client(TransferDirection.PUSH, rsync=True, source=str(source)+'/',
++                    remote=str(destination)+'/', dry_run=True) as client:
++                result = await client.transfer(self.host)
++                self.assertEqual(result.status, Status.SUCCESS, result)
++                self.assertEqual(result.stdout, 'preview only: added=0 changed=1 deleted=0')
++                self.assertIsNone(result.transfer.bytes_transferred)
++        after = {p.name: (p.stat().st_mtime_ns, p.stat().st_mode) for p in (source, destination)}
++        self.assertEqual(before, after)
++        self.assertEqual(list(source.iterdir()), [])
++        self.assertEqual(list(destination.iterdir()), [])
+ 
+ 
+ @unittest.skipUnless(os.name == 'posix', 'direct POSIX guardian logic')
+--- a/tests/test_scheduling.py
++++ b/tests/test_scheduling.py
+@@ -947,12 +947,52 @@
+             return result
+         with patch.object(self.service, '_io', io):
+             task = asyncio.create_task(self.service.serve(once=True))
+-            await asyncio.wait_for(committed.wait(), 2)
+-            task.cancel()
+-            with self.assertRaises(asyncio.CancelledError):
+-                await task
++            try:
++                await asyncio.wait_for(committed.wait(), 2)
++                task.cancel()
++                with self.assertRaises(asyncio.CancelledError):
++                    await task
++            finally:
++                # A refused readiness assertion still owns the service. Join it
++                # while its I/O observer is installed, before closing SQLite.
++                release.set()
++                task.cancel()
++                await asyncio.gather(task, return_exceptions=True)
+         self.assertEqual(self.store.get(FIRST).state, JobState.SUCCEEDED)
+         self.assertEqual(original.__self__, self.store)
++
++    async def test_terminal_readiness_timeout_joins_service_before_fixture_cleanup(self):
++        tasks = []
++        create = asyncio.create_task
++        async def blocked(job):
++            # This scenario refuses readiness before any terminal commit. Keep
++            # execution pending so the retained faulty observer cannot commit
++            # during the regression test's own emergency teardown.
++            await asyncio.sleep(30)
++        self.service.executor = blocked
++        async def expired(awaitable, timeout):
++            self.assertEqual(timeout, 2)
++            awaitable.close()
++            await asyncio.sleep(0)
++            raise TimeoutError('controlled terminal readiness refusal')
++        def own(coroutine, *args, **kwargs):
++            task = create(coroutine, *args, **kwargs)
++            tasks.append(task)
++            return task
++        try:
++            with patch.object(asyncio, 'create_task', side_effect=own), \
++                    patch.object(asyncio, 'wait_for', side_effect=expired):
++                with self.assertRaisesRegex(TimeoutError, 'controlled terminal readiness refusal'):
++                    await self.test_cancellation_after_terminal_commit_preserves_success()
++            self.assertTrue(tasks)
++            self.assertTrue(all(task.done() for task in tasks),
++                            'service survived its failed terminal readiness assertion')
++            with self.store.worker_lock():
++                pass
++        finally:
++            for task in tasks:
++                task.cancel()
++            await asyncio.gather(*tasks, return_exceptions=True)
+ 
+     async def test_signal_worker_wrapper_and_executor_adapter(self):
+         class Worker:

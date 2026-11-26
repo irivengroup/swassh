@@ -1,0 +1,15 @@
+test_independent_deadline_stops_an_idle_open_relay (test_bandwidth.RelayIntegrationTests.test_independent_deadline_stops_an_idle_open_relay) ... FAIL
+
+======================================================================
+FAIL: test_independent_deadline_stops_an_idle_open_relay (test_bandwidth.RelayIntegrationTests.test_independent_deadline_stops_an_idle_open_relay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle149\production-candidate\swassh-2.0.1\tests\test_bandwidth.py", line 316, in test_independent_deadline_stops_an_idle_open_relay
+    self.assertTrue(server.ready.wait(4))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 4.064s
+
+FAILED (failures=1)

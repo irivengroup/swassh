@@ -1,0 +1,24 @@
+{
+  "before": {
+    "tests": 1,
+    "errors": 2,
+    "failures": 0,
+    "skips": 0
+  },
+  "after": {
+    "tests": 1,
+    "errors": 0,
+    "failures": 0,
+    "skips": 0
+  },
+  "old_source_sha256": "c7e06a159ff9b77ff82fb44f9852cf399e3edb39a8452f463bc18e7ed25d2a85",
+  "existing_test_methods_preserved": 25,
+  "only_source_changes": [
+    "import sys",
+    "Darwin non-exclusive creating open dispatch",
+    "bounded exclusive-create/open-existing helper"
+  ],
+  "benchmark_and_all_deadlines_unchanged": true,
+  "native_predecessor_evidence": "descriptor-evidence.json",
+  "same_test_and_kernel_port_inputs": true
+}

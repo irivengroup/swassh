@@ -1,0 +1,7 @@
+{
+  "SWASSH_SAST_GATE_SHA256": "e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803",
+  "SWASSH_SAST_REVIEW_SHA256": "02927b0c27010c5c8f884735d6d7b528d24d84d5bfaa2280046ff6b6714c7d41",
+  "SWASSH_SAST_REVIEW_REF": "b3c4b273498e756e487a8d4ef2ce8712fc5c8e6f",
+  "method": "Saved through GitHub settings in existing Chrome tab and read back from repository variable table",
+  "all_three_values_observed": true
+}

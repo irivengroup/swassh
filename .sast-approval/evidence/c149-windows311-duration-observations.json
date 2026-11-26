@@ -1,0 +1,24 @@
+{
+  "source": "5b125ca1b472bf6e87c75ea0fe60f0f9ab6f8e5b",
+  "pr_job": 139558732097,
+  "push_job": 139558587722,
+  "pr_lines": [
+    "2026-11-25T22:54:50.8037232Z MASSIVE_BENCHMARK={\"hosts\": 50000, \"peak_workers\": 14, \"peak_parent_python_bytes\": 11741121, \"seconds\": 809.1701756, \"report_worker_pid\": 7888, \"parent_pid\": 2156}\r",
+    "2026-11-25T22:59:39.3633588Z Ran 1369 tests in 1225.441s\r",
+    "2026-11-25T22:59:52.6219020Z Ran 53 tests in 11.677s\r",
+    "2026-11-25T22:59:52.7615028Z ##[group]Run python scripts/coverage.py\r",
+    "2026-11-25T22:59:52.7615473Z \u001b[36;1mpython scripts/coverage.py\u001b[0m\r",
+    "2026-11-25T23:09:05.6376375Z ##[error]The operation was canceled.\r"
+  ],
+  "push_lines": [
+    "2026-11-25T22:47:14.0097623Z MASSIVE_BENCHMARK={\"hosts\": 50000, \"peak_workers\": 14, \"peak_parent_python_bytes\": 11741226, \"seconds\": 417.65070590000005, \"report_worker_pid\": 5796, \"parent_pid\": 9888}\r",
+    "2026-11-25T22:50:26.4270744Z Ran 1369 tests in 691.395s\r",
+    "2026-11-25T22:50:34.6203173Z Ran 53 tests in 7.154s\r",
+    "2026-11-25T22:50:34.7388707Z ##[group]Run python scripts/coverage.py\r",
+    "2026-11-25T22:50:34.7388958Z \u001b[36;1mpython scripts/coverage.py\u001b[0m\r",
+    "2026-11-25T22:59:08.3405785Z Ran 1368 tests in 509.872s\r"
+  ],
+  "job_timeout_minutes_unchanged": 30,
+  "conclusion": "Different observed durations on the same source: general suites 1225.441s vs 691.395s; the push completed coverage in 509.872s while PR coverage was cancelled. Host-level cause is not demonstrated; fresh full CI remains required.",
+  "publication_authorized": false
+}

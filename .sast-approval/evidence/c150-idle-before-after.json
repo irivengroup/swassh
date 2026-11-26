@@ -1,0 +1,117 @@
+{
+  "results": [
+    {
+      "phase": "before",
+      "case": "test_independent_deadline_stops_an_idle_open_relay",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "phase": "before",
+      "case": "test_idle_deadline_uses_the_guardian_prepared_policy",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "phase": "before",
+      "case": "test_independent_deadline_also_caps_a_stalled_budget_bootstrap",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "phase": "after",
+      "case": "test_independent_deadline_stops_an_idle_open_relay",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "phase": "after",
+      "case": "test_idle_deadline_uses_the_guardian_prepared_policy",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "phase": "after",
+      "case": "test_independent_deadline_also_caps_a_stalled_budget_bootstrap",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    }
+  ],
+  "processes": [
+    {
+      "sample": "before/test_independent_deadline_stops_an_idle_open_relay",
+      "pid": 31136,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "before/test_idle_deadline_uses_the_guardian_prepared_policy",
+      "pid": 19900,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "before/test_independent_deadline_also_caps_a_stalled_budget_bootstrap",
+      "pid": 4620,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "before/test_independent_deadline_also_caps_a_stalled_budget_bootstrap",
+      "pid": 4620,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "after/test_independent_deadline_stops_an_idle_open_relay",
+      "pid": 22608,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "after/test_idle_deadline_uses_the_guardian_prepared_policy",
+      "pid": 36448,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "after/test_independent_deadline_also_caps_a_stalled_budget_bootstrap",
+      "pid": 28856,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    {
+      "sample": "after/test_independent_deadline_also_caps_a_stalled_budget_bootstrap",
+      "pid": 28856,
+      "returncode": 124,
+      "stdout_bytes": 0,
+      "stderr": ""
+    }
+  ],
+  "same_real_dependency_delay_seconds": 0.75,
+  "original_lifetime_seconds": 0.5,
+  "original_ready_and_exit_timeouts_seconds": 4,
+  "source_before_sha256": "671f26c13c82ef00f5ee322b8b89d49cc332e657a0d52726fafda35458ea6627",
+  "source_after_sha256": "570e8a42754ab633f332a9e3bd19225e25fa657a2cf7ed706809c2ac84e78643",
+  "bootstrap_guard_retained": true,
+  "publication_authorized": false
+}

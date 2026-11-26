@@ -1,0 +1,10 @@
+test_real_rsync_preview_readonly_add_change_delete (test_improvements.TransferImprovementTests.test_real_rsync_preview_readonly_add_change_delete) ... ok
+test_preview_fixture_parent_times_do_not_depend_on_creation_latency (test_improvements.TransferImprovementTests.test_preview_fixture_parent_times_do_not_depend_on_creation_latency)
+Cross-second directory creation must not change the nominal file count. ... ok
+test_real_rsync_preview_counts_directory_time_change_without_writing (test_improvements.TransferImprovementTests.test_real_rsync_preview_counts_directory_time_change_without_writing)
+A real root metadata change remains visible and is never applied in preview. ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.694s
+
+OK

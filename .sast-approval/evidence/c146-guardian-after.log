@@ -1,0 +1,6 @@
+test_permission_race_requires_kernel_absence_before_original_deadline (test_process_guard_contracts.GuardianGroupAbsenceTests.test_permission_race_requires_kernel_absence_before_original_deadline) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

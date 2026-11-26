@@ -1,0 +1,41 @@
+test_application_clients_real_parallel_output_errors_and_session (test_native_ssh.NativeSSHTests.test_application_clients_real_parallel_output_errors_and_session) ... ok
+test_blocking_client_real_ssh_and_managed_stream (test_native_ssh.NativeSSHTests.test_blocking_client_real_ssh_and_managed_stream) ... ok
+test_command_exit_text_cannot_confirm_a_killed_shell (test_native_ssh.NativeSSHTests.test_command_exit_text_cannot_confirm_a_killed_shell) ... ok
+test_interactive_shell_restores_terminal (test_native_ssh.NativeSSHTests.test_interactive_shell_restores_terminal) ... ok
+test_live_bidirectional_parallel_prompts_without_newlines (test_native_ssh.NativeSSHTests.test_live_bidirectional_parallel_prompts_without_newlines) ... ok
+test_live_callback_failure_output_limit_and_timeout_are_not_success (test_native_ssh.NativeSSHTests.test_live_callback_failure_output_limit_and_timeout_are_not_success) ... ok
+test_live_cancellation_revokes_input_and_allows_next_invocation (test_native_ssh.NativeSSHTests.test_live_cancellation_revokes_input_and_allows_next_invocation) ... ok
+test_loopback_tunnel_transfers_bytes_and_rejects_unknown_key (test_native_ssh.NativeSSHTests.test_loopback_tunnel_transfers_bytes_and_rejects_unknown_key) ... ok
+test_multiline_exit_text_never_replaces_the_remote_exit_receipt (test_native_ssh.NativeSSHTests.test_multiline_exit_text_never_replaces_the_remote_exit_receipt) ... ok
+test_network_drivers_over_real_ssh_and_failure_stops_fleet (test_native_ssh.NativeSSHTests.test_network_drivers_over_real_ssh_and_failure_stops_fleet) ... ok
+test_network_reboot_reconnect_never_replays_activation (test_native_ssh.NativeSSHTests.test_network_reboot_reconnect_never_replays_activation)
+Use real SSH/PTY; the device restart itself remains simulated. ... ok
+test_network_reboot_trust_and_auth_failures_are_terminal (test_native_ssh.NativeSSHTests.test_network_reboot_trust_and_auth_failures_are_terminal)
+Changing trust or credentials between connections must stop retries. ... ok
+test_real_cli_report (test_native_ssh.NativeSSHTests.test_real_cli_report) ... ok
+test_real_input_and_profile_encoding (test_native_ssh.NativeSSHTests.test_real_input_and_profile_encoding) ... ok
+test_real_jump (test_native_ssh.NativeSSHTests.test_real_jump) ... ok
+test_real_live_cli_before_completion (test_native_ssh.NativeSSHTests.test_real_live_cli_before_completion) ... ok
+test_real_nonzero_and_remote255 (test_native_ssh.NativeSSHTests.test_real_nonzero_and_remote255) ... ok
+test_real_preview_then_delete_push_pull_with_jump (test_native_ssh.NativeSSHTests.test_real_preview_then_delete_push_pull_with_jump)
+Preview leaves both trees unchanged; the following real run deletes. ... ok
+test_real_success (test_native_ssh.NativeSSHTests.test_real_success) ... ok
+test_real_timeout (test_native_ssh.NativeSSHTests.test_real_timeout) ... ok
+test_real_timeout_preserves_output_received_before_injected_deadline (test_native_ssh.NativeSSHTests.test_real_timeout_preserves_output_received_before_injected_deadline) ... ok
+test_real_timeout_without_optional_native_connector (test_native_ssh.NativeSSHTests.test_real_timeout_without_optional_native_connector) ... ok
+test_real_transfer_rsync_with_jump (test_native_ssh.NativeSSHTests.test_real_transfer_rsync_with_jump) ... ok
+test_real_transfer_sftp_with_jump (test_native_ssh.NativeSSHTests.test_real_transfer_sftp_with_jump) ... ok
+test_real_unknown_key (test_native_ssh.NativeSSHTests.test_real_unknown_key) ... ok
+test_real_verified_rsync_push_pull_with_jump (test_native_ssh.NativeSSHTests.test_real_verified_rsync_push_pull_with_jump) ... ok
+test_real_verified_sftp_push_pull_with_jump (test_native_ssh.NativeSSHTests.test_real_verified_sftp_push_pull_with_jump) ... ok
+test_remote_pty_is_opt_in_and_merges_streams (test_native_ssh.NativeSSHTests.test_remote_pty_is_opt_in_and_merges_streams) ... ok
+test_reusable_session_and_no_fallback_after_master_loss (test_native_ssh.NativeSSHTests.test_reusable_session_and_no_fallback_after_master_loss) ... ok
+test_scoped_binary_channel_over_authenticated_ssh (test_native_ssh.NativeSSHTests.test_scoped_binary_channel_over_authenticated_ssh) ... ok
+test_session_lifetime_includes_deliberately_slow_authentication_setup (test_native_ssh.NativeSSHTests.test_session_lifetime_includes_deliberately_slow_authentication_setup) ... ok
+test_session_socket_loss_lifetime_and_cancellation (test_native_ssh.NativeSSHTests.test_session_socket_loss_lifetime_and_cancellation) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 113.090s
+
+OK
+{"status": "executed", "expected": 32, "run": 32, "skipped": 0, "errors": 0, "failures": 0}

@@ -1,0 +1,44 @@
+name: Diagnose authenticated macOS rsync
+on:
+  push:
+    branches: [diagnostics/c143-macos-rsync]
+permissions:
+  contents: read
+jobs:
+  macos-native-prerequisite-diagnostic:
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - name: Build the unchanged approved prerequisite with explicit libidn2 headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          task_dir=$(mktemp -d "$RUNNER_TEMP/swassh-native-diagnostic.XXXXXX")
+          cd "$task_dir"
+          # These are the exact two previously approved C142 files, not a new
+          # application checkout. This isolated diagnostic grants no release.
+          for file in ci_rsync.sh rsync-release-key.asc; do
+            curl --disable --fail --silent --show-error --location --proto '=https' --proto-redir '=https' \
+              --connect-timeout 10 --max-time 60 --max-filesize 65536 --output "$file" \
+              "https://raw.githubusercontent.com/irivengroup/swassh/b8144d59cf5ee738961f69e9923eb363c2a96dde/scripts/$file"
+          done
+          test "$(shasum -a 256 ci_rsync.sh | cut -d' ' -f1)" = 4dbec8f8c746891ca88d3f6cf16d8f48538c687ea18b2670fb5aa8f6ebd7ed20
+          test "$(shasum -a 256 rsync-release-key.asc | cut -d' ' -f1)" = 23894377787e607d0620bbaba69d5f6f8dbc6d83e4b099d5eebdf1f327d6c240
+          for formula in gnupg libidn2; do
+            if ! brew list --versions "$formula"; then brew install "$formula"; fi
+          done
+          idn_prefix=$(brew --prefix libidn2)
+          test -f "$idn_prefix/include/idn2.h"
+          export CPPFLAGS="-I$idn_prefix/include${CPPFLAGS:+ $CPPFLAGS}"
+          export LDFLAGS="-L$idn_prefix/lib${LDFLAGS:+ $LDFLAGS}"
+          bash ci_rsync.sh
+      - name: Exercise protected arguments and a binary local transfer
+        shell: bash
+        run: |
+          set -euo pipefail
+          /usr/local/bin/rsync --version
+          task_dir=$(mktemp -d "$RUNNER_TEMP/swassh-native-transfer.XXXXXX")
+          mkdir "$task_dir/from folder" "$task_dir/to folder"
+          printf '\000\377binary\n' > "$task_dir/from folder/file with spaces"
+          /usr/local/bin/rsync --protect-args --checksum --archive -- "$task_dir/from folder/" "$task_dir/to folder/"
+          cmp "$task_dir/from folder/file with spaces" "$task_dir/to folder/file with spaces"

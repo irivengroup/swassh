@@ -1,0 +1,54 @@
+{
+  "source_archive_sha256": "c4e1451d07b67aa19cdb7929a48be7fe2dce8ff8a4cee712d7643ec043b4540b",
+  "changed_files": [
+    ".github/workflows/ci.yml",
+    "VALIDATION.md",
+    "tests/test_ci_contracts.py"
+  ],
+  "unchanged_files": 334,
+  "all_100_runtime_modules_unchanged": true,
+  "all_existing_test_ASTs_identical": true,
+  "new_tests": 3,
+  "old_workflow_restored_byte_identical_by_removing_single_new_step": true,
+  "all_actions_matrix_commands_timeouts_and_security_controls_unchanged": true,
+  "qualification_controllers": [
+    {
+      "name": "qualify_windows.py",
+      "before_sha256": "447c5b54d6b9598b4355a9baa6e260d2e6e5a8a794a1e5398e58d9fad8e9ab6c",
+      "after_sha256": "eaff712d5555e7fb2b73f45c427859d9d44da7aa3c1548403abae2d743b760ad",
+      "only_identity_binding_changed": true
+    },
+    {
+      "name": "qualify_linux.py",
+      "before_sha256": "8f4b0b32213238c22507002ef63b3caab3686cdce601fab0133c6dc8edf89b8a",
+      "after_sha256": "d40a8e49aef49f3cc9d19ef2b7677c3e32eef8255764fb266010631757768444",
+      "only_identity_binding_changed": true
+    },
+    {
+      "name": "scan_linux.py",
+      "before_sha256": "c60c61ca1a453517ac06893f63bd216781d09561777cbc016921292cd95da8c2",
+      "after_sha256": "6bd516f646719ad95274b4e1ad302264a7ca98ba6a6a93a8dd6b56f7ddf6a2e2",
+      "only_identity_binding_changed": true
+    },
+    {
+      "name": "check_measurements.py",
+      "before_sha256": "28f140432d8f925933d1c185d3055af4195a57c631fed7ba57cf1672c7b819a8",
+      "after_sha256": "97ba11b5334687fdd2c9b781bb8fb4b4f8c85e7846529a4df8a53d23eae4dae6",
+      "only_identity_binding_changed": true
+    },
+    {
+      "name": "verify_source_archive.py",
+      "before_sha256": "74e9444f482c36da81b10ef12bbdf6d611502edb6b758865931e4fba8988dcb6",
+      "after_sha256": "1eb40c6704f06056d99ccfbf770807c5776d58548f415b6bd2fff364ccb070f3",
+      "only_identity_binding_changed": true
+    },
+    {
+      "name": "qualify_benchmark.py",
+      "before_sha256": "b36f34c8923339a324b42fcdf1ce798b6ee18093c50e987c652bd04a55f52894",
+      "after_sha256": "abfbaf886339f9842702ba157a1d4bd92b7896bea480471118feb0f9f4a36a1c",
+      "only_identity_binding_changed": true
+    }
+  ],
+  "all_controller_checks_and_deadlines_preserved": true,
+  "publication_authorized": false
+}

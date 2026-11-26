@@ -1,0 +1,96 @@
+{
+  "run_id": 45691408399,
+  "source_commit": "65f82c0cf0b638461760d4fabed27f9e0f070c64",
+  "approved_review_commit": "6b97c88d347fbda5178a3bd825d8fddf196cd200",
+  "jobs": [
+    {
+      "name": "security",
+      "id": 139477522755,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (ubuntu-24.04, 3.13)",
+      "id": 139477801578,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (ubuntu-24.04, 3.11)",
+      "id": 139477801617,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (windows-latest, 3.14)",
+      "id": 139477801634,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (windows-latest, 3.12)",
+      "id": 139477801682,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (windows-latest, 3.13)",
+      "id": 139477801689,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (macos-latest, 3.11)",
+      "id": 139477801690,
+      "conclusion": "failure",
+      "failed_steps": [
+        "Run python scripts/coverage.py"
+      ]
+    },
+    {
+      "name": "quality (ubuntu-24.04, 3.14)",
+      "id": 139477801702,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (ubuntu-24.04, 3.12)",
+      "id": 139477801732,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (windows-latest, 3.11)",
+      "id": 139477801750,
+      "conclusion": "success",
+      "failed_steps": []
+    },
+    {
+      "name": "quality (macos-latest, 3.12)",
+      "id": 139477801794,
+      "conclusion": "failure",
+      "failed_steps": [
+        "Run python scripts/coverage.py"
+      ]
+    },
+    {
+      "name": "quality (macos-latest, 3.14)",
+      "id": 139477802127,
+      "conclusion": "failure",
+      "failed_steps": [
+        "Run python scripts/coverage.py"
+      ]
+    },
+    {
+      "name": "quality (macos-latest, 3.13)",
+      "id": 139477802241,
+      "conclusion": "failure",
+      "failed_steps": [
+        "Standard-library QA and DDD dependency boundaries"
+      ]
+    }
+  ],
+  "passed": 9,
+  "failed": 4,
+  "publication_authorized": false
+}

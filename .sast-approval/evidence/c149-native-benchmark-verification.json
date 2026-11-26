@@ -1,0 +1,13 @@
+{
+  "source_commit": "5b125ca1b472bf6e87c75ea0fe60f0f9ab6f8e5b",
+  "native_run": 45713536083,
+  "archive_sha256": "5993ea4e1e981383280295d8a50f91ef6964f9f77b052c0369254175fb6bf383",
+  "artifact_sha256": "de8107a02b21e77bf5d4c1691bb1e36e32e1edc8d02d5a93c61afdb78d9f49cd",
+  "fresh_original_processes": 20,
+  "observed_original_runs": 10,
+  "failures": 0,
+  "unchanged_original_assertions": true,
+  "source_files_checked": 337,
+  "source_unchanged": true,
+  "publication_authorized": false
+}

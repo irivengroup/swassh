@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "c4e1451d07b67aa19cdb7929a48be7fe2dce8ff8a4cee712d7643ec043b4540b",
+  "maintained_files": 337,
+  "zip_crc_and_each_file_sha_verified": true,
+  "classic_python_package_structure": true,
+  "generated_cache_logs_environment_or_secret_files_in_inventory": false,
+  "repeated_build_byte_identical": true,
+  "publication_authorized": false
+}

@@ -1,0 +1,8 @@
+{
+  "command": "python -B -m unittest discover -s tests -p test_process_guard_contracts.py -v",
+  "environment": "restricted Windows execution without full CI object-owner prelude",
+  "observation": "No completion observed after several minutes, at first async launch case; interrupted with Ctrl+C, exit code 1",
+  "status": "interrupted, not a successful validation",
+  "source_changed": false,
+  "next": "Run the complete unchanged gates with the recorded CI prelude and normal authorized local execution; retain this interruption"
+}

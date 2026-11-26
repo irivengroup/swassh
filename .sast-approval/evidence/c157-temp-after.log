@@ -1,0 +1,8 @@
+test_windows_temp_placement_precedes_every_quality_command_with_same_budget (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_placement_precedes_every_quality_command_with_same_budget) ... ok
+test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values) ... ok
+test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 4.965s
+
+OK

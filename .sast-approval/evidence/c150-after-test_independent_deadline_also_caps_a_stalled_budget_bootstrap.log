@@ -1,0 +1,7 @@
+test_independent_deadline_also_caps_a_stalled_budget_bootstrap (relay_after.RelayIntegrationTests.test_independent_deadline_also_caps_a_stalled_budget_bootstrap)
+Preparation of a fixture must never defer the producer's hard timer. ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.805s
+
+OK

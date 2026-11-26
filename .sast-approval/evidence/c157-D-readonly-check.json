@@ -1,0 +1,9 @@
+{
+  "observed_at_utc": "2026-11-26T07:06:03Z",
+  "path": "D:/PROJECTS/LABS/SwarmSsh/sources",
+  "git_head": "8c568dc6b17b983bf2fdd171da0e9ce9ca4acb16",
+  "git_status_porcelain": "",
+  "tracked_worktree_clean": true,
+  "publication_performed": false,
+  "manifest_analysis_proof": "evidence/cycle156/D-predecessor-verification.json"
+}

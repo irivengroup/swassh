@@ -1,0 +1,6 @@
+test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_regression_c148.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

@@ -1,0 +1,16 @@
+{
+  "source_commit": "5ee5b56572e9fc92d64bc1f3447a93678bd18bfd",
+  "native_driver_sha256": "77d26e6e748a6b10acc6e264ca9f8490d4ad4861d07e4aa4e865d357dd2ef881",
+  "production_code_modified": false,
+  "sqlite_journal_and_locking_modes_unchanged": true,
+  "synchronous_FULL_preserved": true,
+  "operations_per_store": 1000,
+  "batch_limit": 14,
+  "repeats": 3,
+  "fresh_stores": 6,
+  "independent_variable": "Default temporary volume versus already allocated workspace parent volume",
+  "same_runner_runtime_and_assertions": true,
+  "no_real_equipment": true,
+  "no_drive_configuration_or_security_policy_changes": true,
+  "publication_authorized": false
+}

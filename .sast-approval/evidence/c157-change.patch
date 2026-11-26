@@ -1,0 +1,143 @@
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -30,6 +30,16 @@
+       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+         with:
+           python-version: ${{ matrix.python }}
++      - name: Use allocated ephemeral storage for Windows QA
++        if: runner.os == 'Windows'
++        shell: pwsh
++        run: |
++          if ([string]::IsNullOrWhiteSpace($env:RUNNER_TEMP) -or $env:RUNNER_TEMP.Contains("`n") -or $env:RUNNER_TEMP.Contains("`r") -or -not [IO.Path]::IsPathFullyQualified($env:RUNNER_TEMP)) { throw 'Invalid allocated QA temporary directory' }
++          if (-not (Test-Path -LiteralPath $env:RUNNER_TEMP -PathType Container)) { throw 'Allocated QA temporary directory is missing' }
++          if ((Get-Item -LiteralPath $env:RUNNER_TEMP -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Allocated QA temporary directory must not be a reparse point' }
++          foreach ($name in @('TMPDIR', 'TEMP', 'TMP')) {
++            Add-Content -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Value "$name=$env:RUNNER_TEMP" -ErrorAction Stop
++          }
+       - name: Signed native OpenSSH and rsync integration prerequisites
+         if: runner.os == 'Linux'
+         shell: bash
+--- a/VALIDATION.md
++++ b/VALIDATION.md
+@@ -1,4 +1,36 @@
+ # Protocole et historique de validation SWASSH 2.0.1
++
++## Stockage temporaire de la QA Windows
++
++La campagne C155 conserve un refus : le push Windows/Python 3.12 a été annulé
++pendant la couverture, près de la limite de trente minutes, après réussite
++des 1 375 tests généraux. Le succès des treize jobs de la PR ne remplace pas
++cette campagne interrompue. Le test de 50 000 hôtes a pris 1 083,3731596 s
++dans ce push ; des runners différents ne permettent pas d'attribuer seuls
++cette différence à une cause précise.
++
++Un profil natif séparé de ce test original attribue 470,431 s sur 514,5165641 s
++aux validations de transactions SQLite. Sur un même runner, trois paires de
++1 000 résultats, dans un ordre alterné, mesurent 4,96 à 5,03 s dans le dossier
++temporaire par défaut sur C:, contre 0,90 à 0,95 s sur le volume de travail D:.
++Les mêmes transactions, données, synchronisations FULL, limites, contrôles
++d'intégrité et assertions sont conservés. Ce microbenchmark instrumenté ne
++constitue ni une mesure SSH réelle ni une garantie de performance générale.
++
++La CI Windows utilise désormais son répertoire éphémère alloué RUNNER_TEMP
++pour TMPDIR, TEMP et TMP, avant les commandes de qualité. Une valeur absente,
++relative, contenant un saut de ligne, inexistante ou de type reparse point
++est refusée. Les tests exécutent le vrai corps PowerShell et vérifient les
++exports ainsi que le refus avant écriture pour les entrées invalides.
++Les sources de production, les réglages SQLite, les règles de sécurité,
++les charges, les assertions existantes, les cinq instruments de couverture,
++leurs seuils et la limite de trente minutes restent inchangés.
++
++La publication exige toujours les cinq couvertures à 98 % minimum avant
++arrondi, par module et globalement, la recette complète et une revue détachée
++approuvée des octets exacts. Les mesures complètes, reçus et comparaisons
++avant/après sont conservés hors des sources ; une expérience favorable ou un
++rapport de couverture suffisant ne remplace aucun contrôle obligatoire.
+ 
+ ## Refus de disponibilité du planificateur sous Windows 3.12
+ 
+--- a/tests/test_ci_contracts.py
++++ b/tests/test_ci_contracts.py
+@@ -80,6 +80,82 @@
+                         unittest.TestSuite([NamedCase(self.verify.ISOLATED_CASE), NamedCase(self.verify.ISOLATED_CASE)])):
+             with self.subTest(size=invalid.countTestCases()), self.assertRaisesRegex(ValueError, 'incomplete or ambiguous'):
+                 self.verify.isolated_run(invalid)
++
++
++class WindowsTemporaryStorageContracts(unittest.TestCase):
++    """Exercise actual CI placement, retaining workload and failure boundaries."""
++
++    def _windows_temp_step(self):
++        """Read the actual CI body, rather than duplicating its PowerShell logic."""
++        lines = (ROOT / '.github/workflows/ci.yml').read_text(encoding='utf-8').splitlines()
++        start = lines.index('  quality:') + 1
++        end = next((i for i in range(start, len(lines))
++                    if re.fullmatch(r'  [A-Za-z_][A-Za-z_0-9-]*:', lines[i])), len(lines))
++        quality = lines[start:end]
++        marker = '      - name: Use allocated ephemeral storage for Windows QA'
++        self.assertEqual(quality.count(marker), 1)
++        first = quality.index(marker)
++        finish = next((i for i in range(first + 1, len(quality))
++                       if quality[i].startswith('      - ')), len(quality))
++        step = quality[first:finish]
++        body = step.index('        run: |') + 1
++        return quality, first, step, '\n'.join(line[10:] for line in step[body:]) + '\n'
++
++    def test_windows_temp_placement_precedes_every_quality_command_with_same_budget(self):
++        quality, position, step, body = self._windows_temp_step()
++        self.assertIn('    timeout-minutes: 30', quality)
++        self.assertIn("        if: runner.os == 'Windows'", step)
++        self.assertIn('        shell: pwsh', step)
++        self.assertNotIn('continue-on-error:', '\n'.join(step))
++        for command in ('python scripts/verify.py', 'python scripts/coverage.py',
++                        'python benchmarks/core.py', 'python scripts/build.py',
++                        'python scripts/validate_installation.py', 'python scripts/package.py'):
++            self.assertLess(position, next(i for i, line in enumerate(quality) if command in line))
++        self.assertIn("@('TMPDIR', 'TEMP', 'TMP')", body)
++
++    def _exercise_temp_step(self, directory, runner_temp):
++        """Execute the extracted CI step through the real strict Windows shell."""
++        _, _, _, body = self._windows_temp_step()
++        script = directory / 'temp-step.ps1'
++        script.write_text(body, encoding='utf-8')
++        exports = directory / 'github-env'
++        exports.write_text('OPERATOR_SENTINEL=retained\n', encoding='utf-8')
++        shell = runpy.run_path(str(ROOT / 'scripts/ci_shell.py'))['ShellRunner']()
++        with patch.dict(os.environ, RUNNER_TEMP=str(runner_temp), GITHUB_ENV=str(exports)):
++            code = shell.run(script)
++        return code, exports.read_text(encoding='utf-8')
++
++    @unittest.skipUnless(os.name == 'nt', 'Windows CI environment contract')
++    def test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values(self):
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary)
++            allocated = root / 'allocated space'
++            allocated.mkdir()
++            previous = {name: os.environ.get(name) for name in ('TMPDIR', 'TEMP', 'TMP')}
++            code, exported = self._exercise_temp_step(root, allocated)
++            self.assertEqual(code, 0)
++            self.assertEqual(exported.splitlines(), ['OPERATOR_SENTINEL=retained',
++                'TMPDIR=' + str(allocated), 'TEMP=' + str(allocated), 'TMP=' + str(allocated)])
++            self.assertEqual({name: os.environ.get(name) for name in previous}, previous)
++
++    @unittest.skipUnless(os.name == 'nt', 'Windows CI environment contract')
++    def test_windows_temp_step_refuses_invalid_location_before_writing_exports(self):
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary)
++            target, junction = root / 'junction target', root / 'junction'
++            target.mkdir()
++            create = root / 'create-junction.ps1'
++            create.write_text('New-Item -ItemType Junction -Path $env:SWASSH_QA_LINK '
++                              '-Target $env:SWASSH_QA_TARGET -ErrorAction Stop | Out-Null\n', encoding='utf-8')
++            shell = runpy.run_path(str(ROOT / 'scripts/ci_shell.py'))['ShellRunner']()
++            with patch.dict(os.environ, SWASSH_QA_LINK=str(junction), SWASSH_QA_TARGET=str(target)):
++                self.assertEqual(shell.run(create), 0)
++            self.assertTrue(junction.is_dir())
++            for location in (root / 'missing', 'relative-location', '', str(root) + '\n', junction):
++                with self.subTest(location=repr(location)):
++                    code, exported = self._exercise_temp_step(root, location)
++                    self.assertNotEqual(code, 0)
++                    self.assertEqual(exported, 'OPERATOR_SENTINEL=retained\n')
+ 
+ 
+ class CoverageWorkflowContracts(unittest.TestCase):

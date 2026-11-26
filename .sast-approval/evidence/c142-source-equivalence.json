@@ -1,0 +1,11 @@
+{
+  "before_archive_sha256": "5f4d16f9308a3e1ea85662584065b55240d275a87073105936df740bc8970742",
+  "after_archive_sha256": "cd62fc41286afbc4f3cfe302940dae63ad74d15c6c7ea5c94254549b43beabaf",
+  "changed": [
+    ".github/workflows/ci.yml"
+  ],
+  "all_production_modules_byte_identical": true,
+  "all_tests_byte_identical": true,
+  "all_scripts_byte_identical": true,
+  "reason": "Retain the five-metric/raw-Python JSON from every CI matrix cell, including failures; no gate or command is removed or ignored."
+}

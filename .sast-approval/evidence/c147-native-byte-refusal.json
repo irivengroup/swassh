@@ -1,0 +1,14 @@
+{
+  "failed_diagnostic_run": 45702488501,
+  "failed_job": 139515913593,
+  "phase": "driver SHA-256 verification, before any native test",
+  "native_tests_executed": 0,
+  "original_frozen_reference_sha256": "be5fcd7bc144fe498a18ce28acdd7afa36d73a847098478d49715cea054bf546",
+  "transferred_lf_sha256": "536b4377fc634011b72a07d690b7d548b77ca7f7b9d3b1998f364405c0f48024",
+  "remote_git_blob_sha": "fbedfe205276e4dae422923eaa2c34f030ac2ba0",
+  "cause": "Preparation serialized the LF text while pinning the original CRLF byte hash.",
+  "correction": "Restore the exact originally frozen bytes; keep the expected SHA and every assertion unchanged.",
+  "application_sources_and_review_unchanged": true,
+  "expected_checksum_changed": false,
+  "failure_log": "native-after-job.json"
+}

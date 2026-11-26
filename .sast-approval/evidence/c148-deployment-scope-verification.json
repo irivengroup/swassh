@@ -1,0 +1,12 @@
+{
+  "file": "scripts/validate_deployment.py",
+  "before_sha256": "bb99e57bccdada5ac5f787009b7d4b3c16447bfba07a36225ef757ab4fe0d8a9",
+  "after_sha256": "231c2c0cb34e886ac2890b5a2de1ac8120618f3220d178879863d8fc1791c3d4",
+  "only_runtime_ast_change": "Canonicalize the newly created owned temporary root with strict=True",
+  "all_existing_shell_version_profile_failure_and_idempotence_oracles_unchanged": true,
+  "existing_test_methods_preserved": 9,
+  "new_test_methods": [
+    "DeploymentAliasIntegrationTests/test_posix_temporary_alias_retains_exact_installed_shell_and_profile_contracts"
+  ],
+  "real_before_after_proof": "deployment-regression/before-after.json"
+}

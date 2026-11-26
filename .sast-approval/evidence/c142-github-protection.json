@@ -1,0 +1,31 @@
+{
+  "repository": "irivengroup/swassh",
+  "rule_id": 86892776,
+  "pattern": "main",
+  "require_pull_request": true,
+  "required_status_checks": [
+    "security",
+    "quality (macos-latest, 3.11)",
+    "quality (macos-latest, 3.12)",
+    "quality (macos-latest, 3.13)",
+    "quality (macos-latest, 3.14)",
+    "quality (ubuntu-24.04, 3.11)",
+    "quality (ubuntu-24.04, 3.12)",
+    "quality (ubuntu-24.04, 3.13)",
+    "quality (ubuntu-24.04, 3.14)",
+    "quality (windows-latest, 3.11)",
+    "quality (windows-latest, 3.12)",
+    "quality (windows-latest, 3.13)",
+    "quality (windows-latest, 3.14)"
+  ],
+  "status_check_app": "GitHub Actions",
+  "strict_up_to_date": true,
+  "enforce_admins": true,
+  "conversation_resolution": true,
+  "force_push": false,
+  "deletions": false,
+  "confirmation": "Branch protection rule settings saved.",
+  "readback": "Reopened rule 86892776 and read all 13 saved context names and GitHub Actions association.",
+  "authority_boundary": "Repository administrator remains the trust root; no resistance to owner rewriting workflow/settings/variables is claimed.",
+  "geometry_rejection": "A coordinate submission was rejected by automatic approval review; a fresh paired AX/screenshot verified the Save changes control and its semantic index. The semantic control submission succeeded and persistence was read back."
+}

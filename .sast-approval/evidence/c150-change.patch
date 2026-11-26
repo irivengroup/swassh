@@ -1,0 +1,160 @@
+--- a/VALIDATION.md
++++ b/VALIDATION.md
+@@ -1,4 +1,29 @@
+ # Protocole et historique de validation SWASSH 2.0.1
++
++## Relais ouvert et initialisation lente sous Windows
++
++La CI C149 a refusé deux tests de relais sous Windows 3.12 et 3.13. Leur
++attente d'une connexion établie mélangeait la préparation SQLite avec la phase
++inactive de 0,5 seconde. Un ralentissement déterministe de 0,75 seconde reproduit
++ce refus sur les sources conservées : le véritable gardien arrête correctement
++le processus avec le code 124 avant toute connexion. Le journal CI initial ne
++contient pas ce code de sortie ; cette reproduction ne permet pas de le déduire.
++
++Le seul scénario « relais déjà ouvert » prépare désormais dans son processus
++enfant un véritable SQLiteByteBudget, avec ses vérifications de fichiers, de
++politique et de schéma. Il exige la politique déjà créée par le gardien et remet
++ce même adaptateur au point d'entrée inchangé. Les attentes de connexion et de
++sortie restent à quatre secondes ; le délai de production reste à 0,5 seconde.
++La préparation ne remplace ni l'horloge, ni les transactions, ni le réseau réel
++de boucle locale. Une spécification différente ou une politique absente est refusée.
++
++Les scénarios d'initialisation froide utilisent toujours le point d'entrée réel
++sans adaptation. Le refus d'une préparation bloquée pendant 30 secondes est
++conservé ; un nouveau cas exige aussi le code 124, sans sortie ni connexion,
++quand l'adaptateur réel prend 0,75 seconde. Les contrôles et instruments de
++couverture ainsi que tous les fichiers de production restent identiques à C148.
++La nouvelle candidate exige une qualification et une revue SAST des octets exacts
++avant approbation, CI complète et publication.
+ 
+ ## Correctif CI et portabilité 2.0.1 — conditions d'admission
+ 
+--- a/tests/test_bandwidth.py
++++ b/tests/test_bandwidth.py
+@@ -270,12 +270,37 @@
+             if process.poll() is None: process.kill()
+             process.communicate(timeout=5)
+ 
+-    def launch(self,port,*,lifetime=10):
++    @staticmethod
++    def _prepared_budget_program():
++        """Prepare a real adapter before the idle-open phase, without a fake clock."""
++        return """import sys
++from pathlib import Path
++from swassh.infrastructure import tcp_proxy
++args=tcp_proxy._arguments(sys.argv[1:])
++spec={'directory':args.budget_root,'policy':[
++    args.connections,args.connect_rate,args.memory_bytes,args.bandwidth_kib]}
++if not (Path(spec['directory'])/'budget.sqlite3').is_file():
++    raise ValueError('idle fixture requires the guardian-prepared policy')
++prepared=tcp_proxy.SQLiteByteBudget(spec)
++def prepared_budget(requested):
++    if requested!=spec:
++        raise ValueError('idle fixture budget specification changed')
++    return prepared
++tcp_proxy.SQLiteByteBudget=prepared_budget
++raise SystemExit(tcp_proxy.main())
++"""
++
++    def launch(self,port,*,lifetime=10,prepared_budget=False):
+         spec=specification(self.options)
+         args=[sys.executable,'-m','swassh.infrastructure.tcp_proxy','--host','127.0.0.1','--port',str(port),
+             '--budget-root',spec['directory'],'--connections',str(spec['policy'][0]),'--connect-rate',str(spec['policy'][1]),
+             '--memory-bytes',str(spec['policy'][2]),'--bandwidth-kib',str(spec['policy'][3]),
+             '--connect-timeout','2','--lifetime',str(lifetime)]
++        if prepared_budget:
++            # The test below observes an already-open idle relay. Real adapter
++            # construction belongs to its fixture, while the separate cold and
++            # stalled bootstrap cases retain the original producer-wide timer.
++            args=[sys.executable,'-c',self._prepared_budget_program(),*args[3:]]
+         process=subprocess.Popen(args,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+         self.children.append(process)
+         return process
+@@ -312,7 +337,7 @@
+     def test_independent_deadline_stops_an_idle_open_relay(self):
+         server=EchoServer(1)
+         try:
+-            peer=self.launch(server.port,lifetime=0.5)
++            peer=self.launch(server.port,lifetime=0.5,prepared_budget=True)
+             self.assertTrue(server.ready.wait(4))
+             self.assertEqual(peer.wait(timeout=4),124)
+         finally: server.close()
+@@ -447,7 +472,7 @@
+ 
+ 
+     def _delayed_budget_child(self, mode):
+-        """Delay only the child's cold policy creation, or every bootstrap."""
++        """Delay cold policy creation, every bootstrap, or the real byte adapter."""
+         create = subprocess.Popen
+         program = """import sys,time
+ from pathlib import Path
+@@ -460,11 +485,23 @@
+             time.sleep(30 if mode=='stall' else 0.75)
+         super().__init__(spec)
+ bandwidth.SharedBudget=DelayedBudget
++if mode=='bytes':
++    original_bytes=tcp_proxy.SQLiteByteBudget
++    class DelayedByteBudget(original_bytes):
++        def __init__(self,spec):
++            time.sleep(0.75)
++            super().__init__(spec)
++    tcp_proxy.SQLiteByteBudget=DelayedByteBudget
+ raise SystemExit(tcp_proxy.main())
+ """
+         def launch(arguments, *args, **kwargs):
+             if arguments[:3] == [sys.executable, '-m', 'swassh.infrastructure.tcp_proxy']:
+                 arguments = [sys.executable, '-c', program, mode, *arguments[3:]]
++            elif arguments[:2] == [sys.executable, '-c'] and arguments[2] == self._prepared_budget_program():
++                # Apply the identical dependency fault before the prepared
++                # adapter, rather than silently bypassing this child fixture.
++                prefix=program.removesuffix('raise SystemExit(tcp_proxy.main())\n')
++                arguments = [sys.executable, '-c', prefix+arguments[2], mode, *arguments[3:]]
+             return create(arguments, *args, **kwargs)
+         return patch.object(subprocess, 'Popen', side_effect=launch)
+ 
+@@ -472,6 +509,44 @@
+         """An idle-open test needs the policy the real guardian prepares first."""
+         with self._delayed_budget_child('cold'):
+             self.test_independent_deadline_stops_an_idle_open_relay()
++
++    def test_idle_deadline_is_independent_of_slow_byte_adapter_preparation(self):
++        """A 0.75-second real adapter setup cannot consume the 0.5-second idle phase."""
++        with self._delayed_budget_child('bytes'):
++            self.test_independent_deadline_stops_an_idle_open_relay()
++
++    def test_idle_fixture_refuses_a_missing_guardian_policy(self):
++        """Idle preparation must not manufacture the policy its guardian owns."""
++        (Path(specification(self.options)['directory'])/'budget.sqlite3').unlink()
++        with socket.socket() as server:
++            server.bind(('127.0.0.1',0))
++            server.listen(1)
++            peer=self.launch(server.getsockname()[1],lifetime=0.5,prepared_budget=True)
++            output,error=peer.communicate(timeout=4)
++            self.assertNotEqual(peer.returncode,0)
++            self.assertEqual(output,b'')
++            self.assertIn(b'idle fixture requires the guardian-prepared policy',error)
++            server.settimeout(0.1)
++            with self.assertRaises(socket.timeout):
++                server.accept()
++
++    def test_independent_deadline_also_caps_slow_byte_adapter_bootstrap(self):
++        """The real cold entry point retains its timer before adapter creation."""
++        with socket.socket() as server:
++            server.bind(('127.0.0.1',0))
++            server.listen(1)
++            with self._delayed_budget_child('bytes'):
++                peer=self.launch(server.getsockname()[1],lifetime=0.5)
++            try:
++                output,error=peer.communicate(timeout=4)
++            except subprocess.TimeoutExpired:
++                self.fail('the unchanged relay lifetime did not stop byte adapter initialization')
++            self.assertEqual(peer.returncode,124)
++            self.assertEqual(output,b'')
++            self.assertEqual(error,b'')
++            server.settimeout(0.1)
++            with self.assertRaises(socket.timeout):
++                server.accept()
+ 
+     def test_independent_deadline_also_caps_a_stalled_budget_bootstrap(self):
+         """Preparation of a fixture must never defer the producer's hard timer."""

@@ -1,0 +1,24 @@
+test_preview_fixture_parent_times_do_not_depend_on_creation_latency (test_improvements.TransferImprovementTests.test_preview_fixture_parent_times_do_not_depend_on_creation_latency)
+Cross-second directory creation must not change the nominal file count. ... FAIL
+
+======================================================================
+FAIL: test_preview_fixture_parent_times_do_not_depend_on_creation_latency (test_improvements.TransferImprovementTests.test_preview_fixture_parent_times_do_not_depend_on_creation_latency)
+Cross-second directory creation must not change the nominal file count.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/swassh-2.0.1/tests/test_improvements.py", line 854, in test_preview_fixture_parent_times_do_not_depend_on_creation_latency
+    await self.test_real_rsync_preview_readonly_add_change_delete()
+  File "/mnt/c/Users/IRIVEN Group/Documents/ChatGPT/SWASSH/evidence/cycle154/before/tests/test_improvements.py", line 827, in test_real_rsync_preview_readonly_add_change_delete
+    self.assertIn('changed=1', result.stdout)
+AssertionError: 'changed=1' not found in 'preview only: added=1 changed=2 deleted=1'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.777s
+
+FAILED (failures=1)

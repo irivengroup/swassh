@@ -1,0 +1,36 @@
+test_permission_race_requires_kernel_absence_before_original_deadline (test_process_guard_contracts.GuardianGroupAbsenceTests.test_permission_race_requires_kernel_absence_before_original_deadline) ... 
+  test_permission_race_requires_kernel_absence_before_original_deadline (test_process_guard_contracts.GuardianGroupAbsenceTests.test_permission_race_requires_kernel_absence_before_original_deadline) (signal=<Signals.SIGTERM: 15>) ... ERROR
+  test_permission_race_requires_kernel_absence_before_original_deadline (test_process_guard_contracts.GuardianGroupAbsenceTests.test_permission_race_requires_kernel_absence_before_original_deadline) (signal=9) ... ERROR
+
+======================================================================
+ERROR: test_permission_race_requires_kernel_absence_before_original_deadline (test_process_guard_contracts.GuardianGroupAbsenceTests.test_permission_race_requires_kernel_absence_before_original_deadline) (signal=<Signals.SIGTERM: 15>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle146\candidate\swassh-2.0.1\tests\test_process_guard_contracts.py", line 131, in test_permission_race_requires_kernel_absence_before_original_deadline
+    guard._stop_native(case.process)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle146\before\process_guard.py", line 149, in _stop_native
+    os.killpg(process.pid, sig)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle146\candidate\swassh-2.0.1\tests\test_process_guard_contracts.py", line 92, in killpg
+    raise denial
+PermissionError: [Errno 1] synthetic group permission denied
+
+======================================================================
+ERROR: test_permission_race_requires_kernel_absence_before_original_deadline (test_process_guard_contracts.GuardianGroupAbsenceTests.test_permission_race_requires_kernel_absence_before_original_deadline) (signal=9)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle146\candidate\swassh-2.0.1\tests\test_process_guard_contracts.py", line 131, in test_permission_race_requires_kernel_absence_before_original_deadline
+    guard._stop_native(case.process)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle146\before\process_guard.py", line 149, in _stop_native
+    os.killpg(process.pid, sig)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle146\candidate\swassh-2.0.1\tests\test_process_guard_contracts.py", line 92, in killpg
+    raise denial
+PermissionError: [Errno 1] synthetic group permission denied
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (errors=2)

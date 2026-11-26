@@ -1,0 +1,52 @@
+test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_regression_c148.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) ... 
+  test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_regression_c148.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=False) ... ERROR
+  test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_regression_c148.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=True) ... ERROR
+
+======================================================================
+ERROR: test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_regression_c148.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 56, in test_concurrent_creator_and_existing_opener_avoid_observed_enoent
+    self.assertEqual(self.directory.open('budget.sqlite3', self.flags), 61)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle148\before\filesystem.py", line 229, in open
+    return os.open(name, flags, mode, dir_fd=self.fd)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1247, in _execute_mock_call
+    result = effect(*args, **kwargs)
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 50, in operation
+    raise FileNotFoundError(errno.ENOENT, 'observed concurrent openat creation failure', name)
+FileNotFoundError: [Errno 2] observed concurrent openat creation failure: 'budget.sqlite3'
+
+======================================================================
+ERROR: test_concurrent_creator_and_existing_opener_avoid_observed_enoent (filesystem_regression_c148.DarwinCreationContractTests.test_concurrent_creator_and_existing_opener_avoid_observed_enoent) (existing=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 56, in test_concurrent_creator_and_existing_opener_avoid_observed_enoent
+    self.assertEqual(self.directory.open('budget.sqlite3', self.flags), 61)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle148\before\filesystem.py", line 229, in open
+    return os.open(name, flags, mode, dir_fd=self.fd)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\unittest\mock.py", line 1247, in _execute_mock_call
+    result = effect(*args, **kwargs)
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle148\candidate\swassh-2.0.1\tests\test_filesystem_contracts.py", line 50, in operation
+    raise FileNotFoundError(errno.ENOENT, 'observed concurrent openat creation failure', name)
+FileNotFoundError: [Errno 2] observed concurrent openat creation failure: 'budget.sqlite3'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.009s
+
+FAILED (errors=2)

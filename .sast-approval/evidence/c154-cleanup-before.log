@@ -1,0 +1,23 @@
+test_terminal_readiness_timeout_joins_service_before_fixture_cleanup (test_scheduling.WorkerTests.test_terminal_readiness_timeout_joins_service_before_fixture_cleanup) ... FAIL
+
+======================================================================
+FAIL: test_terminal_readiness_timeout_joins_service_before_fixture_cleanup (test_scheduling.WorkerTests.test_terminal_readiness_timeout_joins_service_before_fixture_cleanup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Program Files\Python314\Lib\asyncio\runners.py", line 128, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Program Files\Python314\Lib\asyncio\base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle154\candidate\swassh-2.0.1\tests\test_scheduling.py", line 988, in test_terminal_readiness_timeout_joins_service_before_fixture_cleanup
+    self.assertTrue(all(task.done() for task in tasks),
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'service survived its failed terminal readiness assertion')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : service survived its failed terminal readiness assertion
+
+----------------------------------------------------------------------
+Ran 1 test in 0.476s
+
+FAILED (failures=1)

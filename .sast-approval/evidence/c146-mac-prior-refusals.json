@@ -1,0 +1,113 @@
+[
+  {
+    "artifact": "coverage-macos-latest-3.11.zip",
+    "tests_succeeded": false,
+    "failures": [
+      "infrastructure/tcp_proxy.py: statements below 98%",
+      "infrastructure/tcp_proxy.py: branches below 98%",
+      "infrastructure/tcp_proxy.py: lines below 98%",
+      "infrastructure/tcp_proxy.py: boolean_conditions below 98%"
+    ],
+    "proxy": {
+      "statements": {
+        "covered": 164,
+        "total": 172,
+        "percent": 95.34883720930233
+      },
+      "lines": {
+        "covered": 165,
+        "total": 173,
+        "percent": 95.3757225433526
+      },
+      "functions": {
+        "covered": 9,
+        "total": 9,
+        "percent": 100.0
+      },
+      "branches": {
+        "covered": 94,
+        "total": 98,
+        "percent": 95.91836734693878
+      },
+      "boolean_conditions": {
+        "covered": 78,
+        "total": 80,
+        "percent": 97.5
+      }
+    }
+  },
+  {
+    "artifact": "coverage-macos-latest-3.12.zip",
+    "tests_succeeded": false,
+    "failures": [
+      "infrastructure/tcp_proxy.py: statements below 98%",
+      "infrastructure/tcp_proxy.py: branches below 98%",
+      "infrastructure/tcp_proxy.py: lines below 98%",
+      "infrastructure/tcp_proxy.py: boolean_conditions below 98%"
+    ],
+    "proxy": {
+      "statements": {
+        "covered": 164,
+        "total": 172,
+        "percent": 95.34883720930233
+      },
+      "lines": {
+        "covered": 165,
+        "total": 173,
+        "percent": 95.3757225433526
+      },
+      "functions": {
+        "covered": 9,
+        "total": 9,
+        "percent": 100.0
+      },
+      "branches": {
+        "covered": 94,
+        "total": 98,
+        "percent": 95.91836734693878
+      },
+      "boolean_conditions": {
+        "covered": 78,
+        "total": 80,
+        "percent": 97.5
+      }
+    }
+  },
+  {
+    "artifact": "coverage-macos-latest-3.14.zip",
+    "tests_succeeded": false,
+    "failures": [
+      "infrastructure/tcp_proxy.py: statements below 98%",
+      "infrastructure/tcp_proxy.py: branches below 98%",
+      "infrastructure/tcp_proxy.py: lines below 98%",
+      "infrastructure/tcp_proxy.py: boolean_conditions below 98%"
+    ],
+    "proxy": {
+      "statements": {
+        "covered": 164,
+        "total": 172,
+        "percent": 95.34883720930233
+      },
+      "lines": {
+        "covered": 165,
+        "total": 173,
+        "percent": 95.3757225433526
+      },
+      "functions": {
+        "covered": 9,
+        "total": 9,
+        "percent": 100.0
+      },
+      "branches": {
+        "covered": 94,
+        "total": 98,
+        "percent": 95.91836734693878
+      },
+      "boolean_conditions": {
+        "covered": 78,
+        "total": 80,
+        "percent": 97.5
+      }
+    }
+  }
+]

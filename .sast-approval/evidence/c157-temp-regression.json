@@ -1,0 +1,44 @@
+{
+  "records": [
+    {
+      "case": "before",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0,
+      "successful": false,
+      "workflow_sha256": "560083e9a07f4d0496fc581a5f644167336adc20cf7045b611150d00e5973460"
+    },
+    {
+      "case": "after",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "successful": true,
+      "workflow_sha256": "297e92bc85f046a71fac7958edc28b43a74de84fe5c6e945bb2807c7a4abb7a7"
+    },
+    {
+      "case": "missing_TMPDIR_export",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0,
+      "successful": false,
+      "workflow_sha256": "3ccec43eb62329b25b34c4419543394378c76cc709836cd6072c460548703ca3"
+    },
+    {
+      "case": "validation_removed",
+      "tests": 1,
+      "failures": 5,
+      "errors": 0,
+      "skips": 0,
+      "successful": false,
+      "workflow_sha256": "d64fb2aa4ce7d35be9c27047747044c121ea19279a3bfaa664b2d2eef752b865"
+    }
+  ],
+  "before_fails_after_succeeds": true,
+  "missing_export_and_invalid_input_bypass_both_refused": true,
+  "all_existing_tests_and_timeouts_untouched": true,
+  "publication_authorized": false
+}

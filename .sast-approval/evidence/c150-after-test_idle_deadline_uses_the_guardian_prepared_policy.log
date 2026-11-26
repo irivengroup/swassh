@@ -1,0 +1,7 @@
+test_idle_deadline_uses_the_guardian_prepared_policy (relay_after.RelayIntegrationTests.test_idle_deadline_uses_the_guardian_prepared_policy)
+An idle-open test needs the policy the real guardian prepares first. ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.563s
+
+OK
