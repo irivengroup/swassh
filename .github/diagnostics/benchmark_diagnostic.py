@@ -19,7 +19,7 @@ root=args.root.resolve(strict=True)
 output=args.output.resolve()
 output.mkdir(exist_ok=False)
 review_data=args.review.read_bytes()
-assert hashlib.sha256(review_data).hexdigest()=='98f2161a4507d3112c8ec06de4b7b8b50de85f283b813898e6e146c06c5a0c29'
+assert hashlib.sha256(review_data).hexdigest()=='ac9e57e47fc761b8b9e55910ec8469f3c8d5631939388487b357cb7f7eac1455'
 review=json.loads(review_data)
 gate_path=root/'scripts/sast_gate.py'
 assert hashlib.sha256(gate_path.read_bytes()).hexdigest()=='e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803'
