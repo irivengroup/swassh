@@ -30,6 +30,16 @@ jobs:
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: ${{ matrix.python }}
+      - name: Use allocated ephemeral storage for Windows QA
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:RUNNER_TEMP) -or $env:RUNNER_TEMP.Contains("`n") -or $env:RUNNER_TEMP.Contains("`r") -or -not [IO.Path]::IsPathFullyQualified($env:RUNNER_TEMP)) { throw 'Invalid allocated QA temporary directory' }
+          if (-not (Test-Path -LiteralPath $env:RUNNER_TEMP -PathType Container)) { throw 'Allocated QA temporary directory is missing' }
+          if ((Get-Item -LiteralPath $env:RUNNER_TEMP -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Allocated QA temporary directory must not be a reparse point' }
+          foreach ($name in @('TMPDIR', 'TEMP', 'TMP')) {
+            Add-Content -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Value "$name=$env:RUNNER_TEMP" -ErrorAction Stop
+          }
       - name: Signed native OpenSSH and rsync integration prerequisites
         if: runner.os == 'Linux'
         shell: bash

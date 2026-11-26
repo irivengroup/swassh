@@ -1,5 +1,37 @@
 # Protocole et historique de validation SWASSH 2.0.1
 
+## Stockage temporaire de la QA Windows
+
+La campagne C155 conserve un refus : le push Windows/Python 3.12 a été annulé
+pendant la couverture, près de la limite de trente minutes, après réussite
+des 1 375 tests généraux. Le succès des treize jobs de la PR ne remplace pas
+cette campagne interrompue. Le test de 50 000 hôtes a pris 1 083,3731596 s
+dans ce push ; des runners différents ne permettent pas d'attribuer seuls
+cette différence à une cause précise.
+
+Un profil natif séparé de ce test original attribue 470,431 s sur 514,5165641 s
+aux validations de transactions SQLite. Sur un même runner, trois paires de
+1 000 résultats, dans un ordre alterné, mesurent 4,96 à 5,03 s dans le dossier
+temporaire par défaut sur C:, contre 0,90 à 0,95 s sur le volume de travail D:.
+Les mêmes transactions, données, synchronisations FULL, limites, contrôles
+d'intégrité et assertions sont conservés. Ce microbenchmark instrumenté ne
+constitue ni une mesure SSH réelle ni une garantie de performance générale.
+
+La CI Windows utilise désormais son répertoire éphémère alloué RUNNER_TEMP
+pour TMPDIR, TEMP et TMP, avant les commandes de qualité. Une valeur absente,
+relative, contenant un saut de ligne, inexistante ou de type reparse point
+est refusée. Les tests exécutent le vrai corps PowerShell et vérifient les
+exports ainsi que le refus avant écriture pour les entrées invalides.
+Les sources de production, les réglages SQLite, les règles de sécurité,
+les charges, les assertions existantes, les cinq instruments de couverture,
+leurs seuils et la limite de trente minutes restent inchangés.
+
+La publication exige toujours les cinq couvertures à 98 % minimum avant
+arrondi, par module et globalement, la recette complète et une revue détachée
+approuvée des octets exacts. Les mesures complètes, reçus et comparaisons
+avant/après sont conservés hors des sources ; une expérience favorable ou un
+rapport de couverture suffisant ne remplace aucun contrôle obligatoire.
+
 ## Refus de disponibilité du planificateur sous Windows 3.12
 
 La recette PR C151 a conservé trois refus d'attentes de deux secondes sous

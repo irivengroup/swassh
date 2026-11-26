@@ -82,6 +82,82 @@ class IsolatedUnitWorkerContracts(unittest.TestCase):
                 self.verify.isolated_run(invalid)
 
 
+class WindowsTemporaryStorageContracts(unittest.TestCase):
+    """Exercise actual CI placement, retaining workload and failure boundaries."""
+
+    def _windows_temp_step(self):
+        """Read the actual CI body, rather than duplicating its PowerShell logic."""
+        lines = (ROOT / '.github/workflows/ci.yml').read_text(encoding='utf-8').splitlines()
+        start = lines.index('  quality:') + 1
+        end = next((i for i in range(start, len(lines))
+                    if re.fullmatch(r'  [A-Za-z_][A-Za-z_0-9-]*:', lines[i])), len(lines))
+        quality = lines[start:end]
+        marker = '      - name: Use allocated ephemeral storage for Windows QA'
+        self.assertEqual(quality.count(marker), 1)
+        first = quality.index(marker)
+        finish = next((i for i in range(first + 1, len(quality))
+                       if quality[i].startswith('      - ')), len(quality))
+        step = quality[first:finish]
+        body = step.index('        run: |') + 1
+        return quality, first, step, '\n'.join(line[10:] for line in step[body:]) + '\n'
+
+    def test_windows_temp_placement_precedes_every_quality_command_with_same_budget(self):
+        quality, position, step, body = self._windows_temp_step()
+        self.assertIn('    timeout-minutes: 30', quality)
+        self.assertIn("        if: runner.os == 'Windows'", step)
+        self.assertIn('        shell: pwsh', step)
+        self.assertNotIn('continue-on-error:', '\n'.join(step))
+        for command in ('python scripts/verify.py', 'python scripts/coverage.py',
+                        'python benchmarks/core.py', 'python scripts/build.py',
+                        'python scripts/validate_installation.py', 'python scripts/package.py'):
+            self.assertLess(position, next(i for i, line in enumerate(quality) if command in line))
+        self.assertIn("@('TMPDIR', 'TEMP', 'TMP')", body)
+
+    def _exercise_temp_step(self, directory, runner_temp):
+        """Execute the extracted CI step through the real strict Windows shell."""
+        _, _, _, body = self._windows_temp_step()
+        script = directory / 'temp-step.ps1'
+        script.write_text(body, encoding='utf-8')
+        exports = directory / 'github-env'
+        exports.write_text('OPERATOR_SENTINEL=retained\n', encoding='utf-8')
+        shell = runpy.run_path(str(ROOT / 'scripts/ci_shell.py'))['ShellRunner']()
+        with patch.dict(os.environ, RUNNER_TEMP=str(runner_temp), GITHUB_ENV=str(exports)):
+            code = shell.run(script)
+        return code, exports.read_text(encoding='utf-8')
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows CI environment contract')
+    def test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            allocated = root / 'allocated space'
+            allocated.mkdir()
+            previous = {name: os.environ.get(name) for name in ('TMPDIR', 'TEMP', 'TMP')}
+            code, exported = self._exercise_temp_step(root, allocated)
+            self.assertEqual(code, 0)
+            self.assertEqual(exported.splitlines(), ['OPERATOR_SENTINEL=retained',
+                'TMPDIR=' + str(allocated), 'TEMP=' + str(allocated), 'TMP=' + str(allocated)])
+            self.assertEqual({name: os.environ.get(name) for name in previous}, previous)
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows CI environment contract')
+    def test_windows_temp_step_refuses_invalid_location_before_writing_exports(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            target, junction = root / 'junction target', root / 'junction'
+            target.mkdir()
+            create = root / 'create-junction.ps1'
+            create.write_text('New-Item -ItemType Junction -Path $env:SWASSH_QA_LINK '
+                              '-Target $env:SWASSH_QA_TARGET -ErrorAction Stop | Out-Null\n', encoding='utf-8')
+            shell = runpy.run_path(str(ROOT / 'scripts/ci_shell.py'))['ShellRunner']()
+            with patch.dict(os.environ, SWASSH_QA_LINK=str(junction), SWASSH_QA_TARGET=str(target)):
+                self.assertEqual(shell.run(create), 0)
+            self.assertTrue(junction.is_dir())
+            for location in (root / 'missing', 'relative-location', '', str(root) + '\n', junction):
+                with self.subTest(location=repr(location)):
+                    code, exported = self._exercise_temp_step(root, location)
+                    self.assertNotEqual(code, 0)
+                    self.assertEqual(exported, 'OPERATOR_SENTINEL=retained\n')
+
+
 class CoverageWorkflowContracts(unittest.TestCase):
     """Keep runtime-specific coverage regressions from bypassing release validation."""
 
