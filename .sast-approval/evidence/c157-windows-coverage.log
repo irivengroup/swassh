@@ -1,0 +1,42 @@
+.........................................................................................................................................................................................................s...s...Exception: C:\Users\IRIVEN Group\AppData\Local\Temp\swassh-ci-shell-6cj9b6b8\command.ps1:5
+Line |
+   5 |  … e Container)) { throw 'Allocated QA temporary directory is missing' }
+     |                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Allocated QA temporary directory is missing
+Exception: C:\Users\IRIVEN Group\AppData\Local\Temp\swassh-ci-shell-h9e9f_3m\command.ps1:4
+Line |
+   4 |  … nv:RUNNER_TEMP)) { throw 'Invalid allocated QA temporary directory' }
+     |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Invalid allocated QA temporary directory
+Exception: C:\Users\IRIVEN Group\AppData\Local\Temp\swassh-ci-shell-miz2uemr\command.ps1:4
+Line |
+   4 |  … nv:RUNNER_TEMP)) { throw 'Invalid allocated QA temporary directory' }
+     |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Invalid allocated QA temporary directory
+Exception: C:\Users\IRIVEN Group\AppData\Local\Temp\swassh-ci-shell-g4f0wdev\command.ps1:4
+Line |
+   4 |  … nv:RUNNER_TEMP)) { throw 'Invalid allocated QA temporary directory' }
+     |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Invalid allocated QA temporary directory
+Exception: C:\Users\IRIVEN Group\AppData\Local\Temp\swassh-ci-shell-fnqvtcr3\command.ps1:6
+Line |
+   6 |  … rsePoint) { throw 'Allocated QA temporary directory must not be a rep …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Allocated QA temporary directory must not be a reparse point
+.....sNativeCommandExitException: C:\Users\IRIVEN Group\AppData\Local\Temp\swassh-ci-shell-9ct0hahx\command.ps1:4
+Line |
+   4 |  & 'C:\Program Files\Python314\python.exe' -c 'raise SystemExit(7)'
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Program "python.exe" ended with non-zero exit code: 7 (0x00000007).
+...........................................................................ss.........s.........sssss...................................................................................................................................................................................s...................s.........ss..........s.........ssss..........s...ss..s..s....sssss.s....ss...............s.s..sss........................ssssssss.s..................................Private installation failure evidence retained at: C:\Users\IRIVEN~1\AppData\Local\Temp\tmpdj_042eu\fixture
+.ssssss...................sssssssssssssssss.....................ssssssssssssssssssssssssssssssss...........................................................s...............s.s..............s.s..............sssss..................................Verified 173 populated files: C:\Users\IRIVEN~1\AppData\Local\Temp\tmpp1qeoa5v\dist\swassh-1.0.1.zip
+...........................ssssss.......................................................................................s....s............................s................s....................s............s..............................................................................................................................................................s.ss..s.................................................................................
+----------------------------------------------------------------------
+Ran 1377 tests in 266.724s
+
+OK (skipped=128)
+statements: 99.77018698422647% (9551/9573)
+branches: 99.3958197256695% (6087/6124)
+functions: 100.0% (752/752)
+lines: 99.84980756594386% (10637/10653)
+boolean_conditions: 99.36708860759494% (5338/5372)

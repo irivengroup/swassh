@@ -1,0 +1,50 @@
+{
+  "source_archive_sha256": "2b4ebbd8672d07c278b4acf4b813e0543e56a2ce27e701baebe645cac9746014",
+  "source_commit": "5ee5b56572e9fc92d64bc1f3447a93678bd18bfd",
+  "primary_run": 45762716967,
+  "reports": 12,
+  "scopes_per_report": 108,
+  "metrics_per_scope": 5,
+  "all_thresholds_satisfied_before_rounding": true,
+  "module_minima": {
+    "statements": {
+      "case": "coverage-macos-latest-3.11",
+      "scope": "module/application/convergence.py",
+      "covered": 56,
+      "total": 57,
+      "percent": 98.24561403508773
+    },
+    "branches": {
+      "case": "coverage-macos-latest-3.11",
+      "scope": "module/interfaces/channels.py",
+      "covered": 49,
+      "total": 50,
+      "percent": 98.0
+    },
+    "functions": {
+      "case": "coverage-macos-latest-3.11",
+      "scope": "global",
+      "covered": 752,
+      "total": 752,
+      "percent": 100.0
+    },
+    "lines": {
+      "case": "coverage-macos-latest-3.11",
+      "scope": "module/application/convergence.py",
+      "covered": 61,
+      "total": 62,
+      "percent": 98.38709677419355
+    },
+    "boolean_conditions": {
+      "case": "coverage-macos-latest-3.11",
+      "scope": "module/infrastructure/process_reporter.py",
+      "covered": 49,
+      "total": 50,
+      "percent": 98.0
+    }
+  },
+  "report_sha256": "202d334ae35cdca11e487bfdc766d8145ebe79be3589999ef93bcca5870477f3",
+  "raw_python_preserved": true,
+  "publication_authorized": false,
+  "wording_correction_only_before_sha256": "533fc3f61d68ef23511398d8443d1336e05b5c01657b82366f0f980672413ca1"
+}

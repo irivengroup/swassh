@@ -1,0 +1,56 @@
+test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) ... 
+  test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="WindowsPath('C:/Users/IRIVEN~1/AppData/Local/Temp/tmpqoqvyphp/missing')") ... FAIL
+  test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="'relative-location'") ... FAIL
+  test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="''") ... FAIL
+  test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="'C:\\\\Users\\\\IRIVEN~1\\\\AppData\\\\Local\\\\Temp\\\\tmpqoqvyphp\\n'") ... FAIL
+  test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="WindowsPath('C:/Users/IRIVEN~1/AppData/Local/Temp/tmpqoqvyphp/junction')") ... FAIL
+
+======================================================================
+FAIL: test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="WindowsPath('C:/Users/IRIVEN~1/AppData/Local/Temp/tmpqoqvyphp/missing')")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 157, in test_windows_temp_step_refuses_invalid_location_before_writing_exports
+    self.assertNotEqual(code, 0)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="'relative-location'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 157, in test_windows_temp_step_refuses_invalid_location_before_writing_exports
+    self.assertNotEqual(code, 0)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="''")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 157, in test_windows_temp_step_refuses_invalid_location_before_writing_exports
+    self.assertNotEqual(code, 0)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="'C:\\\\Users\\\\IRIVEN~1\\\\AppData\\\\Local\\\\Temp\\\\tmpqoqvyphp\\n'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 157, in test_windows_temp_step_refuses_invalid_location_before_writing_exports
+    self.assertNotEqual(code, 0)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 0 == 0
+
+======================================================================
+FAIL: test_windows_temp_step_refuses_invalid_location_before_writing_exports (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_refuses_invalid_location_before_writing_exports) (location="WindowsPath('C:/Users/IRIVEN~1/AppData/Local/Temp/tmpqoqvyphp/junction')")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 157, in test_windows_temp_step_refuses_invalid_location_before_writing_exports
+    self.assertNotEqual(code, 0)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 0 == 0
+
+----------------------------------------------------------------------
+Ran 1 test in 3.559s
+
+FAILED (failures=5)

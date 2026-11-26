@@ -1,0 +1,11 @@
+{
+  "gate_sha256": "9776186e1b71280b3364def8de55a57eabea49bac389c2edc232d95d6095de51",
+  "gate_unchanged": true,
+  "exit_code": 1,
+  "refused_at_push_run_required_success_assertion": true,
+  "pr_13_success_not_used_to_mask_cancelled_push": true,
+  "no_merge_admission_created": true,
+  "no_publication_admission_created": true,
+  "D_sources_written": false,
+  "publication_authorized": false
+}

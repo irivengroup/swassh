@@ -1,0 +1,21 @@
+test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values) ... FAIL
+
+======================================================================
+FAIL: test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 135, in test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values
+    code, exported = self._exercise_temp_step(root, allocated)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 118, in _exercise_temp_step
+    _, _, _, body = self._windows_temp_step()
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 96, in _windows_temp_step
+    self.assertEqual(quality.count(marker), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (failures=1)

@@ -1,0 +1,31 @@
+test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values) ... FAIL
+
+======================================================================
+FAIL: test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values (c157_ci_contracts.WindowsTemporaryStorageContracts.test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\delivery\cycle157\candidate\swassh-2.0.1\tests\test_ci_contracts.py", line 137, in test_windows_temp_step_exports_only_three_locations_and_preserves_prior_values
+    self.assertEqual(exported.splitlines(), ['OPERATOR_SENTINEL=retained',
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'TMPDIR=' + str(allocated), 'TEMP=' + str(allocated), 'TMP=' + str(allocated)])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['OPE[23 chars]', 'TEMP=C:\\Users\\IRIVEN~1\\AppData\\Local\\[110 chars]ace'] != ['OPE[23 chars]', 'TMPDIR=C:\\Users\\IRIVEN~1\\AppData\\Local[192 chars]ace']
+
+First differing element 1:
+'TEMP=C:\\Users\\IRIVEN~1\\AppData\\Local\\Temp\\tmpsj76ff6f\\allocated space'
+'TMPDIR=C:\\Users\\IRIVEN~1\\AppData\\Local\\Temp\\tmpsj76ff6f\\allocated space'
+
+Second list contains 1 additional elements.
+First extra element 3:
+'TMP=C:\\Users\\IRIVEN~1\\AppData\\Local\\Temp\\tmpsj76ff6f\\allocated space'
+
+  ['OPERATOR_SENTINEL=retained',
++  'TMPDIR=C:\\Users\\IRIVEN~1\\AppData\\Local\\Temp\\tmpsj76ff6f\\allocated '
++  'space',
+   'TEMP=C:\\Users\\IRIVEN~1\\AppData\\Local\\Temp\\tmpsj76ff6f\\allocated space',
+   'TMP=C:\\Users\\IRIVEN~1\\AppData\\Local\\Temp\\tmpsj76ff6f\\allocated space']
+
+----------------------------------------------------------------------
+Ran 1 test in 0.652s
+
+FAILED (failures=1)
