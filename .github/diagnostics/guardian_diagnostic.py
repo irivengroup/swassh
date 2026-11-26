@@ -23,8 +23,8 @@ root = args.root.resolve(strict=True)
 output = args.output.resolve()
 output.mkdir(exist_ok=False)
 review_bytes = args.review.read_bytes()
-if hashlib.sha256(review_bytes).hexdigest() != 'faae6790c3ab0bbc1f0bb1eb4a449897e15f657b0d6bce6da2476b711a0242b7':
-    raise ValueError('Expected the actually approved C157 review')
+if hashlib.sha256(review_bytes).hexdigest() != '3cdf2a28b5e7a4af0a873771df8eaa1808ed24f472eec4d15846270d3d3ec944':
+    raise ValueError('Expected the actually approved C159 review')
 gate = root / 'scripts/sast_gate.py'
 if hashlib.sha256(gate.read_bytes()).hexdigest() != 'e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803':
     raise ValueError('Untrusted source snapshot verifier')
@@ -101,7 +101,7 @@ receipt = {'diagnostic_only': True, 'publication_authorized': False,
            'failures': [{'test': test.id(), 'traceback': trace} for test, trace in result.failures],
            'errors': [{'test': test.id(), 'traceback': trace} for test, trace in result.errors],
            'skipped': result.skipped, 'source_unchanged': True, 'source_files': before,
-           'candidate_archive_sha256': 'c4e1451d07b67aa19cdb7929a48be7fe2dce8ff8a4cee712d7643ec043b4540b',
+           'candidate_archive_sha256': '89eb05a3210b072d24b426e79dbe66fe3d9d830c9adb05c087ef7dd0059154ef',
            'approved_review_sha256': hashlib.sha256(review_bytes).hexdigest(),
            'child_campaign': children, 'all_original_assertions_succeeded': result.wasSuccessful()}
 (output / 'receipt.json').write_text(json.dumps(receipt, indent=2)+'\n', encoding='utf-8')
