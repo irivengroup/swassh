@@ -1,0 +1,80 @@
+--- a/VALIDATION.md
++++ b/VALIDATION.md
+@@ -1252,3 +1252,28 @@
+ No runtime code, collector, threshold, timeout or existing assertion changes.
+ The C60 refusal is retained; all five campaigns must run on this new archive.
+ 
++### Shared-budget test clocks on Windows 3.11 and 3.12
++
++C158 retained the complete C157 push and pull-request failures instead of
++selecting a successful duplicate. The storage-contention test reused a prior
++connection-rate slot while asserting immediate admission after releasing a real
++SQLite lock. Its fixture now advances only the logical admission clock between
++the writer and reader cases. Both real transactions, thread joins, the original
++one-second yield deadline and all timeout-restoration assertions remain.
++
++The ten-process capacity test now records system-wide perf_counter_ns intervals.
++Windows 3.11.9 and 3.12.10 report GetTickCount64 at 15.625 ms for monotonic, versus
++QueryPerformanceCounter at 100 ns for perf_counter. Three bounded observations
++on each runtime retained every original assertion and both clocks. The third
++sample on each runtime reported a coarse-clock peak of three while the same
++admitted intervals measured a high-resolution peak of two. No capacity limit,
++workload, lease lifetime, wait bound or production byte is changed. The interval
++shape and strict ordering are checked before the original limit/count checks.
++
++Python documents the performance counter as system-wide, including on Windows
++since Python 3.10: https://docs.python.org/3.11/library/time.html#time.perf_counter.
++These observations explain the test-oracle defect, not a general proof of
++concurrency correctness. The failed campaign remains a publication refusal;
++fresh local gates and exact-source approval followed by full native CI remain
++mandatory for this candidate.
++
+--- a/tests/test_improvements.py
++++ b/tests/test_improvements.py
+@@ -108,11 +108,15 @@
+         finally:
+             writer.close()
+ 
+-    def test_poll_yields_before_busy_peers_release_and_restores_connection_timeout(self):
++    @patch('swassh.infrastructure.bastion.time.monotonic', return_value=100.0)
++    def test_poll_yields_before_busy_peers_release_and_restores_connection_timeout(self, clock):
+         # Real writer and reader transactions exercise BEGIN and COMMIT contention.
+         # The contender must return while the blocking peer still owns its lock.
+-        for mode in ('writer', 'reader'):
++        for index, mode in enumerate(('writer', 'reader')):
+             with self.subTest(mode=mode):
++                # Isolate storage contention from the previous mode's rate slot.
++                # Real lock ownership and the one-second yield deadline remain.
++                clock.return_value = 100.0 + index
+                 lease = self.lease(connections=1)
+                 self.pool.db.execute('PRAGMA busy_timeout=5000')
+                 writer = sqlite3.connect(self.pool.directory / 'budget.sqlite3', isolation_level=None)
+@@ -271,11 +275,13 @@
+     def test_ten_independent_processes_respect_shared_limit(self):
+         # Ten CLI interpreter invocations compete for the same two slots. Times
+         # are written by the admitted processes, not inferred from parent sleeps.
++        # The system-wide performance counter avoids equal coarse Windows ticks
++        # falsely sorting a later start before an earlier stop from another peer.
+         events = [Path(self.temp.name) / ('events-' + str(i)) for i in range(10)]
+         source = ("import json,sys,time;from swassh.infrastructure.bastion import SharedBudget;"
+             "p=SharedBudget(json.loads(sys.argv[1]));l=p.ticket(connections=1);\n"
+             "while not l.poll(): time.sleep(.005)\n"
+-            "start=time.monotonic();time.sleep(.08);end=time.monotonic()\n"
++            "start=time.perf_counter_ns();time.sleep(.08);end=time.perf_counter_ns()\n"
+             "with open(sys.argv[2],'w') as f: json.dump([start,end],f)\n"
+             "l.close();p.close()")
+         spec = json.dumps(specification(self.options))
+@@ -285,8 +291,11 @@
+             for process in clients:
+                 _, errors = process.communicate(timeout=20)
+                 self.assertEqual(process.returncode, 0, errors.decode())
+-            rows = sorted((t, event, identity) for identity, path in enumerate(events)
+-                for t, event in zip(json.loads(path.read_text()), ('start', 'stop')))
++            intervals = [json.loads(path.read_text()) for path in events]
++            self.assertTrue(all(len(pair) == 2 and all(type(t) is int for t in pair)
++                                and pair[0] < pair[1] for pair in intervals))
++            rows = sorted((t, event, identity) for identity, pair in enumerate(intervals)
++                for t, event in zip(pair, ('start', 'stop')))
+             active = peak = 0
+             for _, event, _ in rows:
+                 active += 1 if event == 'start' else -1

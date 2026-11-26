@@ -1,0 +1,19 @@
+test_blocked_durable_lease_survives_reopen_until_read_only_verification (test_adapter_contracts.AsyncAdapterContractTests.test_blocked_durable_lease_survives_reopen_until_read_only_verification) ... Timeout (0:00:30)!
+Thread 0x00009480 (most recent call first):
+  File "C:\Program Files\Python314\Lib\socket.py", line 298 in accept
+  File "C:\Program Files\Python314\Lib\socket.py", line 633 in _fallback_socketpair
+  File "C:\Program Files\Python314\Lib\asyncio\proactor_events.py", line 813 in _make_self_pipe
+  File "C:\Program Files\Python314\Lib\asyncio\proactor_events.py", line 667 in __init__
+  File "C:\Program Files\Python314\Lib\asyncio\windows_events.py", line 316 in __init__
+  File "C:\Program Files\Python314\Lib\asyncio\events.py", line 735 in new_event_loop
+  File "C:\Program Files\Python314\Lib\asyncio\events.py", line 847 in new_event_loop
+  File "C:\Program Files\Python314\Lib\asyncio\runners.py", line 147 in _lazy_init
+  File "C:\Program Files\Python314\Lib\asyncio\runners.py", line 85 in get_loop
+  File "C:\Program Files\Python314\Lib\unittest\async_case.py", line 97 in _callSetUp
+  File "C:\Program Files\Python314\Lib\unittest\case.py", line 665 in run
+  File "C:\Program Files\Python314\Lib\unittest\async_case.py", line 147 in run
+  File "C:\Program Files\Python314\Lib\unittest\case.py", line 725 in __call__
+  File "C:\Program Files\Python314\Lib\unittest\suite.py", line 122 in run
+  File "C:\Program Files\Python314\Lib\unittest\suite.py", line 84 in __call__
+  File "C:\Program Files\Python314\Lib\unittest\runner.py", line 257 in run
+  File "C:\Users\IRIVEN Group\Documents\ChatGPT\SWASSH\evidence\cycle159\diagnose_first_case.py", line 22 in <module>

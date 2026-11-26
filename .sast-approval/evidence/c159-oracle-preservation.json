@@ -1,0 +1,71 @@
+{
+  "source_archive_sha256": "89eb05a3210b072d24b426e79dbe66fe3d9d830c9adb05c087ef7dd0059154ef",
+  "changed_files": [
+    "VALIDATION.md",
+    "tests/test_improvements.py"
+  ],
+  "unchanged_files": 335,
+  "all_100_runtime_modules_unchanged": true,
+  "all_other_test_ASTs_identical": true,
+  "original_assertions": [
+    {
+      "method": "test_poll_yields_before_busy_peers_release_and_restores_connection_timeout",
+      "original_assertions": 10,
+      "current_assertions": 10,
+      "all_original_assertion_ASTs_preserved": true
+    },
+    {
+      "method": "test_ten_independent_processes_respect_shared_limit",
+      "original_assertions": 4,
+      "current_assertions": 5,
+      "all_original_assertion_ASTs_preserved": true
+    }
+  ],
+  "real_transactions_process_count_and_wait_bounds_unchanged": true,
+  "all_workflow_collector_threshold_and_security_gate_bytes_unchanged": true,
+  "qualification_controllers": [
+    {
+      "file": "qualify_windows.py",
+      "before_sha256": "eaff712d5555e7fb2b73f45c427859d9d44da7aa3c1548403abae2d743b760ad",
+      "after_sha256": "b8e143c1d46dc53692bc7a7ac7c80f9ef32b2a48b1a6c3d53401e365af7b22a2",
+      "inverse_rebind_byte_identical": true
+    },
+    {
+      "file": "qualify_linux.py",
+      "before_sha256": "d40a8e49aef49f3cc9d19ef2b7677c3e32eef8255764fb266010631757768444",
+      "after_sha256": "3fc19a3de5d2c1f65f5b3afd1c684a6e30fd73e51c1277b417a0284b48f86544",
+      "inverse_rebind_byte_identical": true
+    },
+    {
+      "file": "scan_linux.py",
+      "before_sha256": "6bd516f646719ad95274b4e1ad302264a7ca98ba6a6a93a8dd6b56f7ddf6a2e2",
+      "after_sha256": "0e3df51b7b349999463d022bda49ed8f471bb3b11bd7e0db39edb451ec47797a",
+      "inverse_rebind_byte_identical": true
+    },
+    {
+      "file": "check_measurements.py",
+      "before_sha256": "97ba11b5334687fdd2c9b781bb8fb4b4f8c85e7846529a4df8a53d23eae4dae6",
+      "after_sha256": "65754210c33697d0e7c84bcc2da485dc6797ae37af90eccef958aa399c57bf4f",
+      "inverse_rebind_byte_identical": true
+    },
+    {
+      "file": "verify_source_archive.py",
+      "before_sha256": "1eb40c6704f06056d99ccfbf770807c5776d58548f415b6bd2fff364ccb070f3",
+      "after_sha256": "e5f1b58936c114357fa15efb5d8cf2c5a1f0ed64df955ebda67fe9ee59b44980",
+      "inverse_rebind_byte_identical": true
+    },
+    {
+      "file": "qualify_benchmark.py",
+      "before_sha256": "abfbaf886339f9842702ba157a1d4bd92b7896bea480471118feb0f9f4a36a1c",
+      "after_sha256": "14e6c90d844383e5d3ff645dd407c96e586768d4417031d676cca2fd7e39af42",
+      "inverse_rebind_byte_identical": true
+    },
+    {
+      "file": "prepare_delivery.py",
+      "before_sha256": "718af7f471251276fc89f0a1c16f558fcc6dc4b810b81e440d3f9e388a2fbbca",
+      "after_sha256": "1d79c850341fec9031e958e763cbecda793aa3fcda6049b69ee66c971b5178b4",
+      "inverse_rebind_byte_identical": true
+    }
+  ],
+  "publication_authorized": false
+}

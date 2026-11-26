@@ -1,0 +1,83 @@
+{
+  "records": [
+    {
+      "case": "pacing-before",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "pacing-after",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "native-3.11-before",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "native-3.11-after",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "native-3.11-real-overlap-refused",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "native-3.12-before",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "native-3.12-after",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "case": "native-3.12-real-overlap-refused",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    }
+  ],
+  "native_evidence": [
+    {
+      "runtime": "3.11",
+      "artifact_sha256": "ec51d2c7250c655b4e67264d404d1ce56c0eb1aa6be3e1ad27838775d948fdd2",
+      "all_three_native_samples_retained": true,
+      "causal_sample": 2,
+      "coarse_peak": 3,
+      "high_resolution_peak": 2
+    },
+    {
+      "runtime": "3.12",
+      "artifact_sha256": "dd7fb89dae7702a701fae5d072e8a64d7c590fe64b210044ba84f2dc452df3d6",
+      "all_three_native_samples_retained": true,
+      "causal_sample": 2,
+      "coarse_peak": 3,
+      "high_resolution_peak": 2
+    }
+  ],
+  "before_refuses_after_succeeds": true,
+  "real_overlap_still_refused": true,
+  "replay_is_not_a_new_native_qualification": true,
+  "production_sources_unchanged": true,
+  "publication_authorized": false
+}

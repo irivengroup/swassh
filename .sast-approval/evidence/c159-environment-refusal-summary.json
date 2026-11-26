@@ -1,0 +1,16 @@
+{
+  "candidate_archive_sha256": "89eb05a3210b072d24b426e79dbe66fe3d9d830c9adb05c087ef7dd0059154ef",
+  "initial_windows_attempt": {
+    "receipt": "windows-network-restricted-refusal/receipt.json",
+    "exit_code_after_targeted_stop": 4294967295,
+    "original_test_bodies_started": false,
+    "observed_block": "asyncio event-loop creation in socket._fallback_socketpair accept",
+    "bounded_stack_probe_seconds": 30,
+    "stack_log": "first-case-diagnostic.log"
+  },
+  "corrective_action": "Run the same byte-identical qualification controller with local loopback test connectivity available; preserve original evidence.",
+  "control_predicates_deadlines_or_tests_changed": false,
+  "not_a_favorable_test_retry": true,
+  "real_equipment_contacted": false,
+  "publication_authorized": false
+}

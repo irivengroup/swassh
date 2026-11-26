@@ -1,0 +1,6 @@
+test_ten_independent_processes_respect_shared_limit (clock_test_159.SharedBudgetTests.test_ten_independent_processes_respect_shared_limit) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.218s
+
+OK

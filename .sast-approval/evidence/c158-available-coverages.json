@@ -1,0 +1,734 @@
+{
+  "source_commit": "335d68af15471ff1fe07974a13f2312d5fb3f70d",
+  "verified_coverage_reports": [
+    {
+      "artifact_id": 15099090115,
+      "name": "coverage-macos-latest-3.11",
+      "archive_sha256": "ac9b0ffb9179962d33254002c5ac1a55f7445453015d98e2aaa385342b9cda44",
+      "report_sha256": "6aa438eed8cb39c4c3604bcfccd1e17e8a7f07009bc5b0c5a93a059906264f97",
+      "python": "3.11.9 (v3.11.9:de54cf5be3, Apr  2 2024, 07:12:50) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "global": {
+        "statements": {
+          "covered": 9553,
+          "total": 9573,
+          "percent": 99.79107907656952
+        },
+        "branches": {
+          "covered": 6082,
+          "total": 6124,
+          "percent": 99.31417374265186
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10604,
+          "total": 10618,
+          "percent": 99.8681484271991
+        },
+        "boolean_conditions": {
+          "covered": 5334,
+          "total": 5372,
+          "percent": 99.29262844378258
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15098650897,
+      "name": "coverage-macos-latest-3.12",
+      "archive_sha256": "b0d1fb7ddbf0fb68abdc3456847871218fdc573ff587a919b0deb68dbae38223",
+      "report_sha256": "6b63244b0968cf0b1163f3b78b041c446bf2968dc7e491ef460d3de64fbef828",
+      "python": "3.12.10 (v3.12.10:0cc81280367, Apr  8 2025, 08:46:59) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "global": {
+        "statements": {
+          "covered": 9552,
+          "total": 9573,
+          "percent": 99.780633030398
+        },
+        "branches": {
+          "covered": 6083,
+          "total": 6124,
+          "percent": 99.33050293925538
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10638,
+          "total": 10653,
+          "percent": 99.85919459307237
+        },
+        "boolean_conditions": {
+          "covered": 5334,
+          "total": 5372,
+          "percent": 99.29262844378258
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15096909929,
+      "name": "coverage-macos-latest-3.13",
+      "archive_sha256": "a4458f3d4b1e54e74f5429eba06766317228cddb1f8f6b8c4391e95493661a89",
+      "report_sha256": "42f3ab64ebd0919634e38aa14a20119e0560d8cbae33fa09166598ce7aa0a5a0",
+      "python": "3.13.17 (v3.13.17:64e080d3815, Oct 21 2026, 07:24:09) [Clang 21.0.0 (clang-2100.1.1.101)]",
+      "global": {
+        "statements": {
+          "covered": 9552,
+          "total": 9573,
+          "percent": 99.780633030398
+        },
+        "branches": {
+          "covered": 6082,
+          "total": 6124,
+          "percent": 99.31417374265186
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10638,
+          "total": 10653,
+          "percent": 99.85919459307237
+        },
+        "boolean_conditions": {
+          "covered": 5333,
+          "total": 5372,
+          "percent": 99.27401340282948
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15098201816,
+      "name": "coverage-macos-latest-3.14",
+      "archive_sha256": "fd648cb6b4bf3faeea442de6f4d97432e0dc2eb84c1f15da4141f22e937ff398",
+      "report_sha256": "da1aefb85b5dd8c6b3e4ef6e84373c892d9685b6c9b50d91bc0e6c810e6d3e35",
+      "python": "3.14.10 (v3.14.10:b703b2c5e70, Oct 25 2026, 14:17:53) [Clang 21.0.0 (clang-2100.1.1.101)]",
+      "global": {
+        "statements": {
+          "covered": 9552,
+          "total": 9573,
+          "percent": 99.780633030398
+        },
+        "branches": {
+          "covered": 6082,
+          "total": 6124,
+          "percent": 99.31417374265186
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10638,
+          "total": 10653,
+          "percent": 99.85919459307237
+        },
+        "boolean_conditions": {
+          "covered": 5333,
+          "total": 5372,
+          "percent": 99.27401340282948
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15097633057,
+      "name": "coverage-ubuntu-24.04-3.11",
+      "archive_sha256": "3f9cafa771fee9b6f636e3b1a64cd89c375102eb8471eae45bd079e896409e61",
+      "report_sha256": "96127c233473fc9c146e6941d0ff21b0d1d545e96877e9c36d81530dc57cc900",
+      "python": "3.11.18 (main, Oct 26 2026, 02:48:34) [GCC 13.3.0]",
+      "global": {
+        "statements": {
+          "covered": 9553,
+          "total": 9573,
+          "percent": 99.79107907656952
+        },
+        "branches": {
+          "covered": 6084,
+          "total": 6124,
+          "percent": 99.34683213585892
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10604,
+          "total": 10618,
+          "percent": 99.8681484271991
+        },
+        "boolean_conditions": {
+          "covered": 5336,
+          "total": 5372,
+          "percent": 99.32985852568876
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15098540268,
+      "name": "coverage-ubuntu-24.04-3.12",
+      "archive_sha256": "89f34c5d15cbf22b2381ce5ee6e84995613436f412bb6e5752dd7c33aaa409ab",
+      "report_sha256": "44ec81fac51c0b6c08123af11a325a2116005dc4ddeb1dc67b97f18001a2c857",
+      "python": "3.12.16 (main, Oct 26 2026, 02:50:49) [GCC 13.3.0]",
+      "global": {
+        "statements": {
+          "covered": 9552,
+          "total": 9573,
+          "percent": 99.780633030398
+        },
+        "branches": {
+          "covered": 6085,
+          "total": 6124,
+          "percent": 99.36316133246244
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10638,
+          "total": 10653,
+          "percent": 99.85919459307237
+        },
+        "boolean_conditions": {
+          "covered": 5336,
+          "total": 5372,
+          "percent": 99.32985852568876
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15097203912,
+      "name": "coverage-ubuntu-24.04-3.13",
+      "archive_sha256": "a5ed5c99164cb4429e47ced7962ec41badfecd0291ab5f5b546b01153db30a8b",
+      "report_sha256": "df227177828bea79d2f9a5f905b906c5b1d59927444417624bc1651990ccd214",
+      "python": "3.13.18 (main, Oct 26 2026, 14:20:56) [GCC 13.3.0]",
+      "global": {
+        "statements": {
+          "covered": 9552,
+          "total": 9573,
+          "percent": 99.780633030398
+        },
+        "branches": {
+          "covered": 6084,
+          "total": 6124,
+          "percent": 99.34683213585892
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10638,
+          "total": 10653,
+          "percent": 99.85919459307237
+        },
+        "boolean_conditions": {
+          "covered": 5335,
+          "total": 5372,
+          "percent": 99.31124348473567
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15096934756,
+      "name": "coverage-ubuntu-24.04-3.14",
+      "archive_sha256": "d8929a3f3ec297a767917f481a8cb695e4b1edd0d91292a2995d1431739665dc",
+      "report_sha256": "38943d3a13c2edc53b4d6927428a04ce893cb8e9c3c00dd7905e06ee77450340",
+      "python": "3.14.10 (main, Oct 26 2026, 14:19:15) [GCC 13.3.0]",
+      "global": {
+        "statements": {
+          "covered": 9552,
+          "total": 9573,
+          "percent": 99.780633030398
+        },
+        "branches": {
+          "covered": 6084,
+          "total": 6124,
+          "percent": 99.34683213585892
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10638,
+          "total": 10653,
+          "percent": 99.85919459307237
+        },
+        "boolean_conditions": {
+          "covered": 5335,
+          "total": 5372,
+          "percent": 99.31124348473567
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15097591423,
+      "name": "coverage-windows-latest-3.13",
+      "archive_sha256": "6eac11ab3fd1527cf26441d6f5d8a741831349fef4c3bbf2ad5698f2a65791d0",
+      "report_sha256": "df2a1eb6d6a1c3da9e5231ae9200ca14b2a0f737caf21c7a4e4d0c28dc4b043a",
+      "python": "3.13.17 (tags/v3.13.17:64e080d, Oct 21 2026, 14:08:53) [MSC v.1944 64 bit (AMD64)]",
+      "global": {
+        "statements": {
+          "covered": 9550,
+          "total": 9573,
+          "percent": 99.75974093805495
+        },
+        "branches": {
+          "covered": 6087,
+          "total": 6124,
+          "percent": 99.3958197256695
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10636,
+          "total": 10653,
+          "percent": 99.84042053881535
+        },
+        "boolean_conditions": {
+          "covered": 5338,
+          "total": 5372,
+          "percent": 99.36708860759494
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    },
+    {
+      "artifact_id": 15097397026,
+      "name": "coverage-windows-latest-3.14",
+      "archive_sha256": "7ee7a099c6d35cc73ffed26b7ab0a01fba23e153db065c8b9d3947d8bc54b1da",
+      "report_sha256": "6616b873943ae8d1dba515c96dcb1c8c91b2a4621db7a34a38a16aeb0f396d68",
+      "python": "3.14.10 (tags/v3.14.10:b703b2c, Oct 25 2026, 17:36:52) [MSC v.1944 64 bit (AMD64)]",
+      "global": {
+        "statements": {
+          "covered": 9550,
+          "total": 9573,
+          "percent": 99.75974093805495
+        },
+        "branches": {
+          "covered": 6087,
+          "total": 6124,
+          "percent": 99.3958197256695
+        },
+        "functions": {
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "covered": 10636,
+          "total": 10653,
+          "percent": 99.84042053881535
+        },
+        "boolean_conditions": {
+          "covered": 5338,
+          "total": 5372,
+          "percent": 99.36708860759494
+        }
+      },
+      "minima": {
+        "statements": {
+          "scope": "module/application/convergence.py",
+          "covered": 56,
+          "total": 57,
+          "percent": 98.24561403508773
+        },
+        "branches": {
+          "scope": "module/interfaces/channels.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        },
+        "functions": {
+          "scope": "global",
+          "covered": 752,
+          "total": 752,
+          "percent": 100.0
+        },
+        "lines": {
+          "scope": "module/application/convergence.py",
+          "covered": 61,
+          "total": 62,
+          "percent": 98.38709677419355
+        },
+        "boolean_conditions": {
+          "scope": "module/infrastructure/process_reporter.py",
+          "covered": 49,
+          "total": 50,
+          "percent": 98.0
+        }
+      },
+      "modules_checked": 100,
+      "components_checked": 7,
+      "scopes_checked": 108,
+      "independent_metrics": 5,
+      "raw_python_preserved": true,
+      "coverage_gates_succeeded": true
+    }
+  ],
+  "required_reports": 12,
+  "missing_reports": [
+    "coverage-windows-latest-3.11",
+    "coverage-windows-latest-3.12"
+  ],
+  "reason": "Both mandatory native jobs failed before their coverage steps.",
+  "all_available_metrics_ge_98": true,
+  "complete_campaign": false,
+  "publication_authorized": false
+}

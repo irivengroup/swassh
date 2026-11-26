@@ -1,0 +1,10 @@
+{
+  "repository": "irivengroup/swassh",
+  "parent_sha": "335d68af15471ff1fe07974a13f2312d5fb3f70d",
+  "base_tree_sha": "bc81f80e27ed1d3863b6c78b772ca201bb984575",
+  "expected_tree_sha": "96fa622ee7f26ee5f69a6b98f4bc4c316e314ddf",
+  "source_files": 337,
+  "source_archive_sha256": "89eb05a3210b072d24b426e79dbe66fe3d9d830c9adb05c087ef7dd0059154ef",
+  "operator_approved": false,
+  "remote_mutated": false
+}

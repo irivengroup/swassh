@@ -1,0 +1,46 @@
+{
+  "source_commit": "335d68af15471ff1fe07974a13f2312d5fb3f70d",
+  "source_archive_sha256": "c4e1451d07b67aa19cdb7929a48be7fe2dce8ff8a4cee712d7643ec043b4540b",
+  "events": [
+    {
+      "id": 45778703315,
+      "event": "pull_request",
+      "success": 11,
+      "failed_jobs": [
+        {
+          "id": 139768821493,
+          "name": "quality (windows-latest, 3.12)"
+        },
+        {
+          "id": 139768821779,
+          "name": "quality (windows-latest, 3.11)"
+        }
+      ]
+    },
+    {
+      "id": 45778692775,
+      "event": "push",
+      "success": 11,
+      "failed_jobs": [
+        {
+          "id": 139768743151,
+          "name": "quality (windows-latest, 3.12)"
+        },
+        {
+          "id": 139768743162,
+          "name": "quality (windows-latest, 3.11)"
+        }
+      ]
+    }
+  ],
+  "all_26_jobs_observed": true,
+  "no_favorable_duplicate_selected": true,
+  "missing_coverage_reports": [
+    "coverage-windows-latest-3.11",
+    "coverage-windows-latest-3.12"
+  ],
+  "native_guardian_50_and_benchmark_20_10_succeeded_separately": true,
+  "publication_authorized": false,
+  "main_not_merged": true,
+  "D_not_published": true
+}

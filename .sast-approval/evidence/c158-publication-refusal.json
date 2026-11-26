@@ -1,0 +1,11 @@
+{
+  "gate_sha256": "114ff1a4f087ef843bccf0efe782ada456e14353ea1af86c7b137fd75e3f5d84",
+  "gate_unchanged": true,
+  "exit_code": 1,
+  "refused_failed_mandatory_run": true,
+  "all_26_job_outcomes_retained": true,
+  "no_merge_admission_created": true,
+  "no_publication_admission_created": true,
+  "D_sources_written": false,
+  "publication_authorized": false
+}

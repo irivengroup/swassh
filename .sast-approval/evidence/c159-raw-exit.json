@@ -1,0 +1,1 @@
+{"command":["/tmp/swassh-c139-review-nb6ah10c/scanner/bin/python","-I","-B","-m","bandit","--recursive","src","tests","scripts","build_support","benchmarks","--ignore-nosec","--format","json","--output","/mnt/c/Users/IRIVEN Group/Documents/ChatGPT/SWASSH/evidence/cycle159/sast-scan/bandit-full.json"],"raw_exit":1}

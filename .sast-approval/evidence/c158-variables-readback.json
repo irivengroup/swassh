@@ -1,0 +1,24 @@
+{
+  "url": "https://github.com/irivengroup/swassh/settings/variables/actions",
+  "observed_at_utc": "2026-11-26T07:52:57Z",
+  "window_id": 265764,
+  "variables": {
+    "SWASSH_SAST_GATE_SHA256": "e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803",
+    "SWASSH_SAST_REVIEW_REF": "1e7d72fd2eb48c6041b4f9518bc07bb5355969f4",
+    "SWASSH_SAST_REVIEW_SHA256": "faae6790c3ab0bbc1f0bb1eb4a449897e15f657b0d6bce6da2476b711a0242b7"
+  },
+  "all_three_values_observed_in_repository_table": true,
+  "operator_approval": "C157",
+  "effective_authority_cycle": "C158",
+  "security_settings_not_weakened": true,
+  "readback_verified": true,
+  "observed_accessibility_rows": [
+    "16229 data item e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803 Copy value of SWASSH_SAST_GATE_SHA256",
+    "16238 data item 1e7d72fd2eb48c6041b4f9518bc07bb5355969f4 Copy value of SWASSH_SAST_REVIEW_REF",
+    "16247 data item faae6790c3ab0bbc1f0bb1eb4a449897e15f657b0d6bce6da2476b711a0242b7 Copy value of SWASSH_SAST_REVIEW_SHA256"
+  ],
+  "input_collision_recovered_before_save": true,
+  "technical_approval_not_requested_again": true,
+  "source_branch_not_advanced_at_observation": true,
+  "publication_authorized": false
+}
