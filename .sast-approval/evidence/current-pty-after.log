@@ -1,6 +1,0 @@
-test_interactive_shell_restores_terminal (test_native_ssh.NativeSSHTests.test_interactive_shell_restores_terminal) ... ok
-
-----------------------------------------------------------------------
-Ran 1 test in 1.747s
-
-OK
