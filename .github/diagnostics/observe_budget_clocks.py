@@ -5,6 +5,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import runpy
 import shutil
 import subprocess
 import sys
@@ -40,6 +41,8 @@ class NativeClockObservation:
         assert hashlib.sha256(review_bytes).hexdigest() == 'faae6790c3ab0bbc1f0bb1eb4a449897e15f657b0d6bce6da2476b711a0242b7'
         expected = json.loads(review_bytes)['source_files']
         assert all(hashlib.sha256((source / name).read_bytes()).hexdigest() == sha for name, sha in expected.items())
+        # Reuse the approved QA token-creation policy; never relax ownership.
+        runpy.run_path(str(source / 'scripts/ci_shell.py'))['WindowsObjectOwner'].configure()
         sys.path[:0] = [str(source / 'src'), str(source / 'tests')]
         # Child interpreters need the same explicit source path as the CI QA.
         os.environ['PYTHONPATH'] = str(source / 'src')
