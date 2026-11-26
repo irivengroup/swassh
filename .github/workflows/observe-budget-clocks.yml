@@ -1,0 +1,59 @@
+name: Observe original C157 shared-budget clocks
+on:
+  push:
+    branches: [diagnostics/c158-budget-clocks]
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12']
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      GIT_CONFIG_COUNT: '1'
+      GIT_CONFIG_KEY_0: core.autocrlf
+      GIT_CONFIG_VALUE_0: 'false'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Retain observer outside sources
+        shell: pwsh
+        run: Copy-Item -LiteralPath .github/diagnostics/observe_budget_clocks.py -Destination "$env:RUNNER_TEMP/observe_budget_clocks.py"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: 335d68af15471ff1fe07974a13f2312d5fb3f70d
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Preserve the allocated temporary placement
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ([string]::IsNullOrWhiteSpace($env:RUNNER_TEMP) -or $env:RUNNER_TEMP.Contains("`n") -or $env:RUNNER_TEMP.Contains("`r") -or -not [IO.Path]::IsPathFullyQualified($env:RUNNER_TEMP)) { throw 'Invalid runner temp' }
+          if (-not (Test-Path -LiteralPath $env:RUNNER_TEMP -PathType Container)) { throw 'Missing runner temp' }
+          if ((Get-Item -LiteralPath $env:RUNNER_TEMP -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Reparse runner temp' }
+          foreach ($name in @('TMPDIR', 'TEMP', 'TMP')) {
+            Add-Content -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Value "$name=$env:RUNNER_TEMP" -ErrorAction Stop
+          }
+      - name: Verify detached approved review
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Invoke-WebRequest -Uri https://raw.githubusercontent.com/irivengroup/swassh/1e7d72fd2eb48c6041b4f9518bc07bb5355969f4/.sast-approval/review.json -OutFile "$env:RUNNER_TEMP/approved-review.json"
+          if ((Get-FileHash -LiteralPath "$env:RUNNER_TEMP/approved-review.json" -Algorithm SHA256).Hash.ToLowerInvariant() -cne 'faae6790c3ab0bbc1f0bb1eb4a449897e15f657b0d6bce6da2476b711a0242b7') { throw 'Review changed' }
+      - name: Observe three bounded pairs of clocks and original assertions
+        shell: pwsh
+        run: python -B "$env:RUNNER_TEMP/observe_budget_clocks.py" --root "$env:GITHUB_WORKSPACE" --review "$env:RUNNER_TEMP/approved-review.json" --output "$env:RUNNER_TEMP/budget-clocks"
+      - name: Preserve every outcome
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: budget-clocks-${{ matrix.python }}-c158
+          path: ${{ runner.temp }}/budget-clocks/
+          if-no-files-found: error
