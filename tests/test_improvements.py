@@ -108,11 +108,15 @@ class SharedBudgetTests(unittest.TestCase):
         finally:
             writer.close()
 
-    def test_poll_yields_before_busy_peers_release_and_restores_connection_timeout(self):
+    @patch('swassh.infrastructure.bastion.time.monotonic', return_value=100.0)
+    def test_poll_yields_before_busy_peers_release_and_restores_connection_timeout(self, clock):
         # Real writer and reader transactions exercise BEGIN and COMMIT contention.
         # The contender must return while the blocking peer still owns its lock.
-        for mode in ('writer', 'reader'):
+        for index, mode in enumerate(('writer', 'reader')):
             with self.subTest(mode=mode):
+                # Isolate storage contention from the previous mode's rate slot.
+                # Real lock ownership and the one-second yield deadline remain.
+                clock.return_value = 100.0 + index
                 lease = self.lease(connections=1)
                 self.pool.db.execute('PRAGMA busy_timeout=5000')
                 writer = sqlite3.connect(self.pool.directory / 'budget.sqlite3', isolation_level=None)
@@ -271,11 +275,13 @@ class SharedBudgetTests(unittest.TestCase):
     def test_ten_independent_processes_respect_shared_limit(self):
         # Ten CLI interpreter invocations compete for the same two slots. Times
         # are written by the admitted processes, not inferred from parent sleeps.
+        # The system-wide performance counter avoids equal coarse Windows ticks
+        # falsely sorting a later start before an earlier stop from another peer.
         events = [Path(self.temp.name) / ('events-' + str(i)) for i in range(10)]
         source = ("import json,sys,time;from swassh.infrastructure.bastion import SharedBudget;"
             "p=SharedBudget(json.loads(sys.argv[1]));l=p.ticket(connections=1);\n"
             "while not l.poll(): time.sleep(.005)\n"
-            "start=time.monotonic();time.sleep(.08);end=time.monotonic()\n"
+            "start=time.perf_counter_ns();time.sleep(.08);end=time.perf_counter_ns()\n"
             "with open(sys.argv[2],'w') as f: json.dump([start,end],f)\n"
             "l.close();p.close()")
         spec = json.dumps(specification(self.options))
@@ -285,8 +291,11 @@ class SharedBudgetTests(unittest.TestCase):
             for process in clients:
                 _, errors = process.communicate(timeout=20)
                 self.assertEqual(process.returncode, 0, errors.decode())
-            rows = sorted((t, event, identity) for identity, path in enumerate(events)
-                for t, event in zip(json.loads(path.read_text()), ('start', 'stop')))
+            intervals = [json.loads(path.read_text()) for path in events]
+            self.assertTrue(all(len(pair) == 2 and all(type(t) is int for t in pair)
+                                and pair[0] < pair[1] for pair in intervals))
+            rows = sorted((t, event, identity) for identity, pair in enumerate(intervals)
+                for t, event in zip(pair, ('start', 'stop')))
             active = peak = 0
             for _, event, _ in rows:
                 active += 1 if event == 'start' else -1

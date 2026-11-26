@@ -1252,3 +1252,28 @@ negative variants detect omitted final cleanup and resetting an unset token.
 No runtime code, collector, threshold, timeout or existing assertion changes.
 The C60 refusal is retained; all five campaigns must run on this new archive.
 
+### Shared-budget test clocks on Windows 3.11 and 3.12
+
+C158 retained the complete C157 push and pull-request failures instead of
+selecting a successful duplicate. The storage-contention test reused a prior
+connection-rate slot while asserting immediate admission after releasing a real
+SQLite lock. Its fixture now advances only the logical admission clock between
+the writer and reader cases. Both real transactions, thread joins, the original
+one-second yield deadline and all timeout-restoration assertions remain.
+
+The ten-process capacity test now records system-wide perf_counter_ns intervals.
+Windows 3.11.9 and 3.12.10 report GetTickCount64 at 15.625 ms for monotonic, versus
+QueryPerformanceCounter at 100 ns for perf_counter. Three bounded observations
+on each runtime retained every original assertion and both clocks. The third
+sample on each runtime reported a coarse-clock peak of three while the same
+admitted intervals measured a high-resolution peak of two. No capacity limit,
+workload, lease lifetime, wait bound or production byte is changed. The interval
+shape and strict ordering are checked before the original limit/count checks.
+
+Python documents the performance counter as system-wide, including on Windows
+since Python 3.10: https://docs.python.org/3.11/library/time.html#time.perf_counter.
+These observations explain the test-oracle defect, not a general proof of
+concurrency correctness. The failed campaign remains a publication refusal;
+fresh local gates and exact-source approval followed by full native CI remain
+mandatory for this candidate.
+
