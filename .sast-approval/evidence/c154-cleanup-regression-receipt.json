@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "label": "before",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "label": "after",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    }
+  ],
+  "before_sha256": "fd4dab5687b2b47a4720c10686f57df1c6d3c031a3d1ec4bbf3bbea3e7e342f8",
+  "after_sha256": "8fa4436c1a07195c9dbeb07120a6ff82a75254b9b7cc9a32caacc4dcead5ea1f",
+  "readiness_timeout_unchanged_seconds": 2,
+  "all_real_adapters_preserved": true,
+  "publication_authorized": false
+}

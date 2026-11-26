@@ -1,0 +1,10 @@
+{
+  "initial_probe_sha256": "53d443c90d14f7932798de5cf6cca701e32fa6125fbc25b43ed4245357fe2788",
+  "initial_launcher_sha256": "f509546b16af881084c0323ad052cd846a03b06eab65c44f7875f075bcd11507",
+  "initial_failure_retained": "metadata-probe/different-root-times.log",
+  "initial_result": "Local rsync capability probe refused before any preview, not the expected changed-count failure.",
+  "missing_prerequisite": "PYTHONPATH for the source checkout must be inherited by native Python guardian children, as in the full QA runners.",
+  "correction_only_adds_child_source_import_path": true,
+  "test_and_production_bytes_or_expectations_changed": false,
+  "initial_probe_is_not_qualification": true
+}

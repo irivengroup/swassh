@@ -1,0 +1,8 @@
+{
+  "first_attempt": "cleanup-regression/before.log",
+  "second_attempt": "cleanup-regression-pending-executor/watchdog.log",
+  "qualification": false,
+  "observed_stack": "socket._fallback_socketpair accept during creation of the Windows Proactor event loop, before asyncSetUp or the regression scenario executed",
+  "previous_interpretation_retracted": "The initial observer-refusal attributed the stall to a commit barrier without a stack; this inference is not supported by the actual bounded watchdog trace.",
+  "next_action": "Re-execute the identical candidate with authorization for local test loopback. Preserve both original attempts. No test oracle or deadline is relaxed."
+}

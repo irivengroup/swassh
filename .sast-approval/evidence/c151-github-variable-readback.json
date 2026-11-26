@@ -1,0 +1,15 @@
+{
+  "readback_verified": true,
+  "repository": "irivengroup/swassh",
+  "url": "https://github.com/irivengroup/swassh/settings/variables/actions",
+  "window_id": 265764,
+  "method": "Exact native Chrome accessibility value cells after saving, in the dedicated SWASSH window",
+  "variables": {
+    "SWASSH_SAST_GATE_SHA256": "e5b75446872bd89952d63b280e8e097341f22e538ae1a14f93a22a98d0b54803",
+    "SWASSH_SAST_REVIEW_REF": "8271bbd71ac2988ebcaaca142d5fe15e39229d24",
+    "SWASSH_SAST_REVIEW_SHA256": "ac9e57e47fc761b8b9e55910ec8469f3c8d5631939388487b357cb7f7eac1455"
+  },
+  "actual_user_approval_recorded": true,
+  "prior_browser_scope_refusal_resolved_by_dedicated_window": true,
+  "publication_authorized": false
+}

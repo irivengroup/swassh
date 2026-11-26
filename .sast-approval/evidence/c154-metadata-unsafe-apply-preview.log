@@ -1,0 +1,52 @@
+test_real_rsync_preview_readonly_add_change_delete (test_improvements.TransferImprovementTests.test_real_rsync_preview_readonly_add_change_delete) ... FAIL
+test_real_rsync_preview_counts_directory_time_change_without_writing (test_improvements.TransferImprovementTests.test_real_rsync_preview_counts_directory_time_change_without_writing)
+A real root metadata change remains visible and is never applied in preview. ... FAIL
+
+======================================================================
+FAIL: test_real_rsync_preview_readonly_add_change_delete (test_improvements.TransferImprovementTests.test_real_rsync_preview_readonly_add_change_delete)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/swassh-2.0.1/tests/test_improvements.py", line 837, in test_real_rsync_preview_readonly_add_change_delete
+    self.assertEqual(before, after)
+AssertionError: {'deleted': (b'old', 1795669904035319162), [36 chars]162)} != {'added': (b'new', 1795669904035319162), 'c[49 chars]162)}
+- {'changed': (b'old', 1795669904035319162),
+?   -- ^^        ^^^
+
++ {'added': (b'new', 1795669904035319162),
+?    ^^        ^^^
+
+-  'deleted': (b'old', 1795669904035319162)}
++  'changed': (b'different contents', 1795669904035319162)}
+
+======================================================================
+FAIL: test_real_rsync_preview_counts_directory_time_change_without_writing (test_improvements.TransferImprovementTests.test_real_rsync_preview_counts_directory_time_change_without_writing)
+A real root metadata change remains visible and is never applied in preview.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/swassh-2.0.1/tests/test_improvements.py", line 877, in test_real_rsync_preview_counts_directory_time_change_without_writing
+    self.assertEqual(before, after)
+AssertionError: {'met[35 chars], 16832), 'metadata-destination': (1600000002000000000, 16832)} != {'met[35 chars], 16832), 'metadata-destination': (1600000000000000000, 16832)}
+- {'metadata-destination': (1600000002000000000, 16832),
+?                                    ^
+
++ {'metadata-destination': (1600000000000000000, 16832),
+?                                    ^
+
+   'metadata-source': (1600000000000000000, 16832)}
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.040s
+
+FAILED (failures=2)

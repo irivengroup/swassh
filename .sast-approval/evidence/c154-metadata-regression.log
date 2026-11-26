@@ -1,0 +1,5 @@
+{"label": "before", "tests": 1, "failures": 1, "errors": 0, "skips": 0}
+{"label": "after", "tests": 3, "failures": 0, "errors": 0, "skips": 0}
+{"label": "unsafe-ignore-directory", "tests": 1, "failures": 1, "errors": 0, "skips": 0}
+{"label": "unsafe-apply-preview", "tests": 2, "failures": 2, "errors": 0, "skips": 0}
+{"results": [{"label": "before", "tests": 1, "failures": 1, "errors": 0, "skips": 0}, {"label": "after", "tests": 3, "failures": 0, "errors": 0, "skips": 0}, {"label": "unsafe-ignore-directory", "tests": 1, "failures": 1, "errors": 0, "skips": 0}, {"label": "unsafe-apply-preview", "tests": 2, "failures": 2, "errors": 0, "skips": 0}], "before_test_sha256": "508386db0a33dd13d1b0187c6045d8d75369777301ec37b12a53b71c0f315e8b", "after_test_sha256": "0b4200f1d6b0ce1dbef585556c22f48898728ab108c29288a28d28f6ecaec31f", "original_assertions_preserved": true, "production_parser_unchanged": true, "directory_metadata_remains_counted": true, "unsafe_variants_detected": 2, "negative_cases": 3, "publication_authorized": false}

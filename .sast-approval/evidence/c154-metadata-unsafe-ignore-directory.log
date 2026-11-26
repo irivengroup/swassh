@@ -1,0 +1,27 @@
+test_real_rsync_preview_counts_directory_time_change_without_writing (test_improvements.TransferImprovementTests.test_real_rsync_preview_counts_directory_time_change_without_writing)
+A real root metadata change remains visible and is never applied in preview. ... FAIL
+
+======================================================================
+FAIL: test_real_rsync_preview_counts_directory_time_change_without_writing (test_improvements.TransferImprovementTests.test_real_rsync_preview_counts_directory_time_change_without_writing)
+A real root metadata change remains visible and is never applied in preview.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/runtime/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/swassh-rsync-metadata-kjrc5snr/swassh-2.0.1/tests/test_improvements.py", line 874, in test_real_rsync_preview_counts_directory_time_change_without_writing
+    self.assertEqual(result.stdout, 'preview only: added=0 changed=1 deleted=0')
+AssertionError: 'preview only: added=0 changed=0 deleted=0' != 'preview only: added=0 changed=1 deleted=0'
+- preview only: added=0 changed=0 deleted=0
+?                               ^
++ preview only: added=0 changed=1 deleted=0
+?                               ^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.555s
+
+FAILED (failures=1)
